@@ -5,10 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{{ site_name }}{% endblock %}</title>
-        <!-- Fonts: Plus Jakarta Sans for UI, Playfair Display for headings -->
+        <!-- Fonts: Open Sans for UI, Playfair Display for headings -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         <!-- Tailwind CSS -->
         <link rel="stylesheet" href="{% static 'css/site.css' %}">
         <!-- GSAP core & ScrollTrigger -->
@@ -26,46 +26,105 @@
         <!-- Alpine.js -->
         <script defer src="{% static 'js/alpine.min.js' %}"></script>
         <style>
+            :root {
+                --brand-navy: #011f42;
+                --brand-navy-soft: #0d2b5c;
+                --brand-gold: #b88e50;
+                --brand-ivory: #f7f4ed;
+                --brand-cream: #f9f8f6;
+                --line-soft: rgba(1, 31, 66, 0.12);
+            }
             body {
-                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-family: 'Open Sans', sans-serif;
+                color: var(--brand-navy);
+                background: #ffffff;
             }
             h1, h2, h3, .serif-heading {
                 font-family: 'Playfair Display', serif;
             }
+
+            /* Figma palette alignment across existing Tailwind utility usage */
+            .text-indigo-300,
+            .text-indigo-400,
+            .text-indigo-500,
+            .text-indigo-600,
+            .text-indigo-700 {
+                color: var(--brand-gold) !important;
+            }
+            .bg-indigo-600,
+            .bg-indigo-500 {
+                background-color: var(--brand-gold) !important;
+            }
+            .bg-indigo-50,
+            .bg-indigo-100,
+            .bg-indigo-500\/10 {
+                background-color: rgba(184, 142, 80, 0.12) !important;
+            }
+            .border-indigo-100,
+            .border-indigo-200,
+            .border-indigo-500,
+            .border-indigo-500\/20 {
+                border-color: rgba(184, 142, 80, 0.3) !important;
+            }
+            .from-indigo-500 {
+                --tw-gradient-from: var(--brand-gold) var(--tw-gradient-from-position) !important;
+                --tw-gradient-to: rgba(184, 142, 80, 0) var(--tw-gradient-to-position) !important;
+                --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+            }
+
+            @keyframes marquee-left {
+                from { transform: translateX(0); }
+                to { transform: translateX(-50%); }
+            }
+            @keyframes marquee-right {
+                from { transform: translateX(-50%); }
+                to { transform: translateX(0); }
+            }
+            .services-marquee-track {
+                width: max-content;
+                display: flex;
+                gap: 1.25rem;
+                animation: marquee-left 22s linear infinite;
+                will-change: transform;
+            }
+            .services-marquee-track.reverse {
+                animation-name: marquee-right;
+            }
         </style>
         {% block extra_head %}{% endblock %}
     </head>
-    <body class="flex flex-col min-h-screen antialiased bg-slate-50 overflow-x-hidden selection:bg-indigo-600 selection:text-white">
+    <body class="flex flex-col min-h-screen antialiased bg-white overflow-x-hidden selection:bg-[var(--brand-gold)] selection:text-white {% block body_class %}{% endblock %}">
         <!-- Navbar -->
-        <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 transition-all duration-300"
-                x-data="{ mobileMenuOpen: false }">
+        <header class="sticky top-0 z-50 transition-all duration-300"
+                x-data="{ mobileMenuOpen: false, scrolled: false, isHome: false, initNav() { this.isHome = document.body.classList.contains('home-page'); this.scrolled = !this.isHome || window.scrollY > 24; if (this.isHome) { window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 24 }, { passive: true }); } } }"
+                x-init="initNav()"
+                :class="scrolled ? 'bg-white/95 backdrop-blur-md border-b border-[color:var(--line-soft)] shadow-[0_10px_24px_rgba(1,31,66,0.08)]' : 'bg-[linear-gradient(180deg,rgba(247,244,237,0.95)_0%,rgba(247,244,237,0.72)_58%,rgba(247,244,237,0)_100%)]'">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-20 items-center">
+                <div class="flex justify-between h-[83px] items-center">
                     <!-- Logo -->
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="{% url 'website:home' %}" class="flex items-center gap-3 group transition-transform active:scale-95">
-                            <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" class="h-14 w-auto object-contain transition-transform group-hover:rotate-6">
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition duration-300">CA Ashwani Tayal</span>
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-slate-500">Chartered Accountant</span>
-                            </div>
+                        <a href="{% url 'website:home' %}" class="flex items-center group transition-transform active:scale-95" aria-label="CA Ashwani Tayal Home">
+                            <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" class="w-auto object-contain transition-all duration-300" :class="scrolled ? 'h-14' : 'h-20 lg:h-24'">
                         </a>
                     </div>
                     <!-- Desktop Nav -->
-                    <nav class="hidden md:flex items-center space-x-10">
-                        <a href="{% url 'website:home' %}" class="text-slate-600 hover:text-indigo-600 transition font-medium text-sm">Home</a>
-                        <a href="{% url 'website:about' %}" class="text-slate-600 hover:text-indigo-600 transition font-medium text-sm">About Me</a>
-                        <a href="{% url 'website:services' %}" class="text-slate-600 hover:text-indigo-600 transition font-medium text-sm">Services & CCTS</a>
-                        <a href="{% url 'website:home' %}#testimonials" class="text-slate-600 hover:text-indigo-600 transition font-medium text-sm">Testimonials</a>
-                        <a href="{% url 'website:home' %}#gallery" class="text-slate-600 hover:text-indigo-600 transition font-medium text-sm">Gallery</a>
-                        <a href="{% url 'website:about' %}#appointments" class="inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-full text-white bg-indigo-600 hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm">
-                            Consultation
+                    <nav class="hidden md:flex items-center gap-1 px-10 py-1 rounded-[89px] transition-all duration-300"
+                         :class="scrolled ? 'bg-[var(--brand-ivory)] border border-[var(--line-soft)]' : 'bg-[color:rgba(247,244,237,0.7)]'">
+                        <a href="{% url 'website:home' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Home</a>
+                        <a href="{% url 'website:about' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">About</a>
+                        <a href="{% url 'website:services' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Services</a>
+                        <a href="{% url 'website:home' %}#gallery" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
+                        <a href="{% url 'website:services' %}#ccts-details" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
+                        <a href="{% url 'website:home' %}#insights" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
+                        <a href="{% url 'website:about' %}#appointments" class="inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-[4px] text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 min-w-[156px]">
+                            Connect
+                            <i data-lucide="arrow-right" class="ml-1.5 w-3.5 h-3.5"></i>
                         </a>
                     </nav>
                     <!-- Mobile Menu Button -->
                     <div class="md:hidden">
                         <button @click="mobileMenuOpen = !mobileMenuOpen"
-                                class="text-slate-600 hover:text-indigo-600 focus:outline-none transition-colors duration-300">
+                                class="text-[var(--brand-navy)] hover:text-[var(--brand-gold)] focus:outline-none transition-colors duration-300">
                             <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
                             <i data-lucide="x"
                                class="w-6 h-6"
@@ -86,19 +145,21 @@
                  x-transition:leave-end="opacity-0 -translate-y-4"
                  @click.away="mobileMenuOpen = false"
                  style="display: none">
-                <div class="px-4 pt-3 pb-6 space-y-2 bg-white border-t border-slate-100 shadow-xl rounded-b-2xl">
-                    <a href="{% url 'website:home' %}" @click="mobileMenuOpen = false"
-                       class="block px-4 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition animate-slide-in">Home</a>
-                    <a href="{% url 'website:about' %}" @click="mobileMenuOpen = false"
-                       class="block px-4 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition animate-slide-in">About Me</a>
-                    <a href="{% url 'website:services' %}" @click="mobileMenuOpen = false"
-                       class="block px-4 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition animate-slide-in">Services & CCTS</a>
-                    <a href="{% url 'website:home' %}#testimonials" @click="mobileMenuOpen = false"
-                       class="block px-4 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition animate-slide-in">Testimonials</a>
-                    <a href="{% url 'website:home' %}#gallery" @click="mobileMenuOpen = false"
-                       class="block px-4 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition animate-slide-in">Gallery</a>
+                     <div class="px-4 pt-3 pb-6 space-y-2 bg-[var(--brand-ivory)] border-t border-[color:var(--line-soft)] shadow-xl rounded-b-2xl">
+                          <a href="{% url 'website:home' %}" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Home</a>
+                          <a href="{% url 'website:about' %}" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">About</a>
+                          <a href="{% url 'website:services' %}" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Services</a>
+                          <a href="{% url 'website:home' %}#gallery" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Workshops</a>
+                          <a href="{% url 'website:services' %}#ccts-details" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">CCTS</a>
+                          <a href="{% url 'website:home' %}#insights" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Blogs</a>
                     <a href="#appointments" @click="mobileMenuOpen = false"
-                       class="block text-center px-4 py-3 rounded-lg text-base font-bold text-white bg-indigo-600 hover:bg-slate-900 transition mt-4 animate-slide-in">Book Consultation</a>
+                              class="block text-center px-4 py-3 rounded-lg text-base font-bold text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition mt-4">Connect</a>
                 </div>
             </div>
         </header>
