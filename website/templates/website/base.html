@@ -107,52 +107,133 @@
             {% block content %}{% endblock %}
         </main>
         <!-- Footer -->
-        <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.05),transparent_40%)]"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-white text-xl font-bold font-serif">CA Ashwani Tayal</span>
+        <!-- Footer Section with CTA Banner and Watermark Backdrop -->
+        <div class="bg-slate-950 relative z-10 pt-16">
+            <!-- CTA Banner (Figma Rectangle 50) -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-25 -translate-y-16">
+                <div class="bg-indigo-600 rounded-3xl p-8 sm:p-12 text-center text-white shadow-2xl relative overflow-hidden group border border-indigo-500/30">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_45%)]"></div>
+                    <div class="relative z-10 space-y-6">
+                        <h2 class="text-3xl sm:text-5xl font-bold font-serif tracking-tight text-white leading-tight">
+                            Ready To Build A Raid-Ready Business?
+                        </h2>
+                        <p class="text-indigo-100 max-w-xl mx-auto leading-relaxed font-light text-sm sm:text-base">
+                            Expert guidance across compliance, carbon credits, taxation, and strategic financial leadership. Formulate your defensive tactics today.
+                        </p>
+                        <div class="pt-4 flex justify-center">
+                            <a href="#appointments" class="inline-flex items-center justify-center px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-xl text-slate-900 bg-white hover:bg-slate-100 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl">
+                                BOOK YOUR CONSULTATION
+                                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 text-slate-900"></i>
+                            </a>
                         </div>
-                        <p class="text-sm text-slate-500 max-w-xs">A seasoned Chartered Accountant with over 25 years of experience, protecting businesses with proactive planning and audits.</p>
                     </div>
-                    <div>
-                        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="#hero" class="hover:text-white transition">Home</a></li>
-                            <li><a href="#about" class="hover:text-white transition">About Me</a></li>
-                            <li><a href="#pillars" class="hover:text-white transition">Pillars & Frameworks</a></li>
-                            <li><a href="#appointments" class="hover:text-white transition">Consultation</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Reach Details</h4>
-                        <ul class="space-y-2 text-sm text-slate-500">
-                            <li class="flex items-start gap-2">
-                                <i data-lucide="map-pin" class="w-4 h-4 text-indigo-500 mt-0.5 flex-shrink-0"></i>
-                                <span>302, Prestige Tower, MG Road, New Delhi — 110001</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="phone" class="w-4 h-4 text-indigo-500 flex-shrink-0"></i>
-                                <span class="text-slate-400 font-medium">+91 11 4567 8900</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="mail" class="w-4 h-4 text-indigo-500 flex-shrink-0"></i>
-                                <a href="mailto:{{ contact_email }}" class="text-indigo-400 hover:text-white transition">{{ contact_email }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pt-8 border-t border-slate-900 text-center sm:flex sm:justify-between sm:items-center text-xs text-slate-600">
-                    <p>&copy; 2026 CA Ashwani Tayal. All rights reserved.</p>
-                    <p class="mt-2 sm:mt-0">Financial expertise driven by clarity, preparedness, and trust.</p>
                 </div>
             </div>
-        </footer>
+
+            <!-- Informational Footer (Figma Frame 11) -->
+            <footer class="text-slate-400 pb-16 relative overflow-hidden">
+                <!-- Giant Watermark Logo -->
+                <img src="{% static 'images/logo.png' %}" alt="Watermark Logo" class="absolute -bottom-24 -left-24 h-[450px] w-auto opacity-[0.025] select-none pointer-events-none filter invert brightness-200">
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-12 border-b border-slate-900">
+                        
+                        <!-- Column 1: Info & Brand (Spans 4) -->
+                        <div class="lg:col-span-4 space-y-6">
+                            <div class="flex items-center gap-3.5">
+                                <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-14 w-auto object-contain filter invert brightness-200">
+                                <div class="flex flex-col">
+                                    <span class="text-xl font-bold tracking-tight text-white font-serif">CA Ashwani Tayal</span>
+                                    <span class="text-[10px] uppercase tracking-widest font-semibold text-indigo-400">Chartered Accountant</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-500 max-w-xs leading-relaxed font-light">
+                                Trusted by over 1,000 businesses and professionals. Protecting corporate enterprise value through proactive and defensive frameworks.
+                            </p>
+                            <!-- Social Icons -->
+                            <div class="flex items-center gap-3 pt-2">
+                                <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
+                                    <i data-lucide="linkedin" class="w-4.5 h-4.5"></i>
+                                </a>
+                                <a href="https://twitter.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
+                                    <i data-lucide="twitter" class="w-4.5 h-4.5"></i>
+                                </a>
+                                <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
+                                    <i data-lucide="instagram" class="w-4.5 h-4.5"></i>
+                                </a>
+                                <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
+                                    <i data-lucide="youtube" class="w-4.5 h-4.5"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Quick Links (Spans 2) -->
+                        <div class="lg:col-span-2 space-y-5">
+                            <div class="space-y-2">
+                                <h4 class="text-white font-bold text-sm tracking-wider uppercase font-serif">Quick Links</h4>
+                                <div class="h-0.5 w-8 bg-indigo-500 rounded"></div>
+                            </div>
+                            <ul class="space-y-2.5 text-sm">
+                                <li><a href="{% url 'website:home' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Home</a></li>
+                                <li><a href="{% url 'website:about' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">About Us</a></li>
+                                <li><a href="{% url 'website:services' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Services</a></li>
+                                <li><a href="{% url 'website:home' %}#gallery" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Workshops</a></li>
+                                <li><a href="{% url 'website:services' %}#ccts-details" class="hover:text-white transition-colors duration-300 flex items-center gap-1">CCTS</a></li>
+                                <li><a href="{% url 'website:home' %}#insights" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Blogs</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 3: Services (Spans 3) -->
+                        <div class="lg:col-span-3 space-y-5">
+                            <div class="space-y-2">
+                                <h4 class="text-white font-bold text-sm tracking-wider uppercase font-serif">Services</h4>
+                                <div class="h-0.5 w-8 bg-indigo-500 rounded"></div>
+                            </div>
+                            <ul class="space-y-2.5 text-sm text-slate-400 font-light">
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Tax Planning</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Audit & Assurance</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Business Advisory</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">GST Consultancy</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Corporate Compliance</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Financial Strategy</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 4: Contact Details (Spans 3) -->
+                        <div class="lg:col-span-3 space-y-5">
+                            <div class="space-y-2">
+                                <h4 class="text-white font-bold text-sm tracking-wider uppercase font-serif">Contact Details</h4>
+                                <div class="h-0.5 w-8 bg-indigo-500 rounded"></div>
+                            </div>
+                            <ul class="space-y-4 text-sm text-slate-500 font-light">
+                                <li class="flex items-start gap-2.5">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-indigo-500 mt-0.5 flex-shrink-0 animate-pulse"></i>
+                                    <span class="text-slate-400">302, Prestige Tower, MG Road, New Delhi — 110001</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <i data-lucide="phone" class="w-4 h-4 text-indigo-500 flex-shrink-0"></i>
+                                    <span class="text-slate-300 font-medium">+91 11 4567 8900</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <i data-lucide="mail" class="w-4 h-4 text-indigo-500 flex-shrink-0"></i>
+                                    <a href="mailto:info@ashwanitayal.com" class="text-indigo-400 hover:text-white transition-colors duration-300">info@ashwanitayal.com</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Bottom Copyright strip -->
+                    <div class="pt-8 text-xs text-slate-600 sm:flex sm:justify-between sm:items-center">
+                        <p>© 2026 Ashwani Tayal. All Rights Reserved.</p>
+                        <p class="mt-2 sm:mt-0 font-light">Handcrafted with Elegance by <span class="text-indigo-500 font-semibold hover:underline cursor-pointer">Invincible Web Solutions</span></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
         <!-- Lucide Icons initialization -->
         <script type="module">
-        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart } from 'lucide'
+        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube } from 'lucide'
         createIcons({
             icons: {
                 Sparkles,
@@ -175,7 +256,11 @@
                 Award,
                 Video,
                 ShieldCheck,
-                Heart
+                Heart,
+                Linkedin,
+                Twitter,
+                Instagram,
+                Youtube
             }
         })
         </script>
