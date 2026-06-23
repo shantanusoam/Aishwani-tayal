@@ -22,6 +22,42 @@ def test_home_page_template_used(client):
     assert "website/home.html" in [t.name for t in response.templates]
 
 
+def test_services_page_status_code(client):
+    """
+    Test that the services page loads successfully (HTTP 200).
+    """
+    url = reverse("website:services")
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_services_page_template_used(client):
+    """
+    Test that the services page uses the correct template.
+    """
+    url = reverse("website:services")
+    response = client.get(url)
+    assert "website/services.html" in [t.name for t in response.templates]
+
+
+def test_about_page_status_code(client):
+    """
+    Test that the about page loads successfully (HTTP 200).
+    """
+    url = reverse("website:about")
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_about_page_template_used(client):
+    """
+    Test that the about page uses the correct template.
+    """
+    url = reverse("website:about")
+    response = client.get(url)
+    assert "website/about.html" in [t.name for t in response.templates]
+
+
 def test_global_context_processor(client):
     """
     Test that the global context processor injects the correct site name and email.

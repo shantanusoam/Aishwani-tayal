@@ -52,6 +52,23 @@ def home(request):
     return render(request, "website/home.html", {"insights": insights, "form": form})
 
 
+def services(request):
+    """
+    Renders the Carbon Credit Trading Scheme (CCTS) & comprehensive services page.
+    """
+    insights = Insight.objects.all().order_by("-published_date")[:3]
+    form = ConsultationForm()
+    return render(request, "website/services.html", {"insights": insights, "form": form})
+
+
+def about(request):
+    """
+    Renders the detailed CA Ashwani Tayal biography, certifications, & values page.
+    """
+    form = ConsultationForm()
+    return render(request, "website/about.html", {"form": form})
+
+
 @require_POST
 def book_consultation(request):
     """

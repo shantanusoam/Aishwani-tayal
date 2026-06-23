@@ -5,5 +5,8 @@ app_name = "website"
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("services/", views.services, name="services"),
+    path("ccts/", views.services, name="ccts"),
+    path("about/", views.about, name="about"),
     path("book-consultation/", views.book_consultation, name="book_consultation"),
 ]
