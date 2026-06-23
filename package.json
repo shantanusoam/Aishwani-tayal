@@ -1,0 +1,22 @@
+{
+  "name": "aishwani-tayal",
+  "version": "1.0.0",
+  "description": "Django + Tailwind project for Aishwani Tayal",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./website/static_src/styles.css -o ./website/static/css/site.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i ./website/static_src/styles.css -o ./website/static/css/site.css --watch",
+    "vendor:js": "mkdir -p website/static/js && cp node_modules/alpinejs/dist/cdn.min.js website/static/js/alpine.min.js",
+    "dev": "npm run vendor:js && npm run watch:css",
+    "build": "npm run vendor:js && npm run build:css",
+    "deploy": "scripts/deploy.sh"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "dependencies": {
+    "alpinejs": "^3.14.0",
+    "lucide": "^0.400.0",
+    "motion": "^11.2.0"
+  }
+}
