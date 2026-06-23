@@ -1,4 +1,7 @@
+import pytest
 from django.urls import reverse
+
+pytestmark = pytest.mark.django_db
 
 
 def test_home_page_status_code(client):
@@ -29,3 +32,42 @@ def test_global_context_processor(client):
     assert response.context["site_name"] == "Aishwani Tayal"
     assert "contact_email" in response.context
     assert response.context["contact_email"] == "contact@aishwanitayal.com"
+
+
+def test_book_consultation_success(client):
+    """
+    Test successful consultation booking.
+    """
+    url = reverse("website:book_consultation")
+    data = {
+        "full_name": "Rajesh Mehta",
+        "email": "rajesh@company.com",
+        "phone": "+919876543210",
+        "service": "X-RAY",
+        "company": "Mehta Corp",
+        "message": "Need a mock audit."
+    }
+    response = client.post(url, data)
+    assert response.status_code == 200
+    res_data = response.json()
+    assert res_data["success"] is True
+    assert "booked successfully" in res_data["message"]
+
+
+def test_book_consultation_failure(client):
+    """
+    Test consultation booking failure on missing required elements.
+    """
+    url = reverse("website:book_consultation")
+    data = {
+        "full_name": "",
+        "email": "invalid-email",
+        "phone": "",
+    }
+    response = client.post(url, data)
+    assert response.status_code == 400
+    res_data = response.json()
+    assert res_data["success"] is False
+    assert "full_name" in res_data["errors"]
+    assert "email" in res_data["errors"]
+
