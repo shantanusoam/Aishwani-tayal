@@ -14,6 +14,18 @@
         <!-- GSAP core & ScrollTrigger -->
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <script>
+            // Global ScrollTrigger helper to refresh positions after all assets, fonts, and stylesheets are loaded
+            window.addEventListener('load', () => {
+                if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                    // Secondary refresh to catch any delayed rendering, Alpine.js layout updates, or lazy-loaded images
+                    setTimeout(() => {
+                        ScrollTrigger.refresh();
+                    }, 250);
+                }
+            });
+        </script>
         <!-- Import Map for ES Modules -->
         <script type="importmap">
     {
@@ -38,6 +50,9 @@
                 font-family: 'Open Sans', sans-serif;
                 color: var(--brand-navy);
                 background: #ffffff;
+            }
+            body.home-page main {
+                padding-top: 0;
             }
             h1, h2, h3, .serif-heading {
                 font-family: 'Playfair Display', serif;
@@ -95,28 +110,24 @@
     </head>
     <body class="flex flex-col min-h-screen antialiased bg-white overflow-x-hidden selection:bg-[var(--brand-gold)] selection:text-white {% block body_class %}{% endblock %}">
         <!-- Navbar -->
-        <header class="sticky top-0 z-50 transition-all duration-300"
-                x-data="{ mobileMenuOpen: false, scrolled: false, isHome: false, initNav() { this.isHome = document.body.classList.contains('home-page'); this.scrolled = !this.isHome || window.scrollY > 24; if (this.isHome) { window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 24 }, { passive: true }); } } }"
-                x-init="initNav()"
-                :class="scrolled ? 'bg-white/95 backdrop-blur-md border-b border-[color:var(--line-soft)] shadow-[0_10px_24px_rgba(1,31,66,0.08)]' : 'bg-[linear-gradient(180deg,rgba(247,244,237,0.95)_0%,rgba(247,244,237,0.72)_58%,rgba(247,244,237,0)_100%)]'">
+        <header class="fixed inset-x-0 top-0 z-50" x-data="{ mobileMenuOpen: false }">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-[83px] items-center">
+                <div class="flex justify-between h-[83px] items-center pt-3">
                     <!-- Logo -->
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="{% url 'website:home' %}" class="flex items-center group transition-transform active:scale-95" aria-label="CA Ashwani Tayal Home">
-                            <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" class="w-auto object-contain transition-all duration-300" :class="scrolled ? 'h-14' : 'h-20 lg:h-24'">
+                        <a href="{% url 'website:home' %}" class="flex items-center bg-white/92 border border-white/70 shadow-[0_10px_28px_rgba(1,31,66,0.18)] px-3 py-2 rounded-[2px] transition-transform active:scale-95" aria-label="CA Ashwani Tayal Home">
+                            <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" class="h-16 lg:h-20 w-auto object-contain">
                         </a>
                     </div>
                     <!-- Desktop Nav -->
-                    <nav class="hidden md:flex items-center gap-1 px-10 py-1 rounded-[89px] transition-all duration-300"
-                         :class="scrolled ? 'bg-[var(--brand-ivory)] border border-[var(--line-soft)]' : 'bg-[color:rgba(247,244,237,0.7)]'">
+                    <nav class="hidden md:flex items-center gap-1 px-6 py-1.5 rounded-[14px] border border-white/70 bg-[rgba(247,244,237,0.9)] shadow-[0_10px_24px_rgba(1,31,66,0.16)] backdrop-blur-sm">
                         <a href="{% url 'website:home' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Home</a>
                         <a href="{% url 'website:about' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">About</a>
                         <a href="{% url 'website:services' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Services</a>
                         <a href="{% url 'website:home' %}#gallery" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
                         <a href="{% url 'website:services' %}#ccts-details" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
-                        <a href="{% url 'website:home' %}#insights" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
-                        <a href="{% url 'website:about' %}#appointments" class="inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-[4px] text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 min-w-[156px]">
+                        <a href="{% url 'website:blogs' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
+                        <a href="{% url 'website:about' %}#appointments" class="inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-[4px] text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 min-w-[152px]">
                             Connect
                             <i data-lucide="arrow-right" class="ml-1.5 w-3.5 h-3.5"></i>
                         </a>
@@ -124,7 +135,7 @@
                     <!-- Mobile Menu Button -->
                     <div class="md:hidden">
                         <button @click="mobileMenuOpen = !mobileMenuOpen"
-                                class="text-[var(--brand-navy)] hover:text-[var(--brand-gold)] focus:outline-none transition-colors duration-300">
+                                class="text-[var(--brand-navy)] bg-white/90 border border-white/80 shadow-lg rounded-lg p-2 hover:text-[var(--brand-gold)] focus:outline-none transition-colors duration-300">
                             <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
                             <i data-lucide="x"
                                class="w-6 h-6"
@@ -156,7 +167,7 @@
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Workshops</a>
                           <a href="{% url 'website:services' %}#ccts-details" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">CCTS</a>
-                          <a href="{% url 'website:home' %}#insights" @click="mobileMenuOpen = false"
+                          <a href="{% url 'website:blogs' %}" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Blogs</a>
                     <a href="#appointments" @click="mobileMenuOpen = false"
                               class="block text-center px-4 py-3 rounded-lg text-base font-bold text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition mt-4">Connect</a>
@@ -164,27 +175,30 @@
             </div>
         </header>
         <!-- Main Content -->
-        <main class="flex-grow">
+        <main class="pt-[83px]">
             {% block content %}{% endblock %}
         </main>
         <!-- Footer -->
         <!-- Footer Section with CTA Banner and Watermark Backdrop -->
         <div class="bg-slate-950 relative z-10 pt-16">
             <!-- CTA Banner (Figma Rectangle 50) -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-25 -translate-y-16">
-                <div class="bg-indigo-600 rounded-3xl p-8 sm:p-12 text-center text-white shadow-2xl relative overflow-hidden group border border-indigo-500/30">
-                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_45%)]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[25] -translate-y-16">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 p-8 sm:p-12 text-center text-white bg-cover bg-center bg-no-repeat group" style="background-image: url('{% static 'images/raid_ready_banner_bg.png' %}');">
+                    <!-- Overlay for high-contrast text rendering -->
+                    <div class="absolute inset-0 bg-slate-950/40 mix-blend-multiply"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80"></div>
+                    
                     <div class="relative z-10 space-y-6">
-                        <h2 class="text-3xl sm:text-5xl font-bold font-serif tracking-tight text-white leading-tight">
+                        <h2 class="text-3xl sm:text-4xl lg:text-[38px] font-bold font-serif tracking-tight text-white leading-tight">
                             Ready To Build A Raid-Ready Business?
                         </h2>
-                        <p class="text-indigo-100 max-w-xl mx-auto leading-relaxed font-light text-sm sm:text-base">
-                            Expert guidance across compliance, carbon credits, taxation, and strategic financial leadership. Formulate your defensive tactics today.
+                        <p class="text-slate-200 max-w-2xl mx-auto leading-relaxed font-normal text-sm sm:text-base">
+                            Expert guidance across compliance, carbon credits, taxation, and strategic financial leadership.
                         </p>
                         <div class="pt-4 flex justify-center">
-                            <a href="#appointments" class="inline-flex items-center justify-center px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-xl text-slate-900 bg-white hover:bg-slate-100 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl">
+                            <a href="#appointments" class="inline-flex items-center justify-center px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-xl text-[#0d2b5c] bg-[#d4af37] hover:bg-[#bfa030] hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl">
                                 BOOK YOUR CONSULTATION
-                                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 text-slate-900"></i>
+                                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 text-[#0d2b5c]"></i>
                             </a>
                         </div>
                     </div>
@@ -240,7 +254,7 @@
                                 <li><a href="{% url 'website:services' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Services</a></li>
                                 <li><a href="{% url 'website:home' %}#gallery" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Workshops</a></li>
                                 <li><a href="{% url 'website:services' %}#ccts-details" class="hover:text-white transition-colors duration-300 flex items-center gap-1">CCTS</a></li>
-                                <li><a href="{% url 'website:home' %}#insights" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Blogs</a></li>
+                                <li><a href="{% url 'website:blogs' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Blogs</a></li>
                             </ul>
                         </div>
 

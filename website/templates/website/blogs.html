@@ -1,0 +1,132 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Insights & Blogs | CA Ashwani Tayal{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section class="relative bg-[var(--brand-navy)] text-white overflow-hidden py-20 sm:py-24 border-b border-[color:var(--line-soft)]">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{% static "images/blogs_hero_bg.png" %}');"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[rgba(1,31,66,0.95)] via-[rgba(1,31,66,0.85)] to-[rgba(1,31,66,0.4)]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] text-center">
+        <h1 class="text-[44px] sm:text-[54px] leading-[1.12] text-white font-semibold tracking-tight" style="font-family: 'Playfair Display', serif;">
+            Blogs
+        </h1>
+        <p class="mt-4 max-w-[620px] mx-auto text-[15px] sm:text-[16px] leading-[1.45] text-slate-200 font-light" style="font-family: 'Open Sans', sans-serif;">
+            Explore insights, practical guidance, and industry updates designed to simplify complex financial matters.
+        </p>
+    </div>
+</section>
+
+<!-- Latest Insights & Articles Section -->
+<section id="latest-insights" class="bg-white py-16 sm:py-20 border-b border-[color:var(--line-soft)]" x-data="{ activeTab: 'ALL' }">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
+        <!-- Section Header -->
+        <div class="text-center max-w-[775px] mx-auto">
+            <div class="flex items-center justify-center gap-[12px]">
+                <div class="bg-[var(--brand-gold)] h-[2px] w-[32px]"></div>
+                <span class="font-['Inter'] font-semibold text-[var(--brand-gold)] text-[12px] tracking-[1.8px] uppercase">
+                    Insights
+                </span>
+                <div class="bg-[var(--brand-gold)] h-[2px] w-[32px]"></div>
+            </div>
+            <h2 class="mt-4 font-['Playfair_Display'] font-bold text-[36px] sm:text-[44px] leading-[1.2] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                Latest Insights & Articles
+            </h2>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+            <button @click="activeTab = 'ALL'"
+                    :class="activeTab === 'ALL' ? 'bg-[var(--brand-navy)] text-white border-[var(--brand-navy)] shadow-md' : 'bg-white text-[var(--brand-navy)] border-slate-200 hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'"
+                    class="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border transition-all duration-300">
+                All
+            </button>
+            <button @click="activeTab = 'TAX'"
+                    :class="activeTab === 'TAX' ? 'bg-[var(--brand-navy)] text-white border-[var(--brand-navy)] shadow-md' : 'bg-white text-[var(--brand-navy)] border-slate-200 hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'"
+                    class="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border transition-all duration-300">
+                Tax Planning
+            </button>
+            <button @click="activeTab = 'GST'"
+                    :class="activeTab === 'GST' ? 'bg-[var(--brand-navy)] text-white border-[var(--brand-navy)] shadow-md' : 'bg-white text-[var(--brand-navy)] border-slate-200 hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'"
+                    class="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border transition-all duration-300">
+                GST
+            </button>
+            <button @click="activeTab = 'BIZ'"
+                    :class="activeTab === 'BIZ' ? 'bg-[var(--brand-navy)] text-white border-[var(--brand-navy)] shadow-md' : 'bg-white text-[var(--brand-navy)] border-slate-200 hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'"
+                    class="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border transition-all duration-300">
+                Business Advisory
+            </button>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for insight in insights %}
+            <article 
+                x-show="activeTab === 'ALL' || activeTab === '{{ insight.category }}'"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                class="flex flex-col bg-white rounded-[12px] shadow-[0px_4px_16px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.12)] transition-all duration-300"
+                style="display: none;">
+                
+                <!-- Card Image -->
+                <div class="relative h-[200px] w-full overflow-hidden">
+                    <img src="{% static 'images/' %}{{ insight.image_filename }}" 
+                         alt="{{ insight.title }}" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+
+                <!-- Card Content -->
+                <div class="flex-grow flex flex-col justify-between p-6 pb-7">
+                    <div>
+                        <!-- Category Badge & Date Row -->
+                        <div class="flex items-center justify-between text-[11px] font-bold tracking-wider">
+                            <span class="inline-block bg-[rgba(212,175,55,0.1)] px-3 py-1 rounded-[4px] text-[var(--brand-gold)] uppercase font-['Inter']">
+                                {% if insight.category == 'TAX' %}
+                                    Tax Planning
+                                {% elif insight.category == 'GST' %}
+                                    GST
+                                {% elif insight.category == 'BIZ' %}
+                                    Business Advisory
+                                {% else %}
+                                    {{ insight.get_category_display }}
+                                {% endif %}
+                            </span>
+                            <span class="text-slate-400 font-normal font-['Inter']">
+                                {{ insight.published_date|date:"d F Y" }}
+                            </span>
+                        </div>
+
+                        <!-- Card Heading -->
+                        <h3 class="mt-4 font-['Playfair_Display'] font-bold text-[18px] leading-[1.3] text-[#0d2b5c] transition-colors group-hover:text-[var(--brand-gold)] duration-300">
+                            {{ insight.title }}
+                        </h3>
+
+                        <!-- Card Paragraph -->
+                        <p class="mt-3 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666] line-clamp-3">
+                            {{ insight.summary }}
+                        </p>
+                    </div>
+
+                    <!-- Read More Link -->
+                    <div class="mt-5 pt-3 flex items-center gap-[8px]">
+                        <a href="{{ insight.read_more_link }}" class="font-['Inter'] font-semibold text-[13px] text-[var(--brand-gold)] flex items-center gap-1 group/btn hover:underline">
+                            Read More
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-slate-500">No blog posts found.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

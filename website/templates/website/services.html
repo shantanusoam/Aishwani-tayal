@@ -1,240 +1,466 @@
 {% extends "website/base.html" %}
 {% load static %}
 
-{% block title %}CCTS | Carbon Credits, Compliance, and Strategic Advisory{% endblock %}
+{% block title %}Our Services | CA Ashwani Tayal{% endblock %}
 
 {% block content %}
-<section id="hero" class="relative h-[639px] overflow-hidden border-b border-[color:var(--line-soft)]">
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{% static "images/ccts_hero_bg.png" %}');"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-[rgba(247,244,237,0.93)] via-[rgba(247,244,237,0.78)] to-[rgba(247,244,237,0.1)]"></div>
+<!-- Hero Banner -->
+<section class="relative bg-[var(--brand-navy)] text-white overflow-hidden py-20 sm:py-24 border-b border-[color:var(--line-soft)]">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{% static "images/services_hero_bg.png" %}');"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[rgba(1,31,66,0.95)] via-[rgba(1,31,66,0.85)] to-[rgba(1,31,66,0.4)]"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto h-full px-6 sm:px-10 lg:px-[83px]">
-        <div class="max-w-[560px] pt-[150px]">
-            <p class="text-[12px] uppercase tracking-[0.12em] text-[var(--brand-gold)] font-semibold">CCTS Specialization</p>
-            <h1 class="mt-3 text-[54px] leading-[1.04] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Carbon Credits:<br>Real Money.</h1>
-            <p class="mt-5 text-[18px] leading-[1.5] text-[var(--brand-navy-soft)]">Understanding the legal, tax and financial impact of India&apos;s Carbon Credit Trading Scheme for businesses and finance leaders.</p>
-            <a href="#ccts-overview" class="mt-7 inline-flex items-center gap-2 rounded-[4px] bg-[var(--brand-gold)] px-5 py-3 text-[14px] text-white uppercase tracking-wider hover:bg-[#a67e45] transition">
-                Explore CCTS Now
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-        </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] text-center">
+        <h1 class="text-[44px] sm:text-[54px] leading-[1.12] text-white font-semibold tracking-tight" style="font-family: 'Playfair Display', serif;">
+            Our Services
+        </h1>
+        <p class="mt-4 max-w-[620px] mx-auto text-[15px] sm:text-[16px] leading-[1.45] text-slate-200 font-light" style="font-family: 'Open Sans', sans-serif;">
+            Comprehensive financial expertise tailored to individuals, businesses, and aspiring professionals at every stage of growth.
+        </p>
     </div>
 </section>
 
-<section id="ccts-overview" class="bg-[#f8f6f1] py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] grid lg:grid-cols-[591px_1fr] gap-12 items-center">
-        <div class="rounded-[10px] overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.22)] bg-white h-[373px]">
-            <img src="{% static 'images/ccts_story.png' %}" alt="CCTS story" class="w-full h-full object-cover">
-        </div>
-        <div>
-            <p class="text-[16px] text-[var(--brand-gold)] uppercase tracking-wide">Legal • Financial • Compliance Framework</p>
-            <h2 class="mt-3 text-[32px] leading-[1.18] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">India&apos;s Carbon Credit Trading Scheme Understood Completely.</h2>
-            <div class="mt-5 h-[2px] w-[66px] bg-[var(--brand-gold)]"></div>
-            <p class="mt-6 text-[16px] leading-[1.45] text-[#1e1e1e] max-w-[569px]">On 28 June 2023, India notified the Carbon Credit Trading Scheme. It created assets, liabilities, taxable income, and personal liability for CFOs and directors across 14 industries. Most companies are navigating it without a complete picture. This site exists to provide that picture - for business owners, policy makers, finance professionals, and every citizen who wants to understand India&apos;s carbon future.</p>
-        </div>
-    </div>
-</section>
-
-<section class="bg-white py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
+<!-- Expertise & Service Grid Section -->
+<section id="expertise" class="bg-white py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
     <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
-        <h3 class="text-center text-[28px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Explore CCTS In Four Easy Steps</h3>
-        <div class="mt-10 grid md:grid-cols-3 gap-6">
-            <article class="border border-[rgba(1,31,66,0.14)] rounded-[8px] p-6 bg-white">
-                <div class="text-[32px] text-[#d4bf9a] font-semibold" style="font-family: 'Playfair Display', serif;">01</div>
-                <h4 class="mt-2 text-[18px] font-semibold text-[var(--brand-navy)]">What Is CCTS?</h4>
-                <p class="mt-2 text-[14px] leading-[1.55] text-[#4a4a4a]">Learn the policy foundation, obligated entities, and how compliance cycles are triggered under the notified framework.</p>
+        <!-- Section Header -->
+        <div class="text-center max-w-[775px] mx-auto">
+            <div class="flex items-center justify-center gap-[12px]">
+                <div class="bg-[var(--brand-gold)] h-[2px] w-[32px]"></div>
+                <span class="font-['Inter'] font-semibold text-[var(--brand-gold)] text-[12px] tracking-[1.8px] uppercase">
+                    What We Offer
+                </span>
+                <div class="bg-[var(--brand-gold)] h-[2px] w-[32px]"></div>
+            </div>
+            <h2 class="mt-4 font-['Playfair_Display'] font-bold text-[36px] sm:text-[44px] leading-[1.2] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                Expertise That Drives Real Results
+            </h2>
+            <p class="mt-4 font-['Inter'] font-normal text-[15px] leading-[1.65] text-[#666] max-w-[510px] mx-auto">
+                Comprehensive financial solutions designed to support every stage of your business journey.
+            </p>
+        </div>
+
+        <!-- Service Cards Grid -->
+        <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1: Tax Planning -->
+            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{% static 'images/service_tax.png' %}" alt="Tax Planning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                    <div>
+                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                            Tax Planning
+                        </h3>
+                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
+                            Comprehensive income tax planning and optimisation strategies for individuals, HUFs, and corporates.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Direct Tax
+                        </span>
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Optimisation
+                        </span>
+                    </div>
+                </div>
             </article>
-            <article class="border border-[rgba(1,31,66,0.14)] rounded-[8px] p-6 bg-white">
-                <div class="text-[32px] text-[#d4bf9a] font-semibold" style="font-family: 'Playfair Display', serif;">02</div>
-                <h4 class="mt-2 text-[18px] font-semibold text-[var(--brand-navy)]">How Does It Impact Finance?</h4>
-                <p class="mt-2 text-[14px] leading-[1.55] text-[#4a4a4a]">Understand accounting treatment, tax positioning, valuation concerns and disclosure responsibilities for management teams.</p>
+
+            <!-- Card 2: Audit & Assurance -->
+            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{% static 'images/service_audit.png' %}" alt="Audit & Assurance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                    <div>
+                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                            Audit & Assurance
+                        </h3>
+                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
+                            Statutory, internal, and forensic audits with meticulous attention to detail and regulatory compliance.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Statutory
+                        </span>
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Forensic
+                        </span>
+                    </div>
+                </div>
             </article>
-            <article class="border border-[rgba(1,31,66,0.14)] rounded-[8px] p-6 bg-white">
-                <div class="text-[32px] text-[#d4bf9a] font-semibold" style="font-family: 'Playfair Display', serif;">03</div>
-                <h4 class="mt-2 text-[18px] font-semibold text-[var(--brand-navy)]">What Should You Do Next?</h4>
-                <p class="mt-2 text-[14px] leading-[1.55] text-[#4a4a4a]">Set up policy tracking, internal controls and risk documentation before enforcement windows create avoidable exposure.</p>
+
+            <!-- Card 3: Business Advisory -->
+            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{% static 'images/service_biz.png' %}" alt="Business Advisory" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                    <div>
+                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                            Business Advisory
+                        </h3>
+                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
+                            Strategic guidance on business restructuring, mergers, acquisitions, and sustainable growth planning.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Strategy
+                        </span>
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            M&A
+                        </span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4: GST Consultancy -->
+            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{% static 'images/service_gst.png' %}" alt="GST Consultancy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                    <div>
+                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                            GST Consultancy
+                        </h3>
+                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
+                            Complete GST advisory, registration, return filing, and resolution of complex GST disputes.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Indirect Tax
+                        </span>
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Compliance
+                        </span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 5: Corporate Compliance -->
+            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{% static 'images/service_compliance.png' %}" alt="Corporate Compliance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                    <div>
+                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                            Corporate Compliance
+                        </h3>
+                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
+                            ROC filings, company law compliance, FEMA, and secretarial services for corporates of all sizes.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Company Law
+                        </span>
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            FEMA
+                        </span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 6: Financial Strategy -->
+            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{% static 'images/service_strategy.png' %}" alt="Financial Strategy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                </div>
+                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                    <div>
+                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                            Financial Strategy
+                        </h3>
+                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
+                            CFO advisory services, fundraising support, and long-term financial structuring for business growth.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            CFO Advisory
+                        </span>
+                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
+                            Fundraising
+                        </span>
+                    </div>
+                </div>
             </article>
         </div>
     </div>
 </section>
 
-<section class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] grid lg:grid-cols-[280px_1fr] gap-10 items-center">
-        <div class="rounded-[10px] shadow-[0_5px_14px_rgba(0,0,0,0.16)] overflow-hidden bg-white">
-            <img src="{% static 'images/portrait.png' %}" alt="Book cover" class="w-full h-[360px] object-cover">
-        </div>
-        <div>
-            <p class="text-[12px] uppercase tracking-[0.12em] text-[var(--brand-gold)] font-semibold">Guidebook</p>
-            <h3 class="mt-2 text-[32px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Inside the Book.</h3>
-            <p class="mt-4 text-[15px] leading-[1.6] text-[#444] max-w-[720px]">A practical breakdown of the carbon credit ecosystem in India, including legal intent, accounting classification, tax treatment, board-level obligations, and readiness checklists for real businesses.</p>
-            <ul class="mt-5 space-y-2 text-[14px] text-[var(--brand-navy-soft)]">
-                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-[var(--brand-gold)]"></i> CCTS law and policy evolution</li>
-                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-[var(--brand-gold)]"></i> Taxability and accounting interpretation</li>
-                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-[var(--brand-gold)]"></i> CFO and director risk responsibilities</li>
-            </ul>
-            <a href="#appointments" class="mt-6 inline-flex rounded-[4px] bg-[var(--brand-gold)] px-5 py-3 text-[13px] uppercase tracking-wider text-white hover:bg-[#a67e45] transition">Get the Book</a>
-        </div>
+<!-- CCTS Knowledge Hub (Specialized Carbon Credit Section) -->
+<section id="ccts-details" class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)] relative overflow-hidden scroll-mt-24">
+    <!-- Background subtle shape or gradient -->
+    <div class="absolute inset-0 pointer-events-none opacity-5 flex items-center justify-center">
+        <div class="w-[800px] h-[800px] rounded-full bg-[var(--brand-gold)] filter blur-3xl"></div>
     </div>
-</section>
 
-<section id="all-services" class="bg-white py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
-        <div class="text-center">
-            <h3 class="text-[34px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Expertise That Drives Real Results</h3>
-            <p class="mt-2 text-[14px] uppercase tracking-wider text-[var(--brand-gold)]">Comprehensive services</p>
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="flex items-center justify-center gap-2">
+                <span class="inline-block px-3 py-1 rounded-full bg-[rgba(184,142,80,0.12)] text-[var(--brand-gold)] font-semibold text-[11px] uppercase tracking-wider">
+                    CCTS Specialization
+                </span>
+            </div>
+            <h2 class="mt-3 text-[32px] sm:text-[38px] leading-[1.15] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">
+                India's Carbon Credit Trading Scheme
+            </h2>
+            <p class="mt-4 text-[15px] leading-[1.6] text-slate-600">
+                Understanding the legal, tax, and financial impact of the notified CCTS framework for businesses and finance leaders.
+            </p>
         </div>
 
-        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="rounded-[14px] border border-[rgba(13,43,92,0.14)] bg-white overflow-hidden shadow-[0_4px_10px_rgba(13,43,92,0.06)]">
-                <img src="{% static 'images/service_tax.png' %}" alt="Tax Planning" class="w-full h-[180px] object-cover">
-                <div class="p-5">
-                    <h4 class="text-[20px] text-[#0d2b5c] font-semibold" style="font-family: 'Playfair Display', serif;">Tax Planning</h4>
-                    <p class="mt-2 text-[13px] leading-[1.7] text-[#666]">Comprehensive income tax planning and optimisation strategies for individuals, HUFs, and corporates.</p>
-                </div>
-            </article>
-            <article class="rounded-[14px] border border-[rgba(13,43,92,0.14)] bg-white overflow-hidden shadow-[0_4px_10px_rgba(13,43,92,0.06)]">
-                <img src="{% static 'images/service_audit.png' %}" alt="Audit and Assurance" class="w-full h-[180px] object-cover">
-                <div class="p-5">
-                    <h4 class="text-[20px] text-[#0d2b5c] font-semibold" style="font-family: 'Playfair Display', serif;">Audit &amp; Assurance</h4>
-                    <p class="mt-2 text-[13px] leading-[1.7] text-[#666]">Statutory, internal, and forensic audits with meticulous attention to detail and regulatory compliance.</p>
-                </div>
-            </article>
-            <article class="rounded-[14px] border border-[rgba(13,43,92,0.14)] bg-white overflow-hidden shadow-[0_4px_10px_rgba(13,43,92,0.06)]">
-                <img src="{% static 'images/service_biz.png' %}" alt="Business Advisory" class="w-full h-[180px] object-cover">
-                <div class="p-5">
-                    <h4 class="text-[20px] text-[#0d2b5c] font-semibold" style="font-family: 'Playfair Display', serif;">Business Advisory</h4>
-                    <p class="mt-2 text-[13px] leading-[1.7] text-[#666]">Strategic guidance on business restructuring, mergers, acquisitions, and sustainable growth planning.</p>
-                </div>
-            </article>
-            <article class="rounded-[14px] border border-[rgba(13,43,92,0.14)] bg-white overflow-hidden shadow-[0_4px_10px_rgba(13,43,92,0.06)]">
-                <img src="{% static 'images/service_gst.png' %}" alt="GST Consultancy" class="w-full h-[180px] object-cover">
-                <div class="p-5">
-                    <h4 class="text-[20px] text-[#0d2b5c] font-semibold" style="font-family: 'Playfair Display', serif;">GST Consultancy</h4>
-                    <p class="mt-2 text-[13px] leading-[1.7] text-[#666]">Complete GST advisory, registration, return filing, and resolution of complex GST disputes.</p>
-                </div>
-            </article>
-            <article class="rounded-[14px] border border-[rgba(13,43,92,0.14)] bg-white overflow-hidden shadow-[0_4px_10px_rgba(13,43,92,0.06)]">
-                <img src="{% static 'images/service_compliance.png' %}" alt="Corporate Compliance" class="w-full h-[180px] object-cover">
-                <div class="p-5">
-                    <h4 class="text-[20px] text-[#0d2b5c] font-semibold" style="font-family: 'Playfair Display', serif;">Corporate Compliance</h4>
-                    <p class="mt-2 text-[13px] leading-[1.7] text-[#666]">ROC filings, company law compliance, FEMA, and secretarial services for corporates of all sizes.</p>
-                </div>
-            </article>
-            <article class="rounded-[14px] border border-[rgba(13,43,92,0.14)] bg-white overflow-hidden shadow-[0_4px_10px_rgba(13,43,92,0.06)]">
-                <img src="{% static 'images/service_strategy.png' %}" alt="Financial Strategy" class="w-full h-[180px] object-cover">
-                <div class="p-5">
-                    <h4 class="text-[20px] text-[#0d2b5c] font-semibold" style="font-family: 'Playfair Display', serif;">Financial Strategy</h4>
-                    <p class="mt-2 text-[13px] leading-[1.7] text-[#666]">CFO advisory, working capital strategy, and long-term financial architecture for resilient growth.</p>
-                </div>
-            </article>
+        <!-- Story & Overview grid -->
+        <div class="mt-12 grid lg:grid-cols-12 gap-10 items-center bg-white rounded-2xl border border-[rgba(1,31,66,0.1)] p-6 sm:p-8 lg:p-10 shadow-sm">
+            <div class="lg:col-span-5 rounded-xl overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.1)] h-[300px] bg-slate-100">
+                <img src="{% static 'images/ccts_story.png' %}" alt="CCTS story" class="w-full h-full object-cover">
+            </div>
+            <div class="lg:col-span-7">
+                <p class="text-[12px] text-[var(--brand-gold)] font-bold uppercase tracking-wider">Legal • Financial • Compliance Framework</p>
+                <h3 class="mt-2 text-[24px] sm:text-[28px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">
+                    A Critical Regulatory Shift
+                </h3>
+                <div class="mt-4 h-[2px] w-[66px] bg-[var(--brand-gold)]"></div>
+                <p class="mt-5 text-[14.5px] leading-[1.65] text-slate-700">
+                    On 28 June 2023, India notified the Carbon Credit Trading Scheme. It created assets, liabilities, taxable income, and personal liability for CFOs and directors across 14 industries. Most companies are navigating it without a complete picture. This hub exists to provide that picture - for business owners, policy makers, finance professionals, and every stakeholder who wants to understand India's carbon future.
+                </p>
+            </div>
         </div>
-    </div>
-</section>
 
-<section id="insights" class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
-        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <!-- Steps layout -->
+        <div class="mt-16">
+            <h3 class="text-center text-[24px] sm:text-[28px] text-[var(--brand-navy)] font-semibold mb-8" style="font-family: 'Playfair Display', serif;">
+                Explore CCTS in Three Key Steps
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Step 1 -->
+                <article class="border border-[rgba(1,31,66,0.08)] rounded-[12px] p-6 bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="text-[28px] text-[rgba(184,142,80,0.3)] font-bold" style="font-family: 'Playfair Display', serif;">01</div>
+                    <h4 class="mt-2 text-[17px] font-semibold text-[var(--brand-navy)]">What Is CCTS?</h4>
+                    <p class="mt-2 text-[13.5px] leading-[1.55] text-slate-600">
+                        Learn the policy foundation, obligated entities, and how compliance cycles are triggered under the notified framework.
+                    </p>
+                </article>
+                <!-- Step 2 -->
+                <article class="border border-[rgba(1,31,66,0.08)] rounded-[12px] p-6 bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="text-[28px] text-[rgba(184,142,80,0.3)] font-bold" style="font-family: 'Playfair Display', serif;">02</div>
+                    <h4 class="mt-2 text-[17px] font-semibold text-[var(--brand-navy)]">How Does It Impact Finance?</h4>
+                    <p class="mt-2 text-[13.5px] leading-[1.55] text-slate-600">
+                        Understand accounting treatment, tax positioning, valuation concerns and disclosure responsibilities for management teams.
+                    </p>
+                </article>
+                <!-- Step 3 -->
+                <article class="border border-[rgba(1,31,66,0.08)] rounded-[12px] p-6 bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="text-[28px] text-[rgba(184,142,80,0.3)] font-bold" style="font-family: 'Playfair Display', serif;">03</div>
+                    <h4 class="mt-2 text-[17px] font-semibold text-[var(--brand-navy)]">What Should You Do Next?</h4>
+                    <p class="mt-2 text-[13.5px] leading-[1.55] text-slate-600">
+                        Set up policy tracking, internal controls and risk documentation before enforcement windows create avoidable exposure.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Book Guide Section -->
+        <div class="mt-16 bg-white rounded-2xl border border-[rgba(1,31,66,0.1)] p-6 sm:p-8 lg:p-10 shadow-sm grid lg:grid-cols-[250px_1fr] gap-10 items-center">
+            <div class="rounded-xl shadow-md overflow-hidden bg-slate-100 h-[300px]">
+                <img src="{% static 'images/portrait.png' %}" alt="Book cover" class="w-full h-full object-cover">
+            </div>
             <div>
-                <p class="text-[12px] uppercase tracking-[0.1em] text-[var(--brand-gold)] font-semibold">Latest insights</p>
-                <h3 class="mt-1 text-[30px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Latest Insights &amp; Articles</h3>
-            </div>
-            <a href="#appointments" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-wider px-3 py-2 border border-[rgba(1,31,66,0.2)] rounded-[4px] text-[var(--brand-navy)] hover:bg-white transition">View all articles <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-        </div>
-
-        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {% for post in insights %}
-            <article class="bg-white rounded-[8px] border border-[rgba(1,31,66,0.14)] overflow-hidden">
-                <img src="{% static 'images/' %}{{ post.image_filename }}" alt="{{ post.title }}" class="w-full h-[130px] object-cover">
-                <div class="p-4">
-                    <h4 class="text-[14px] leading-[1.45] text-[var(--brand-navy)] font-semibold">{{ post.title }}</h4>
-                    <p class="mt-2 text-[12px] text-[#666]">{{ post.summary|truncatechars:80 }}</p>
-                    <a href="#appointments" class="mt-3 inline-flex items-center gap-1 text-[11px] uppercase tracking-wider text-[var(--brand-gold)]">Read more <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-[rgba(184,142,80,0.12)] text-[var(--brand-gold)] font-semibold text-[11px] uppercase tracking-wider">
+                    Specialized Guidebook
+                </span>
+                <h3 class="mt-2 text-[26px] sm:text-[30px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">
+                    Inside the Book
+                </h3>
+                <p class="mt-3 text-[14.5px] leading-[1.6] text-slate-600 max-w-3xl">
+                    A practical breakdown of the carbon credit ecosystem in India, including legal intent, accounting classification, tax treatment, board-level obligations, and readiness checklists for real businesses.
+                </p>
+                <ul class="mt-5 space-y-2.5 text-[14px] text-slate-700">
+                    <li class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-[var(--brand-gold)]"></i>
+                        <span>CCTS law and policy evolution</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-[var(--brand-gold)]"></i>
+                        <span>Taxability and accounting interpretation</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-[var(--brand-gold)]"></i>
+                        <span>CFO and director risk responsibilities</span>
+                    </li>
+                </ul>
+                <div class="mt-6">
+                    <a href="#appointments" class="inline-flex items-center justify-center rounded-[4px] bg-[var(--brand-gold)] hover:bg-[#a67e45] px-5 py-2.5 text-[12.5px] uppercase tracking-wider text-white font-semibold transition shadow-sm">
+                        Get the Book
+                    </a>
                 </div>
-            </article>
-            {% endfor %}
+            </div>
+        </div>
+
+        <!-- FAQs Section inside CCTS details -->
+        <div class="mt-16 bg-white rounded-2xl border border-[rgba(1,31,66,0.1)] p-6 sm:p-8 lg:p-10 shadow-sm" x-data="{ open: 1 }">
+            <h3 class="text-center text-[24px] sm:text-[28px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">
+                Frequently Asked Questions
+            </h3>
+            <div class="mt-8 space-y-3.5 max-w-4xl mx-auto">
+                <div class="border border-[rgba(1,31,66,0.08)] rounded-[8px] overflow-hidden">
+                    <button @click="open = open === 1 ? 0 : 1" class="w-full flex items-center justify-between px-5 py-4 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-slate-50/50 hover:bg-slate-50 transition-colors duration-200">
+                        <span>What is Carbon Credit Trading and why does it matter?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" :class="open===1 ? 'rotate-180 text-[var(--brand-gold)]' : 'text-[#0d2b5c]'"></i>
+                    </button>
+                    <div x-show="open===1" class="px-5 pb-5 pt-2 text-[13.5px] leading-[1.6] text-slate-600" style="display:none;">
+                        Carbon credits represent verified emission reductions. Under CCTS, they can create financial value, compliance obligations, and governance exposure.
+                    </div>
+                </div>
+                <div class="border border-[rgba(1,31,66,0.08)] rounded-[8px] overflow-hidden">
+                    <button @click="open = open === 2 ? 0 : 2" class="w-full flex items-center justify-between px-5 py-4 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-slate-50/50 hover:bg-slate-50 transition-colors duration-200">
+                        <span>How does CCTS impact accounting and taxation?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" :class="open===2 ? 'rotate-180 text-[var(--brand-gold)]' : 'text-[#0d2b5c]'"></i>
+                    </button>
+                    <div x-show="open===2" class="px-5 pb-5 pt-2 text-[13.5px] leading-[1.6] text-slate-600" style="display:none;">
+                        Classification, valuation, timing of recognition, and tax characterization all affect books and filings. A structured position is critical.
+                    </div>
+                </div>
+                <div class="border border-[rgba(1,31,66,0.08)] rounded-[8px] overflow-hidden">
+                    <button @click="open = open === 3 ? 0 : 3" class="w-full flex items-center justify-between px-5 py-4 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-slate-50/50 hover:bg-slate-50 transition-colors duration-200">
+                        <span>Who should read this CCTS guide?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" :class="open===3 ? 'rotate-180 text-[var(--brand-gold)]' : 'text-[#0d2b5c]'"></i>
+                    </button>
+                    <div x-show="open===3" class="px-5 pb-5 pt-2 text-[13.5px] leading-[1.6] text-slate-600" style="display:none;">
+                        Business owners, CFOs, finance teams, tax professionals, company secretaries, and policy stakeholders navigating carbon-linked decisions.
+                    </div>
+                </div>
+                <div class="border border-[rgba(1,31,66,0.08)] rounded-[8px] overflow-hidden">
+                    <button @click="open = open === 4 ? 0 : 4" class="w-full flex items-center justify-between px-5 py-4 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-slate-50/50 hover:bg-slate-50 transition-colors duration-200">
+                        <span>Is CCTS relevant for SMEs and startups?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" :class="open===4 ? 'rotate-180 text-[var(--brand-gold)]' : 'text-[#0d2b5c]'"></i>
+                    </button>
+                    <div x-show="open===4" class="px-5 pb-5 pt-2 text-[13.5px] leading-[1.6] text-slate-600" style="display:none;">
+                        Yes. Even when not directly obligated, supply-chain and disclosure requirements can indirectly affect reporting, contracts, and valuations.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="bg-white py-16 sm:py-20 border-b border-[color:var(--line-soft)]" x-data="{ open: 1 }">
-    <div class="max-w-5xl mx-auto px-6 sm:px-10">
-        <h3 class="text-center text-[32px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Frequently Asked Questions</h3>
-        <div class="mt-8 space-y-3">
-            <div class="border border-[rgba(1,31,66,0.16)] rounded-[6px] overflow-hidden">
-                <button @click="open = open === 1 ? 0 : 1" class="w-full flex items-center justify-between px-4 py-3 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-[#faf9f6]">What is Carbon Credit Trading and why does it matter? <i data-lucide="chevron-down" class="w-4 h-4" :class="open===1 ? 'rotate-180' : ''"></i></button>
-                <div x-show="open===1" class="px-4 pb-4 pt-1 text-[13px] text-[#555]" style="display:none;">Carbon credits represent verified emission reductions. Under CCTS, they can create financial value, compliance obligations, and governance exposure.</div>
-            </div>
-            <div class="border border-[rgba(1,31,66,0.16)] rounded-[6px] overflow-hidden">
-                <button @click="open = open === 2 ? 0 : 2" class="w-full flex items-center justify-between px-4 py-3 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-[#faf9f6]">How does CCTS impact accounting and taxation? <i data-lucide="chevron-down" class="w-4 h-4" :class="open===2 ? 'rotate-180' : ''"></i></button>
-                <div x-show="open===2" class="px-4 pb-4 pt-1 text-[13px] text-[#555]" style="display:none;">Classification, valuation, timing of recognition, and tax characterization all affect books and filings. A structured position is critical.</div>
-            </div>
-            <div class="border border-[rgba(1,31,66,0.16)] rounded-[6px] overflow-hidden">
-                <button @click="open = open === 3 ? 0 : 3" class="w-full flex items-center justify-between px-4 py-3 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-[#faf9f6]">Who should read this CCTS guide? <i data-lucide="chevron-down" class="w-4 h-4" :class="open===3 ? 'rotate-180' : ''"></i></button>
-                <div x-show="open===3" class="px-4 pb-4 pt-1 text-[13px] text-[#555]" style="display:none;">Business owners, CFOs, finance teams, tax professionals, company secretaries, and policy stakeholders navigating carbon-linked decisions.</div>
-            </div>
-            <div class="border border-[rgba(1,31,66,0.16)] rounded-[6px] overflow-hidden">
-                <button @click="open = open === 4 ? 0 : 4" class="w-full flex items-center justify-between px-4 py-3 text-left text-[14px] font-semibold text-[var(--brand-navy)] bg-[#faf9f6]">Is CCTS relevant for SMEs and startups? <i data-lucide="chevron-down" class="w-4 h-4" :class="open===4 ? 'rotate-180' : ''"></i></button>
-                <div x-show="open===4" class="px-4 pb-4 pt-1 text-[13px] text-[#555]" style="display:none;">Yes. Even when not directly obligated, supply-chain and disclosure requirements can indirectly affect reporting, contracts, and valuations.</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="appointments" class="bg-[#f9f8f6] py-16 sm:py-20">
+<!-- Book Consultation section -->
+<section id="appointments" class="bg-white py-16 sm:py-20">
     <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
-        <div class="text-center">
-            <p class="text-[12px] uppercase tracking-[0.12em] text-[var(--brand-gold)] font-semibold">Get in touch</p>
-            <h3 class="mt-2 text-[34px] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">Book Your Consultation</h3>
+        <div class="text-center max-w-[775px] mx-auto">
+            <div class="flex items-center justify-center gap-[12px]">
+                <div class="bg-[var(--brand-gold)] h-[2px] w-[32px]"></div>
+                <span class="font-['Inter'] font-semibold text-[var(--brand-gold)] text-[12px] tracking-[1.8px] uppercase">
+                    Get In Touch
+                </span>
+                <div class="bg-[var(--brand-gold)] h-[2px] w-[32px]"></div>
+            </div>
+            <h2 class="mt-4 font-['Playfair_Display'] font-bold text-[36px] sm:text-[44px] leading-[1.2] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                Book Your Consultation
+            </h2>
+            <p class="mt-4 font-['Inter'] font-normal text-[15px] leading-[1.65] text-[#666] max-w-[510px] mx-auto">
+                Schedule a private consultation and take the first step towards financial clarity.
+            </p>
         </div>
 
-        <div class="mt-10 grid lg:grid-cols-2 gap-8">
-            <div class="bg-white border border-[rgba(1,31,66,0.14)] rounded-[8px] p-6"
-                 x-data="{ formData: { full_name: '', email: '', phone: '', service: 'CCTS', company: '', message: '' }, submitting: false, successMsg: '', errors: {}, submitForm() { this.submitting = true; this.successMsg = ''; this.errors = {}; let urlEncoded = new URLSearchParams(); urlEncoded.append('csrfmiddlewaretoken', '{{ csrf_token }}'); Object.keys(this.formData).forEach(key => urlEncoded.append(key, this.formData[key])); fetch('{% url "website:book_consultation" %}', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: urlEncoded }).then(response => response.json().then(data => ({ status: response.status, body: data }))).then(res => { this.submitting = false; if (res.status === 200 && res.body.success) { this.successMsg = res.body.message; this.formData = { full_name: '', email: '', phone: '', service: 'CCTS', company: '', message: '' }; } else { this.errors = res.body.errors || {}; } }).catch(() => { this.submitting = false; this.errors = { __all__: 'A network connectivity error occurred. Please try again.' }; }); } }">
+        <div class="mt-12 grid lg:grid-cols-12 gap-10 items-stretch">
+            <div class="lg:col-span-7 bg-[#fdfcf9] border border-[rgba(1,31,66,0.08)] rounded-[20px] p-6 sm:p-8 shadow-sm flex flex-col justify-between"
+                 x-data="{ formData: { full_name: '', email: '', phone: '', service: 'Tax Planning', company: '', message: '' }, submitting: false, successMsg: '', errors: {}, submitForm() { this.submitting = true; this.successMsg = ''; this.errors = {}; let urlEncoded = new URLSearchParams(); urlEncoded.append('csrfmiddlewaretoken', '{{ csrf_token }}'); Object.keys(this.formData).forEach(key => urlEncoded.append(key, this.formData[key])); fetch('{% url "website:book_consultation" %}', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: urlEncoded }).then(response => response.json().then(data => ({ status: response.status, body: data }))).then(res => { this.submitting = false; if (res.status === 200 && res.body.success) { this.successMsg = res.body.message; this.formData = { full_name: '', email: '', phone: '', service: 'Tax Planning', company: '', message: '' }; } else { this.errors = res.body.errors || {}; } }).catch(() => { this.submitting = false; this.errors = { __all__: 'A network connectivity error occurred. Please try again.' }; }); } }">
 
                 <div x-show="successMsg !== ''" class="mb-5 rounded-[6px] bg-[rgba(184,142,80,0.12)] border border-[rgba(184,142,80,0.25)] p-3 text-[13px] text-[var(--brand-navy)]" style="display:none;" x-text="successMsg"></div>
 
                 <form @submit.prevent="submitForm()" class="space-y-4">
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold">Full Name</label>
+                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold block mb-1">Full Name</label>
                             {{ form.full_name }}
                         </div>
                         <div>
-                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold">Email</label>
+                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold block mb-1">Email</label>
                             {{ form.email }}
                         </div>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold">Phone</label>
+                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold block mb-1">Phone</label>
                             {{ form.phone }}
                         </div>
                         <div>
-                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold">Service</label>
+                            <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold block mb-1">Service Required</label>
                             {{ form.service }}
                         </div>
                     </div>
                     <div>
-                        <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold">Company</label>
+                        <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold block mb-1">Company / Organization</label>
                         {{ form.company }}
                     </div>
                     <div>
-                        <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold">Message</label>
+                        <label class="text-[11px] uppercase tracking-wider text-[var(--brand-navy-soft)] font-semibold block mb-1">Message</label>
                         {{ form.message }}
                     </div>
-                    <button type="submit" :disabled="submitting" class="w-full rounded-[4px] bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] text-white px-4 py-3 text-[12px] uppercase tracking-wider transition disabled:opacity-50">Book your consultation</button>
+                    <button type="submit" :disabled="submitting" class="w-full rounded-lg bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] text-white px-5 py-3.5 text-[12.5px] uppercase font-bold tracking-wider transition-all duration-300 disabled:opacity-50 hover:shadow-md cursor-pointer">
+                        Book Your Consultation
+                    </button>
                 </form>
             </div>
 
-            <div class="rounded-[8px] bg-[var(--brand-navy)] text-white p-6">
-                <h4 class="text-[22px] font-semibold" style="font-family: 'Playfair Display', serif;">Reach Us</h4>
-                <div class="mt-5 space-y-4 text-[14px] text-slate-200">
-                    <p class="flex gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-1 text-[var(--brand-gold)]"></i> 302, Prestige Tower, MG Road, New Delhi - 110001</p>
-                    <p class="flex gap-2"><i data-lucide="phone" class="w-4 h-4 mt-1 text-[var(--brand-gold)]"></i> +91 11 4567 8900</p>
-                    <p class="flex gap-2"><i data-lucide="mail" class="w-4 h-4 mt-1 text-[var(--brand-gold)]"></i> info@ashwanitayal.com</p>
-                    <p class="flex gap-2"><i data-lucide="clock" class="w-4 h-4 mt-1 text-[var(--brand-gold)]"></i> Mon-Fri: 9:30 AM - 6:30 PM</p>
+            <div class="lg:col-span-5 rounded-[20px] bg-[var(--brand-navy)] text-white p-6 sm:p-8 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                <!-- Watermark Background -->
+                <div class="absolute right-0 bottom-0 pointer-events-none opacity-5 translate-x-12 translate-y-12">
+                    <i data-lucide="building-2" class="w-64 h-64"></i>
                 </div>
-                <a href="https://maps.google.com" target="_blank" class="mt-6 inline-flex items-center gap-2 rounded-[4px] bg-[var(--brand-gold)] px-4 py-2 text-[12px] uppercase tracking-wider">Navigate directly <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+
+                <div class="relative z-10">
+                    <h4 class="text-[24px] font-semibold tracking-tight" style="font-family: 'Playfair Display', serif;">Reach Us</h4>
+                    <div class="mt-6 space-y-5 text-[14px] text-slate-200">
+                        <p class="flex gap-3"><i data-lucide="map-pin" class="w-5 h-5 shrink-0 mt-0.5 text-[var(--brand-gold)]"></i> <span>302, Prestige Tower, MG Road, New Delhi - 110001</span></p>
+                        <p class="flex gap-3"><i data-lucide="phone" class="w-5 h-5 shrink-0 mt-0.5 text-[var(--brand-gold)]"></i> <span>+91 11 4567 8900</span></p>
+                        <p class="flex gap-3"><i data-lucide="mail" class="w-5 h-5 shrink-0 mt-0.5 text-[var(--brand-gold)]"></i> <span>info@ashwanitayal.com</span></p>
+                        <p class="flex gap-3"><i data-lucide="clock" class="w-5 h-5 shrink-0 mt-0.5 text-[var(--brand-gold)]"></i> <span>Mon-Fri: 9:30 AM - 6:30 PM</span></p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 mt-8">
+                    <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-center mb-6">
+                        <i data-lucide="map" class="w-6 h-6 mx-auto text-[var(--brand-gold)] mb-2"></i>
+                        <span class="text-xs text-slate-300 block mb-1">Google Maps preview</span>
+                    </div>
+                    <a href="https://maps.google.com" target="_blank" class="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--brand-gold)] hover:bg-[#a67e45] text-white px-5 py-3 text-[12.5px] uppercase tracking-wider font-bold transition-all duration-300 hover:shadow-md cursor-pointer">
+                        Navigate Directly <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

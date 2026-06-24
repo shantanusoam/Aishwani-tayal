@@ -69,6 +69,51 @@ def about(request):
     return render(request, "website/about.html", {"form": form})
 
 
+def blogs(request):
+    """
+    Renders the comprehensive blogs & insights page.
+    """
+    insights = list(Insight.objects.all().order_by("-published_date"))
+
+    # Seed insights data if empty (dynamic database setup)
+    if not insights:
+        seed_data = [
+            {
+                "title": "How to Optimise Your Tax Liability in FY 2025–26",
+                "category": "TAX",
+                "published_date": datetime.date(2026, 6, 12),
+                "summary": "A step-by-step breakdown of the most effective strategies to legally minimize your personal and corporate taxes under the latest Union Budget provisions.",
+                "image_filename": "blog_tax.png",
+            },
+            {
+                "title": "GST Input Tax Credit: Common Mistakes & How to Avoid Them",
+                "category": "GST",
+                "published_date": datetime.date(2026, 5, 28),
+                "summary": "ITC mismatches are among the top reasons for audit notices. Learn our bulletproof process to audit and reconcile purchase logs with GSTR-2B.",
+                "image_filename": "blog_gst.png",
+            },
+            {
+                "title": "Structuring Your Business for Long-term Growth",
+                "category": "BIZ",
+                "published_date": datetime.date(2026, 5, 10),
+                "summary": "From entity selection to corporate restructuring, discover how seasoned structures protect your wealth and facilitate easy fundraises.",
+                "image_filename": "blog_growth.png",
+            },
+        ]
+        for data in seed_data:
+            insight = Insight.objects.create(
+                title=data["title"],
+                category=data["category"],
+                published_date=data["published_date"],
+                summary=data["summary"],
+                image_filename=data["image_filename"],
+            )
+            insights.append(insight)
+
+    form = ConsultationForm()
+    return render(request, "website/blogs.html", {"insights": insights, "form": form})
+
+
 @require_POST
 def book_consultation(request):
     """
