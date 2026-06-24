@@ -63,6 +63,82 @@
     </a>
 </div>
 
+<!-- Home Services Showcase -->
+<section id="home-services" class="relative overflow-hidden bg-[var(--brand-cream)] py-16 sm:py-24" style="font-family: 'Inter', sans-serif;">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[rgba(184,142,80,0.12)] blur-3xl animate-[pulse_12s_ease-in-out_infinite]"></div>
+        <div class="absolute right-0 top-0 h-96 w-96 rounded-full bg-[rgba(13,43,92,0.06)] blur-3xl animate-[pulse_16s_ease-in-out_infinite]"></div>
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(184,142,80,0.35)] to-transparent"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-[83px] relative z-10">
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
+            <div class="lg:col-span-5 max-w-[520px]">
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[var(--brand-gold)]"></span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[var(--brand-gold)]">
+                        {{ home_service_section.label }}
+                    </span>
+                </div>
+
+                <h2 class="mt-4 text-[40px] leading-[1.1] sm:text-[48px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                    {{ home_service_section.title }}
+                </h2>
+            </div>
+
+            <div class="lg:col-span-4 lg:col-start-9 max-w-[320px] lg:ml-auto">
+                <p class="text-[15px] leading-[1.8] text-[#666]">
+                    {{ home_service_section.description }}
+                </p>
+
+                <a href="{{ home_service_section.cta_url }}"
+                   class="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#0d2b5c] px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.08em] text-white shadow-[0_12px_24px_rgba(13,43,92,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#12386f] hover:shadow-[0_16px_30px_rgba(13,43,92,0.24)]">
+                    {{ home_service_section.cta_text }}
+                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {% for card in home_service_cards %}
+            <article class="home-service-card relative flex h-full flex-col overflow-hidden rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] ring-1 ring-[rgba(1,31,66,0.06)]">
+                <div class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover">
+                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                    <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[rgba(13,43,92,0.16)] to-transparent"></div>
+                </div>
+
+                <a href="{{ card.link_url }}"
+                   aria-label="Open {{ card.title }}"
+                   class="absolute right-6 top-[198px] z-20 flex size-[44px] items-center justify-center rounded-full bg-white shadow-[0px_4px_8px_rgba(13,43,92,0.18)]">
+                    <i data-lucide="arrow-up-right" class="h-[18px] w-[18px] text-[#0d2b5c]"></i>
+                </a>
+
+                <div class="flex flex-1 flex-col justify-between px-6 pb-6 pt-7">
+                    <div>
+                        <h3 class="text-[19px] leading-[1.28] text-[#0d2b5c]">
+                            {{ card.title }}
+                        </h3>
+                        <p class="mt-2.5 max-w-[300px] text-[13px] leading-[1.65] text-[#666]">
+                            {{ card.summary }}
+                        </p>
+                    </div>
+
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c]">
+                            {{ card.badge_one }}
+                        </span>
+                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c]">
+                            {{ card.badge_two }}
+                        </span>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <!-- Dynamic Services Auto-scroll (Figma annotation aligned) -->
 <section class="py-16 sm:py-20 bg-[var(--brand-cream)] border-y border-[color:var(--line-soft)] overflow-hidden" id="service-flow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
@@ -549,126 +625,9 @@
     </div>
 </section>
 
-<!-- Insights & Blog Section -->
-<section id="insights" class="py-24 sm:py-32 bg-white relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Header Column -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-16 gap-4 scroll-anim-heading">
-            <div class="space-y-3">
-                <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">MY Insights</span>
-                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 font-serif tracking-tight">Latest Insights & Blogs</h2>
-                <div class="h-0.5 w-16 bg-indigo-600 rounded"></div>
-            </div>
-            <a href="#appointments"
-               class="inline-flex items-center justify-center px-6 py-3 border border-slate-200 hover:border-indigo-600 hover:text-indigo-600 text-sm font-bold text-slate-700 rounded-xl transition duration-300 shadow-sm mt-4 sm:mt-0">
-                View All Blogs
-                <i data-lucide="external-link" class="ml-2 w-4 h-4"></i>
-            </a>
-        </div>
+{% include "website/sections/insights_section.html" with insights=insights section_id="insights" view_all_url="#appointments" %}
 
-        <!-- 3 Insight Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 scroll-anim-blogs">
-            {% for post in insights %}
-            <div class="bg-white border border-slate-100 rounded-2xl shadow-md overflow-hidden flex flex-col group hover:border-indigo-200 hover:shadow-xl transition duration-500 transform hover:-translate-y-1">
-                <!-- Blog Image -->
-                <div class="aspect-video relative overflow-hidden bg-slate-100">
-                    <img src="{% static 'images/' %}{{ post.image_filename }}" alt="{{ post.title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-slate-950/10 group-hover:bg-transparent transition duration-300"></div>
-                </div>
-
-                <!-- Text content -->
-                <div class="p-6 flex-grow flex flex-col justify-between space-y-6">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between text-xs font-semibold">
-                            <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
-                                {{ post.get_category_display }}
-                            </span>
-                            <span class="text-slate-400 flex items-center gap-1">
-                                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-                                {{ post.published_date|date:"d M Y" }}
-                            </span>
-                        </div>
-                        <h4 class="text-xl font-bold font-serif text-slate-900 leading-snug group-hover:text-indigo-600 transition">
-                            {{ post.title }}
-                        </h4>
-                        <p class="text-sm text-slate-500 leading-relaxed font-light line-clamp-3">
-                            {{ post.summary }}
-                        </p>
-                    </div>
-
-                    <div class="border-t border-slate-50 pt-4">
-                        <a href="#appointments" class="inline-flex items-center gap-1 text-sm font-bold text-indigo-600 group-hover:text-slate-900 transition-colors">
-                            <span>Read More</span>
-                            <i data-lucide="chevron-right" class="w-4 h-4 transform group-hover:translate-x-1.5 transition"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-    </div>
-</section>
-
-<!-- Awards Section -->
-<section class="py-24 sm:py-32 bg-slate-50 border-t border-b border-slate-100 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Header -->
-        <div class="text-center max-w-xl mx-auto mb-16 space-y-4 scroll-anim-heading">
-            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Credibility</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-serif tracking-tight">Awards & Recognitions</h2>
-            <p class="text-base text-slate-600 font-light">A legacy of recognition from India's most respected corporate associations & advisory forums.</p>
-        </div>
-
-        <!-- Awards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto scroll-anim-awards">
-            
-            <!-- Award 1 -->
-            <div class="bg-white p-8 border border-slate-100 rounded-2xl shadow-lg flex flex-col justify-between hover:border-indigo-200 hover:shadow-xl transition group duration-500">
-                <div class="space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="bg-indigo-50 text-indigo-600 border border-indigo-100 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase">
-                            2024 Award
-                        </div>
-                        <div class="text-slate-400 group-hover:text-indigo-600 transition">
-                            <i data-lucide="award" class="w-8 h-8"></i>
-                        </div>
-                    </div>
-                    <div class="h-0.5 w-12 bg-indigo-500 rounded"></div>
-                    <h3 class="text-2xl font-bold font-serif text-slate-800">Best CA Advisor of the Year</h3>
-                    <p class="text-sm text-slate-500 font-light">Awarded for path-breaking legal advocacy & pre-emptive enterprise counsel during the annual convention.</p>
-                </div>
-                <div class="border-t border-slate-100 mt-6 pt-4 text-xs font-semibold text-slate-500">
-                    ICAI National Conference
-                </div>
-            </div>
-
-            <!-- Award 2 -->
-            <div class="bg-white p-8 border border-slate-100 rounded-2xl shadow-lg flex flex-col justify-between hover:border-indigo-200 hover:shadow-xl transition group duration-500">
-                <div class="space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="bg-indigo-50 text-indigo-600 border border-indigo-100 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase">
-                            2022 Award
-                        </div>
-                        <div class="text-slate-400 group-hover:text-indigo-600 transition">
-                            <i data-lucide="award" class="w-8 h-8"></i>
-                        </div>
-                    </div>
-                    <div class="h-0.5 w-12 bg-indigo-500 rounded"></div>
-                    <h3 class="text-2xl font-bold font-serif text-slate-800">Excellence in GST Advisory</h3>
-                    <p class="text-sm text-slate-500 font-light">Honored for formulation of defensive structures that reconciled systemic gaps and reclaimed working capital.</p>
-                </div>
-                <div class="border-t border-slate-100 mt-6 pt-4 text-xs font-semibold text-slate-500">
-                    National Business Council
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
+{% include "website/sections/awards_section.html" with award_cards=award_cards %}
 
 <!-- Moments & Milestones Gallery Section -->
 <section id="gallery" class="py-24 sm:py-32 bg-white relative" x-data="{ openImg: null, zoomTitle: '', listImg: [
@@ -1046,20 +1005,7 @@
             ease: 'power3.out'
         });
 
-        // 8. Awards Cards reveal
-        gsap.from('.scroll-anim-awards', {
-            scrollTrigger: {
-                trigger: '.scroll-anim-awards',
-                start: 'top 85%'
-            },
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            stagger: 0.15,
-            ease: 'power3.out'
-        });
-
-        // 9. Gallery Items stagger brick layout
+        // 8. Gallery Items stagger brick layout
         gsap.from('.scroll-anim-gallery', {
             scrollTrigger: {
                 trigger: '#gallery',
@@ -1071,7 +1017,7 @@
             ease: 'power2.out'
         });
 
-        // 9.5 Book Showcase Section reveal
+        // 9. Book Showcase Section reveal
         gsap.from('.scroll-anim-book-left', {
             scrollTrigger: {
                 trigger: '#book-showcase',
@@ -1101,4 +1047,3 @@
     });
 </script>
 {% endblock %}
-

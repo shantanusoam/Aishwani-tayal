@@ -41,180 +41,42 @@
         </div>
 
         <!-- Service Cards Grid -->
-        <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1: Tax Planning -->
-            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
+        <div class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {% for card in home_service_cards %}
+            <article class="relative flex h-full flex-col overflow-hidden rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] ring-1 ring-[rgba(1,31,66,0.06)]">
                 <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{% static 'images/service_tax.png' %}" alt="Tax Planning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover">
                     <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
+                    <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[rgba(13,43,92,0.16)] to-transparent"></div>
                 </div>
-                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
-                </div>
-                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
-                    <div>
-                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
-                            Tax Planning
-                        </h3>
-                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
-                            Comprehensive income tax planning and optimisation strategies for individuals, HUFs, and corporates.
-                        </p>
-                    </div>
-                    <div class="flex gap-2 mt-4">
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Direct Tax
-                        </span>
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Optimisation
-                        </span>
-                    </div>
-                </div>
-            </article>
 
-            <!-- Card 2: Audit & Assurance -->
-            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
-                <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{% static 'images/service_audit.png' %}" alt="Audit & Assurance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                </div>
-                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
-                </div>
-                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
-                    <div>
-                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
-                            Audit & Assurance
-                        </h3>
-                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
-                            Statutory, internal, and forensic audits with meticulous attention to detail and regulatory compliance.
-                        </p>
-                    </div>
-                    <div class="flex gap-2 mt-4">
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Statutory
-                        </span>
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Forensic
-                        </span>
-                    </div>
-                </div>
-            </article>
+                <a href="{{ card.link_url }}"
+                   aria-label="Open {{ card.title }}"
+                   class="absolute right-6 top-[198px] z-20 flex size-[44px] items-center justify-center rounded-full bg-white shadow-[0px_4px_8px_rgba(13,43,92,0.18)]">
+                    <i data-lucide="arrow-up-right" class="h-[18px] w-[18px] text-[#0d2b5c]"></i>
+                </a>
 
-            <!-- Card 3: Business Advisory -->
-            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
-                <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{% static 'images/service_biz.png' %}" alt="Business Advisory" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                </div>
-                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
-                </div>
-                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
+                <div class="flex flex-1 flex-col justify-between px-6 pb-6 pt-7">
                     <div>
-                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
-                            Business Advisory
+                        <h3 class="text-[19px] leading-[1.28] text-[#0d2b5c]">
+                            {{ card.title }}
                         </h3>
-                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
-                            Strategic guidance on business restructuring, mergers, acquisitions, and sustainable growth planning.
+                        <p class="mt-2.5 max-w-[300px] text-[13px] leading-[1.65] text-[#666]">
+                            {{ card.summary }}
                         </p>
                     </div>
-                    <div class="flex gap-2 mt-4">
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Strategy
-                        </span>
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            M&A
-                        </span>
-                    </div>
-                </div>
-            </article>
 
-            <!-- Card 4: GST Consultancy -->
-            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
-                <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{% static 'images/service_gst.png' %}" alt="GST Consultancy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                </div>
-                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
-                </div>
-                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
-                    <div>
-                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
-                            GST Consultancy
-                        </h3>
-                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
-                            Complete GST advisory, registration, return filing, and resolution of complex GST disputes.
-                        </p>
-                    </div>
-                    <div class="flex gap-2 mt-4">
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Indirect Tax
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c]">
+                            {{ card.badge_one }}
                         </span>
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Compliance
+                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c]">
+                            {{ card.badge_two }}
                         </span>
                     </div>
                 </div>
             </article>
-
-            <!-- Card 5: Corporate Compliance -->
-            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
-                <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{% static 'images/service_compliance.png' %}" alt="Corporate Compliance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                </div>
-                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
-                </div>
-                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
-                    <div>
-                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
-                            Corporate Compliance
-                        </h3>
-                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
-                            ROC filings, company law compliance, FEMA, and secretarial services for corporates of all sizes.
-                        </p>
-                    </div>
-                    <div class="flex gap-2 mt-4">
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Company Law
-                        </span>
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            FEMA
-                        </span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 6: Financial Strategy -->
-            <article class="relative flex flex-col bg-white rounded-[20px] shadow-[0px_4px_10px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.1)] transition-all duration-300 h-[435px]">
-                <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{% static 'images/service_strategy.png' %}" alt="Financial Strategy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                </div>
-                <div class="absolute right-6 top-[198px] z-10 flex items-center justify-center bg-white rounded-full size-[44px] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] group-hover:bg-[var(--brand-gold)] transition-all duration-300">
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-[#0d2b5c] -rotate-45 group-hover:text-white transition-colors duration-300"></i>
-                </div>
-                <div class="flex-grow flex flex-col justify-between p-6 pt-7">
-                    <div>
-                        <h3 class="font-['Playfair_Display'] font-bold text-[19px] text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
-                            Financial Strategy
-                        </h3>
-                        <p class="mt-2.5 font-['Inter'] font-normal text-[13px] leading-[1.65] text-[#666]">
-                            CFO advisory services, fundraising support, and long-term financial structuring for business growth.
-                        </p>
-                    </div>
-                    <div class="flex gap-2 mt-4">
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            CFO Advisory
-                        </span>
-                        <span class="inline-block bg-[rgba(13,43,92,0.07)] border border-black/10 px-3 py-1 rounded-full text-[10.5px] font-semibold text-[#0d2b5c] tracking-wider uppercase">
-                            Fundraising
-                        </span>
-                    </div>
-                </div>
-            </article>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -375,6 +237,8 @@
         </div>
     </div>
 </section>
+
+{% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %}
 
 <!-- Book Consultation section -->
 <section id="appointments" class="bg-white py-16 sm:py-20">
