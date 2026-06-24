@@ -110,37 +110,44 @@
     </head>
     <body class="flex flex-col min-h-screen antialiased bg-white overflow-x-hidden selection:bg-[var(--brand-gold)] selection:text-white {% block body_class %}{% endblock %}">
         <!-- Navbar -->
-        <header class="fixed inset-x-0 top-0 z-50" x-data="{ mobileMenuOpen: false }">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-[83px] items-center pt-3">
-                    <!-- Logo -->
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="{% url 'website:home' %}" class="flex items-center bg-white/92 border border-white/70 shadow-[0_10px_28px_rgba(1,31,66,0.18)] px-3 py-2 rounded-[2px] transition-transform active:scale-95" aria-label="CA Ashwani Tayal Home">
-                            <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" class="h-16 lg:h-20 w-auto object-contain">
+        <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300" 
+                x-data="{ mobileMenuOpen: false, scrolled: false }" 
+                @scroll.window="scrolled = (window.pageYOffset > 20)"
+                :class="scrolled ? 'bg-white shadow-md' : 'bg-gradient-to-r from-white/90 via-white/70 to-transparent'">
+            <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] relative">
+                <div class="flex justify-end lg:justify-between h-[83px] items-center">
+                    <!-- Logo container -->
+                    <div class="absolute left-6 sm:left-10 lg:left-[83px] top-0 transition-all duration-300 flex-shrink-0 flex items-start"
+                         :class="scrolled ? 'h-[83px] items-center' : 'h-[140px] lg:h-[180px] pt-6'">
+                        <a href="{% url 'website:home' %}" class="flex items-center justify-center h-full" aria-label="CA Ashwani Tayal Home">
+                            <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" 
+                                 class="w-auto object-contain transition-all duration-300"
+                                 :class="scrolled ? 'h-12' : 'h-24 lg:h-32'">
                         </a>
                     </div>
+                    
+                    <!-- Spacer for absolute logo -->
+                    <div class="w-[140px] lg:w-[180px] hidden lg:block flex-shrink-0"></div>
+
                     <!-- Desktop Nav -->
-                    <nav class="hidden md:flex items-center gap-1 px-6 py-1.5 rounded-[14px] border border-white/70 bg-[rgba(247,244,237,0.9)] shadow-[0_10px_24px_rgba(1,31,66,0.16)] backdrop-blur-sm">
-                        <a href="{% url 'website:home' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Home</a>
-                        <a href="{% url 'website:about' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">About</a>
-                        <a href="{% url 'website:services' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Services</a>
-                        <a href="{% url 'website:home' %}#gallery" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
-                        <a href="{% url 'website:services' %}#ccts-details" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
-                        <a href="{% url 'website:blogs' %}" class="px-2 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
-                        <a href="{% url 'website:about' %}#appointments" class="inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-[4px] text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 min-w-[152px]">
+                    <nav class="hidden md:flex items-center gap-1 px-4 py-1.5 justify-end w-full lg:w-auto">
+                        <a href="{% url 'website:home' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Home</a>
+                        <a href="{% url 'website:about' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">About</a>
+                        <a href="{% url 'website:services' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Services</a>
+                        <a href="{% url 'website:home' %}#gallery" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
+                        <a href="{% url 'website:services' %}#ccts-details" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
+                        <a href="{% url 'website:blogs' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
+                        <a href="{% url 'website:about' %}#appointments" class="ml-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 border border-[var(--brand-navy)]">
                             Connect
                             <i data-lucide="arrow-right" class="ml-1.5 w-3.5 h-3.5"></i>
                         </a>
                     </nav>
                     <!-- Mobile Menu Button -->
-                    <div class="md:hidden">
+                    <div class="md:hidden relative z-10 bg-white/50 rounded p-1">
                         <button @click="mobileMenuOpen = !mobileMenuOpen"
-                                class="text-[var(--brand-navy)] bg-white/90 border border-white/80 shadow-lg rounded-lg p-2 hover:text-[var(--brand-gold)] focus:outline-none transition-colors duration-300">
+                                class="text-[var(--brand-navy)] bg-white/90 border border-white/80 shadow-sm rounded-lg p-2 hover:text-[var(--brand-gold)] focus:outline-none transition-colors duration-300">
                             <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
-                            <i data-lucide="x"
-                               class="w-6 h-6"
-                               x-show="mobileMenuOpen"
-                               style="display: none"></i>
+                            <i data-lucide="x" class="w-6 h-6" x-show="mobileMenuOpen" style="display: none"></i>
                         </button>
                     </div>
                 </div>
@@ -179,16 +186,13 @@
             {% block content %}{% endblock %}
         </main>
         <!-- Footer -->
-        <!-- Footer Section with CTA Banner and Watermark Backdrop -->
-        <div class="bg-slate-950 relative z-10 pt-16">
-            <!-- CTA Banner (Figma Rectangle 50) -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[25] -translate-y-16">
-                <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 p-8 sm:p-12 text-center text-white bg-cover bg-center bg-no-repeat group" style="background-image: url('{% static 'images/raid_ready_banner_bg.png' %}');">
-                    <!-- Overlay for high-contrast text rendering -->
-                    <div class="absolute inset-0 bg-slate-950/40 mix-blend-multiply"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80"></div>
-                    
-                    <div class="relative z-10 space-y-6">
+        <!-- CTA Banner (full-width dark navy, rounded, above white footer) -->
+        <div class="bg-white relative z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 lg:p-16 text-center text-white bg-[var(--brand-navy)]">
+                    <!-- Subtle diagonal lines overlay -->
+                    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+                   <div class="relative z-10 space-y-6">
                         <h2 class="text-3xl sm:text-4xl lg:text-[38px] font-bold font-serif tracking-tight text-white leading-tight">
                             Ready To Build A Raid-Ready Business?
                         </h2>
@@ -205,39 +209,35 @@
                 </div>
             </div>
 
-            <!-- Informational Footer (Figma Frame 11) -->
-            <footer class="text-slate-400 pb-16 relative overflow-hidden">
+            <!-- Informational Footer (white background to match Figma) -->
+            <footer class="text-[var(--brand-navy)] pt-16 pb-8 relative overflow-hidden">
                 <!-- Giant Watermark Logo -->
-                <img src="{% static 'images/logo.png' %}" alt="Watermark Logo" class="absolute -bottom-24 -left-24 h-[450px] w-auto opacity-[0.025] select-none pointer-events-none filter invert brightness-200">
+                <img src="{% static 'images/logo.png' %}" alt="Watermark Logo" class="absolute top-0 right-[10%] h-[420px] w-auto opacity-[0.04] select-none pointer-events-none">
 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-12 border-b border-slate-900">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-12 border-b border-[var(--line-soft)]">
                         
                         <!-- Column 1: Info & Brand (Spans 4) -->
-                        <div class="lg:col-span-4 space-y-6">
-                            <div class="flex items-center gap-3.5">
-                                <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-14 w-auto object-contain filter invert brightness-200">
-                                <div class="flex flex-col">
-                                    <span class="text-xl font-bold tracking-tight text-white font-serif">CA Ashwani Tayal</span>
-                                    <span class="text-[10px] uppercase tracking-widest font-semibold text-indigo-400">Chartered Accountant</span>
-                                </div>
+                        <div class="lg:col-span-4 space-y-5">
+                            <div>
+                                <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-16 w-auto object-contain">
                             </div>
-                            <p class="text-sm text-slate-500 max-w-xs leading-relaxed font-light">
-                                Trusted by over 1,000 businesses and professionals. Protecting corporate enterprise value through proactive and defensive frameworks.
+                            <p class="text-sm text-[var(--brand-navy)]/60 max-w-xs leading-relaxed">
+                                Trusted by over 1,000 businesses and professionals for 25+ years of strategic financial advisory, compliance excellence, and thought leadership.
                             </p>
                             <!-- Social Icons -->
-                            <div class="flex items-center gap-3 pt-2">
-                                <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
-                                    <i data-lucide="linkedin" class="w-4.5 h-4.5"></i>
+                            <div class="flex items-center gap-3 pt-1">
+                                <a href="https://linkedin.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
+                                    <i data-lucide="linkedin" class="w-4 h-4"></i>
                                 </a>
-                                <a href="https://twitter.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
-                                    <i data-lucide="twitter" class="w-4.5 h-4.5"></i>
+                                <a href="https://twitter.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
+                                    <i data-lucide="twitter" class="w-4 h-4"></i>
                                 </a>
-                                <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
-                                    <i data-lucide="instagram" class="w-4.5 h-4.5"></i>
+                                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
+                                    <i data-lucide="instagram" class="w-4 h-4"></i>
                                 </a>
-                                <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-transparent transition-all duration-300">
-                                    <i data-lucide="youtube" class="w-4.5 h-4.5"></i>
+                                <a href="https://youtube.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
+                                    <i data-lucide="youtube" class="w-4 h-4"></i>
                                 </a>
                             </div>
                         </div>
@@ -245,53 +245,54 @@
                         <!-- Column 2: Quick Links (Spans 2) -->
                         <div class="lg:col-span-2 space-y-5">
                             <div class="space-y-2">
-                                <h4 class="text-white font-bold text-sm tracking-wider uppercase font-serif">Quick Links</h4>
-                                <div class="h-0.5 w-8 bg-indigo-500 rounded"></div>
+                                <h4 class="text-[var(--brand-gold)] font-semibold text-[11px] tracking-widest uppercase">Quick Links</h4>
+                                <div class="h-[2px] w-8 bg-[var(--brand-gold)]"></div>
                             </div>
-                            <ul class="space-y-2.5 text-sm">
-                                <li><a href="{% url 'website:home' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Home</a></li>
-                                <li><a href="{% url 'website:about' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">About Us</a></li>
-                                <li><a href="{% url 'website:services' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Services</a></li>
-                                <li><a href="{% url 'website:home' %}#gallery" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Workshops</a></li>
-                                <li><a href="{% url 'website:services' %}#ccts-details" class="hover:text-white transition-colors duration-300 flex items-center gap-1">CCTS</a></li>
-                                <li><a href="{% url 'website:blogs' %}" class="hover:text-white transition-colors duration-300 flex items-center gap-1">Blogs</a></li>
+                            <ul class="space-y-2.5 text-sm text-[var(--brand-navy)]/70">
+                                <li><a href="{% url 'website:home' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Home</a></li>
+                                <li><a href="{% url 'website:about' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">About</a></li>
+                                <li><a href="{% url 'website:services' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Services</a></li>
+                                <li><a href="{% url 'website:home' %}#gallery" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Workshops</a></li>
+                                <li><a href="{% url 'website:services' %}#ccts-details" class="hover:text-[var(--brand-gold)] transition-colors duration-200">CCTS</a></li>
+                                <li><a href="{% url 'website:blogs' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Blogs</a></li>
+                                <li><a href="{% url 'website:about' %}#appointments" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Connect</a></li>
                             </ul>
                         </div>
 
                         <!-- Column 3: Services (Spans 3) -->
                         <div class="lg:col-span-3 space-y-5">
                             <div class="space-y-2">
-                                <h4 class="text-white font-bold text-sm tracking-wider uppercase font-serif">Services</h4>
-                                <div class="h-0.5 w-8 bg-indigo-500 rounded"></div>
+                                <h4 class="text-[var(--brand-gold)] font-semibold text-[11px] tracking-widest uppercase">Services</h4>
+                                <div class="h-[2px] w-8 bg-[var(--brand-gold)]"></div>
                             </div>
-                            <ul class="space-y-2.5 text-sm text-slate-400 font-light">
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Tax Planning</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Audit & Assurance</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Business Advisory</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">GST Consultancy</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Corporate Compliance</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-white transition duration-300">Financial Strategy</a></li>
+                            <ul class="space-y-2.5 text-sm text-[var(--brand-navy)]/70">
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Tax Planning</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Audit & Assurance</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Business Advisory</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">GST Consultancy</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Corporate Compliance</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Financial Strategy</a></li>
                             </ul>
                         </div>
 
                         <!-- Column 4: Contact Details (Spans 3) -->
                         <div class="lg:col-span-3 space-y-5">
                             <div class="space-y-2">
-                                <h4 class="text-white font-bold text-sm tracking-wider uppercase font-serif">Contact Details</h4>
-                                <div class="h-0.5 w-8 bg-indigo-500 rounded"></div>
+                                <h4 class="text-[var(--brand-gold)] font-semibold text-[11px] tracking-widest uppercase">Contact Details</h4>
+                                <div class="h-[2px] w-8 bg-[var(--brand-gold)]"></div>
                             </div>
-                            <ul class="space-y-4 text-sm text-slate-500 font-light">
+                            <ul class="space-y-4 text-sm text-[var(--brand-navy)]/70">
                                 <li class="flex items-start gap-2.5">
-                                    <i data-lucide="map-pin" class="w-4 h-4 text-indigo-500 mt-0.5 flex-shrink-0 animate-pulse"></i>
-                                    <span class="text-slate-400">302, Prestige Tower, MG Road, New Delhi — 110001</span>
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-[var(--brand-gold)] mt-0.5 flex-shrink-0"></i>
+                                    <span>302, Prestige Tower, MG Road, New Delhi — 110001</span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <i data-lucide="phone" class="w-4 h-4 text-indigo-500 flex-shrink-0"></i>
-                                    <span class="text-slate-300 font-medium">+91 11 4567 8900</span>
+                                    <i data-lucide="phone" class="w-4 h-4 text-[var(--brand-gold)] flex-shrink-0"></i>
+                                    <span class="font-medium text-[var(--brand-navy)]">+91 11 4567 8900</span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <i data-lucide="mail" class="w-4 h-4 text-indigo-500 flex-shrink-0"></i>
-                                    <a href="mailto:info@ashwanitayal.com" class="text-indigo-400 hover:text-white transition-colors duration-300">info@ashwanitayal.com</a>
+                                    <i data-lucide="mail" class="w-4 h-4 text-[var(--brand-gold)] flex-shrink-0"></i>
+                                    <a href="mailto:info@ashwanitayal.com" class="text-[var(--brand-gold)] hover:underline transition-colors duration-200">info@ashwanitayal.com</a>
                                 </li>
                             </ul>
                         </div>
@@ -299,9 +300,9 @@
                     </div>
 
                     <!-- Bottom Copyright strip -->
-                    <div class="pt-8 text-xs text-slate-600 sm:flex sm:justify-between sm:items-center">
+                    <div class="pt-8 text-xs text-[var(--brand-navy)]/50 sm:flex sm:justify-between sm:items-center">
                         <p>© 2026 Ashwani Tayal. All Rights Reserved.</p>
-                        <p class="mt-2 sm:mt-0 font-light">Handcrafted with Elegance by <span class="text-indigo-500 font-semibold hover:underline cursor-pointer">Invincible Web Solutions</span></p>
+                        <p class="mt-2 sm:mt-0">Handcrafted with Elegance by <span class="text-[var(--brand-gold)] hover:underline cursor-pointer">Invincible Web Solutions</span></p>
                     </div>
                 </div>
             </footer>
