@@ -41,36 +41,52 @@
         </div>
 
         <!-- Service Cards Grid -->
-        <div class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div id="service-cards" class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {% for card in home_service_cards %}
-            <article class="relative flex h-full flex-col overflow-hidden rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] ring-1 ring-[rgba(1,31,66,0.06)]">
+            <article class="scroll-anim-service-card group relative flex h-full flex-col overflow-hidden rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] ring-1 ring-[rgba(1,31,66,0.06)] transition-all duration-500 will-change-transform hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(13,43,92,0.14)] hover:ring-white">
+                <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#d4af37] via-[#f0d37e] to-[#b88e50] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
                 <div class="relative h-[220px] w-full overflow-hidden">
-                    <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover">
+                    <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
                     <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                    <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[rgba(13,43,92,0.16)] to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[rgba(13,43,92,0.18)] via-transparent to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[rgba(13,43,92,0.22)] to-transparent"></div>
                 </div>
 
                 <a href="{{ card.link_url }}"
-                   aria-label="Open {{ card.title }}"
-                   class="absolute right-6 top-[198px] z-20 flex size-[44px] items-center justify-center rounded-full bg-white shadow-[0px_4px_8px_rgba(13,43,92,0.18)]">
-                    <i data-lucide="arrow-up-right" class="h-[18px] w-[18px] text-[#0d2b5c]"></i>
-                </a>
+   aria-label="Open {{ card.title }}"
+   class="absolute right-6 top-[198px] z-20 flex size-[44px] items-center justify-center rounded-full bg-white text-[var(--brand-gold)] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] transition-all duration-500 group-hover:-translate-y-0.5 group-hover:scale-110 group-hover:bg-[var(--brand-gold)] group-hover:text-white">
 
-                <div class="flex flex-1 flex-col justify-between px-6 pb-6 pt-7">
+    <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M7 17L17 7"></path>
+        <path d="M7 7h10v10"></path>
+    </svg>
+
+</a>
+
+                <div class="flex flex-1 flex-col justify-between px-6 pb-6 pt-7 transition-transform duration-500 group-hover:translate-y-[-2px]">
                     <div>
-                        <h3 class="text-[19px] leading-[1.28] text-[#0d2b5c]">
+                        <h3 class="text-[19px] leading-[1.28] text-[#0d2b5c] transition-colors duration-300 group-hover:text-[var(--brand-navy)]">
                             {{ card.title }}
                         </h3>
-                        <p class="mt-2.5 max-w-[300px] text-[13px] leading-[1.65] text-[#666]">
+                        <p class="mt-2.5 max-w-[300px] text-[13px] leading-[1.65] text-[#666] transition-colors duration-300 group-hover:text-[#4f5e75]">
                             {{ card.summary }}
                         </p>
                     </div>
 
                     <div class="mt-5 flex flex-wrap gap-2">
-                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c]">
+                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c] transition-all duration-300 group-hover:border-[rgba(212,175,55,0.28)] group-hover:bg-[rgba(212,175,55,0.12)]">
                             {{ card.badge_one }}
                         </span>
-                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c]">
+                        <span class="inline-flex items-center rounded-full border border-black/10 bg-[rgba(13,43,92,0.07)] px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.11em] text-[#0d2b5c] transition-all duration-300 group-hover:border-[rgba(212,175,55,0.28)] group-hover:bg-[rgba(212,175,55,0.12)]">
                             {{ card.badge_two }}
                         </span>
                     </div>
@@ -82,7 +98,7 @@
 </section>
 
 <!-- CCTS Knowledge Hub (Specialized Carbon Credit Section) -->
-<section id="ccts-details" class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)] relative overflow-hidden scroll-mt-24">
+{% comment %} <section id="ccts-details" class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)] relative overflow-hidden scroll-mt-24">
     <!-- Background subtle shape or gradient -->
     <div class="absolute inset-0 pointer-events-none opacity-5 flex items-center justify-center">
         <div class="w-[800px] h-[800px] rounded-full bg-[var(--brand-gold)] filter blur-3xl"></div>
@@ -236,9 +252,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
-{% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %}
+{% comment %} {% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %} {% endcomment %}
 
 <!-- Book Consultation section -->
 <section id="appointments" class="bg-white py-16 sm:py-20">
@@ -331,12 +347,37 @@
 </section>
 {% endblock %}
 
+{% block extra_css %}
+<style>
+.group:hover svg.arrow-icon {
+    stroke: white;
+}
+</style>
+{% endblock %}
+
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+{% comment %} document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
-});
+
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from('.scroll-anim-service-card', {
+            scrollTrigger: {
+                trigger: '#service-cards',
+                start: 'top 78%'
+            },
+            opacity: 0,
+            y: 36,
+            scale: 0.98,
+            duration: 0.85,
+            stagger: 0.12,
+            ease: 'power3.out'
+        });
+    }
+}); {% endcomment %}
 </script>
 {% endblock %}

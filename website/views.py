@@ -7,7 +7,15 @@ from django.urls import reverse
 import datetime
 from pathlib import Path
 
-from .models import Insight, HomeServiceSection, HomeServiceCard
+from .models import (
+    Insight,
+    HomeServiceSection,
+    HomeServiceCard,
+    AboutHeroSection,
+    AboutHeroPanel,
+    AboutIntroSection,
+    AboutIntroFeature,
+)
 from .forms import ConsultationForm
 
 
@@ -120,6 +128,161 @@ def _get_award_cards():
     ]
 
 
+def _get_about_award_cards():
+    return [
+        {
+            "year": "2024",
+            "title": "Best CA Advisor of the Year",
+            "source": "ICAI National Conference",
+            "image": "images/cert_ca_advisor.png",
+            "image_alt": "Certificate for Best CA Advisor of the Year",
+        },
+        {
+            "year": "2022",
+            "title": "Excellence in GST Advisory",
+            "source": "Federation of Indian Chambers",
+            "image": "images/cert_gst_advisor.png",
+            "image_alt": "Certificate for Excellence in GST Advisory",
+        },
+        {
+            "year": "2021",
+            "title": "Corporate Recognition Award",
+            "source": "ASSOCHAM India",
+            "image": "images/cert_corp_recog_1.png",
+            "image_alt": "Corporate Recognition Award certificate",
+        },
+        {
+            "year": "2021",
+            "title": "Corporate Recognition Award",
+            "source": "ASSOCHAM India",
+            "image": "images/cert_corp_recog_2.png",
+            "image_alt": "Corporate Recognition Award certificate",
+        },
+        {
+            "year": "2022",
+            "title": "Excellence in GST Advisory",
+            "source": "Federation of Indian Chambers",
+            "image": "images/cert_gst_advisor.png",
+            "image_alt": "Certificate for Excellence in GST Advisory",
+        },
+        {
+            "year": "2021",
+            "title": "Corporate Recognition Award",
+            "source": "ASSOCHAM India",
+            "image": "images/cert_membership.png",
+            "image_alt": "Corporate Recognition Award certificate",
+        },
+        {
+            "year": "2021",
+            "title": "Corporate Recognition Award",
+            "source": "ASSOCHAM India",
+            "image": "images/cert_diploma_trade.png",
+            "image_alt": "Corporate Recognition Award certificate",
+        },
+    ]
+
+
+def _seed_about_hero_content():
+    section = AboutHeroSection.objects.order_by("id").first()
+    if section is None:
+        section = AboutHeroSection.objects.create(
+            pretitle="KNOW ME BETTER",
+            title_line_one="Experience.",
+            title_line_two="Expertise.",
+            title_highlight="Impact.",
+            description=(
+                "A journey of trust, learning and leadership that has empowered businesses, "
+                "inspired professionals and created lasting impact."
+            ),
+            image_filename="about_hero_portrait.png",
+            image_alt="CA Ashwani Tayal",
+        )
+
+    if section.panels.exists():
+        return section
+
+    panel_data = [
+        {
+            "number": "01",
+            "title": "Author",
+            "subtitle": "Thought Leader",
+            "icon_name": "book-open",
+            "tone": "navy",
+            "order": 1,
+        },
+        {
+            "number": "02",
+            "title": "Motivational Speaker",
+            "subtitle": "Inspiring Growth",
+            "icon_name": "mic",
+            "tone": "blue",
+            "order": 2,
+        },
+        {
+            "number": "03",
+            "title": "ICAI Faculty",
+            "subtitle": "Direct Tax / Indirect Tax / International Tax",
+            "icon_name": "graduation-cap",
+            "tone": "midblue",
+            "order": 3,
+        },
+        {
+            "number": "04",
+            "title": "Practicing CA",
+            "subtitle": "for 21 Years",
+            "icon_name": "briefcase",
+            "tone": "gold",
+            "order": 4,
+        },
+        {
+            "number": "05",
+            "title": "Business Mentor",
+            "subtitle": "500+ Entrepreneurs",
+            "icon_name": "users",
+            "tone": "lightgold",
+            "order": 5,
+        },
+    ]
+
+    for panel_info in panel_data:
+        AboutHeroPanel.objects.create(section=section, **panel_info)
+
+    return section
+
+
+def _seed_about_intro_content():
+    section = AboutIntroSection.objects.order_by("id").first()
+    if section is None:
+        section = AboutIntroSection.objects.create(
+            section_id="about",
+            pretitle="Know Me Better",
+            title="CA Ashwani Tayal",
+            description=(
+                "A seasoned Chartered Accountant with over 25 years of experience, CA Ashwani Tayal has been "
+                "the trusted financial backbone for hundreds of businesses across India. Known for his practical "
+                "approach, depth of knowledge, and commitment to client success, he brings clarity to complexity."
+            ),
+            poster_filename="figma_ashwani_video_poster.png",
+            poster_alt="CA Ashwani Tayal video introduction",
+            cta_url="#appointments",
+        )
+
+    if section.features.exists():
+        return section
+
+    features = [
+        {"title": "Chartered Accountant", "icon_name": "user-check", "order": 1},
+        {"title": "25+ Years Experience", "icon_name": "clock", "order": 2},
+        {"title": "Mentor & Speaker", "icon_name": "video", "order": 3},
+        {"title": "Trusted Business Advisor", "icon_name": "building-2", "order": 4},
+    ]
+
+    for feature in features:
+        AboutIntroFeature.objects.create(section=section, **feature)
+
+    return section
+
+
 def home(request):
     """
     Renders the homepage with insights and consultation forms.
@@ -205,8 +368,26 @@ def about(request):
     Renders the detailed CA Ashwani Tayal biography, certifications, & values page.
     """
     form = ConsultationForm()
-    award_cards = _get_award_cards()
-    return render(request, "website/about.html", {"form": form, "award_cards": award_cards})
+    about_hero_section = _seed_about_hero_content()
+    about_hero_panels = list(about_hero_section.panels.all().order_by("order", "id"))
+    about_intro_section = _seed_about_intro_content()
+    about_intro_features = list(about_intro_section.features.all().order_by("order", "id"))
+    about_award_cards = _get_about_award_cards()
+    about_award_cards_top = about_award_cards[:4]
+    about_award_cards_bottom = about_award_cards[4:]
+    return render(
+        request,
+        "website/about.html",
+        {
+            "form": form,
+            "about_award_cards_top": about_award_cards_top,
+            "about_award_cards_bottom": about_award_cards_bottom,
+            "about_hero_section": about_hero_section,
+            "about_hero_panels": about_hero_panels,
+            "about_intro_section": about_intro_section,
+            "about_intro_features": about_intro_features,
+        },
+    )
 
 
 def blogs(request):
