@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ConsultationRequest, Insight
+from .models import ConsultationRequest, Insight, AALabelCard, HomeServiceCard, HomeServiceSection
 
 
 @admin.register(ConsultationRequest)
@@ -16,4 +16,25 @@ class InsightAdmin(admin.ModelAdmin):
     list_filter = ("category", "published_date")
     search_fields = ("title", "summary")
     prepopulated_fields = {"slug": ("title",)}
+
+
+@admin.register(AALabelCard)
+class AALabelCardAdmin(admin.ModelAdmin):
+    list_display = ("title", "order", "redirect_url")
+    list_editable = ("order",)
+    search_fields = ("title",)
+
+
+class HomeServiceCardInline(admin.StackedInline):
+    model = HomeServiceCard
+    extra = 0
+    fields = ("title", "summary", "image", "image_alt", "badge_one", "badge_two", "link_url", "order")
+    ordering = ("order", "id")
+
+
+@admin.register(HomeServiceSection)
+class HomeServiceSectionAdmin(admin.ModelAdmin):
+    list_display = ("title", "label", "cta_text", "cta_url")
+    search_fields = ("title", "label", "description")
+    inlines = [HomeServiceCardInline]
 

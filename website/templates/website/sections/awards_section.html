@@ -1,0 +1,15 @@
+<section class="py-24 sm:py-32 bg-slate-50 border-t border-b border-slate-100 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-xl mx-auto mb-16 space-y-4 scroll-anim-heading">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Credibility</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-serif tracking-tight">Awards & Recognitions</h2>
+            <p class="text-base text-slate-600 font-light">A legacy of recognition from India's most respected corporate associations & advisory forums.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {% for award in award_cards %}
+                {% include "website/components/award_card.html" with award=award %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
