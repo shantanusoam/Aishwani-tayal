@@ -1,0 +1,87 @@
+{% load static %}
+
+<section id="about-hero" class="bg-white border-b border-[color:var(--line-soft)] overflow-hidden">
+    <div class="mx-auto w-full">
+        <div class="grid lg:grid-cols-[1.02fr_1.08fr_2fr]">
+            <div class="scroll-anim-about-image relative min-h-[340px] sm:min-h-[420px] lg:min-h-[720px] bg-[#0d1624]">
+                {% with hero_image='images/'|add:about_hero_section.image_filename %}
+                    <img src="{% static hero_image %}" alt="{{ about_hero_section.image_alt }}" class="absolute z-10 inset-0 h-full w-full object-cover object-[50%_22%] sm:object-[48%_38%] xl:object-[0%_45%]">
+                {% endwith %}
+                <div class="absolute inset-0 bg-gradient-to-r from-[rgba(7,12,20,0.06)] via-transparent to-[rgba(7,12,20,0.3)]"></div>
+            </div>
+
+            <div class="scroll-anim-about-copy min-h-[340px] sm:min-h-[420px] lg:min-h-[720px] border-l border-r border-[color:var(--line-soft)] bg-[#f7f8fa] px-5 py-10 sm:px-10 lg:px-12 xl:px-16 flex items-center">
+                <div class="max-w-[440px] w-full">
+                    <p class="text-[12px] font-semibold uppercase tracking-[0.32em] text-[var(--brand-gold)]">
+                        {{ about_hero_section.pretitle }}
+                    </p>
+
+                    <h1 class="mt-4 text-[36px] leading-[0.98] sm:text-[54px] xl:text-[64px] font-semibold text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                        <span class="block">{{ about_hero_section.title_line_one }}</span>
+                        <span class="block">{{ about_hero_section.title_line_two }}</span>
+                        <span class="block text-[var(--brand-gold)]">{{ about_hero_section.title_highlight }}</span>
+                    </h1>
+
+                    <div class="mt-7 h-px w-14 sm:w-16 bg-[var(--brand-gold)]"></div>
+
+                    <p class="mt-6 sm:mt-7 max-w-[400px] text-[14px] sm:text-[15px] leading-[1.8] text-[#5d6c88]">
+                        {{ about_hero_section.description }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid min-h-[340px] sm:min-h-[420px] lg:min-h-[720px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+                {% for panel in about_hero_panels %}
+                    {% if panel.tone == 'navy' %}
+                        <article class="scroll-anim-about-panel relative flex h-full min-h-[200px] sm:min-h-[230px] flex-col justify-between bg-[#0d2b5c] px-5 py-6 text-white">
+                    {% elif panel.tone == 'blue' %}
+                        <article class="scroll-anim-about-panel relative flex h-full min-h-[200px] sm:min-h-[230px] flex-col justify-between bg-[#143d75] px-5 py-6 text-white">
+                    {% elif panel.tone == 'midblue' %}
+                        <article class="scroll-anim-about-panel relative flex h-full min-h-[200px] sm:min-h-[230px] flex-col justify-between bg-[#1d4d84] px-5 py-6 text-white">
+                    {% elif panel.tone == 'gold' %}
+                        <article class="scroll-anim-about-panel relative flex h-full min-h-[200px] sm:min-h-[230px] flex-col justify-between bg-[#c7a047] px-5 py-6 text-[#0d2b5c]">
+                    {% else %}
+                        <article class="scroll-anim-about-panel relative flex h-full min-h-[200px] sm:min-h-[230px] flex-col justify-between bg-[#efd584] px-5 py-6 text-[#0d2b5c]">
+                    {% endif %}
+                        <div>
+                            <div class="flex items-start justify-between gap-3">
+                                <p class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.22em] opacity-90">{{ panel.number }}</p>
+                                <div class="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-current/20 bg-white/10">
+                                    <i data-lucide="{{ panel.icon_name }}" class="h-4 w-4 sm:h-5 sm:w-5"></i>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 sm:mt-5 h-px w-10 sm:w-12 bg-current/60"></div>
+
+                            <h2 class="mt-4 sm:mt-5 max-w-[170px] text-[18px] sm:text-[21px] font-semibold leading-[1.2]" style="font-family: 'Playfair Display', serif;">
+                                {{ panel.title }}
+                            </h2>
+
+                            {% if panel.subtitle %}
+                                <p class="mt-2.5 sm:mt-3 max-w-[170px] text-[12px] sm:text-[13px] leading-[1.6] opacity-85">
+                                    {{ panel.subtitle }}
+                                </p>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="grid grid-cols-4 gap-1 opacity-30">
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
+                            </div>
+                            <div class="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-white/12 flex items-center justify-center">
+                                <span class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-current"></span>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

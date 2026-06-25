@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import ConsultationRequest, Insight, AALabelCard, HomeServiceCard, HomeServiceSection
+from .models import (
+    ConsultationRequest,
+    Insight,
+    AALabelCard,
+    HomeServiceCard,
+    HomeServiceSection,
+    AboutHeroSection,
+    AboutHeroPanel,
+)
 
 
 @admin.register(ConsultationRequest)
@@ -38,3 +46,16 @@ class HomeServiceSectionAdmin(admin.ModelAdmin):
     search_fields = ("title", "label", "description")
     inlines = [HomeServiceCardInline]
 
+
+class AboutHeroPanelInline(admin.TabularInline):
+    model = AboutHeroPanel
+    extra = 0
+    fields = ("number", "title", "subtitle", "icon_name", "tone", "order")
+    ordering = ("order", "id")
+
+
+@admin.register(AboutHeroSection)
+class AboutHeroSectionAdmin(admin.ModelAdmin):
+    list_display = ("pretitle", "title_line_one", "title_line_two", "title_highlight")
+    search_fields = ("pretitle", "title_line_one", "title_line_two", "title_highlight", "description")
+    inlines = [AboutHeroPanelInline]

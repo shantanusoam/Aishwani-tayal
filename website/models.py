@@ -103,3 +103,52 @@ class HomeServiceCard(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class AboutHeroSection(models.Model):
+    pretitle = models.CharField(max_length=120, default="KNOW ME BETTER")
+    title_line_one = models.CharField(max_length=120, default="Experience.")
+    title_line_two = models.CharField(max_length=120, default="Expertise.")
+    title_highlight = models.CharField(max_length=120, default="Impact.")
+    description = models.TextField(
+        default="A journey of trust, learning and leadership that has empowered businesses, inspired professionals and created lasting impact."
+    )
+    image_filename = models.CharField(max_length=120, default="about_hero_portrait.png")
+    image_alt = models.CharField(max_length=180, default="CA Ashwani Tayal")
+
+    class Meta:
+        verbose_name = "About Hero Section"
+        verbose_name_plural = "About Hero Section"
+
+    def __str__(self):
+        return self.pretitle
+
+
+class AboutHeroPanel(models.Model):
+    TONE_CHOICES = [
+        ("navy", "Navy"),
+        ("blue", "Blue"),
+        ("midblue", "Mid Blue"),
+        ("gold", "Gold"),
+        ("lightgold", "Light Gold"),
+    ]
+
+    section = models.ForeignKey(
+        AboutHeroSection,
+        on_delete=models.CASCADE,
+        related_name="panels",
+    )
+    number = models.CharField(max_length=10)
+    title = models.CharField(max_length=120)
+    subtitle = models.CharField(max_length=120, blank=True)
+    icon_name = models.CharField(max_length=50)
+    tone = models.CharField(max_length=20, choices=TONE_CHOICES, default="navy")
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "About Hero Panel"
+        verbose_name_plural = "About Hero Panels"
+
+    def __str__(self):
+        return f"{self.number} - {self.title}"

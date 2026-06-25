@@ -1,0 +1,37 @@
+{% load static %}
+
+<section id="achievements" class="bg-white py-20 sm:py-24 lg:py-32 border-t border-[color:var(--line-soft)] border-b border-[color:var(--line-soft)] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 space-y-4 scroll-anim-heading">
+            <div class="flex items-center justify-center gap-3">
+                <span class="h-[2px] w-8 sm:w-10 bg-[var(--brand-gold)]"></span>
+                <span class="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.28em] sm:tracking-[0.32em] text-[var(--brand-gold)]">Credibility</span>
+                <span class="h-[2px] w-8 sm:w-10 bg-[var(--brand-gold)]"></span>
+            </div>
+            <h2 class="text-[28px] sm:text-[34px] lg:text-[42px] leading-[1.1] text-[#0d2b5c] font-bold" style="font-family: 'Playfair Display', serif;">
+                Certifications &amp; Achievements
+            </h2>
+            <p class="mx-auto max-w-[560px] text-[14px] sm:text-[15px] leading-[1.75] text-[#666] px-2 sm:px-0">
+                A legacy of recognition from India's most respected institutions and industry bodies.
+            </p>
+        </div>
+
+        <div class="space-y-4 sm:space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 scroll-anim-awards-grid">
+                {% for award in about_award_cards_top %}
+                    <div class="scroll-anim-cert-card">
+                        {% include "website/components/award_card.html" with award=award %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 xl:max-w-[1020px] xl:mx-auto scroll-anim-awards-grid">
+                {% for award in about_award_cards_bottom %}
+                    <div class="scroll-anim-cert-card">
+                        {% include "website/components/award_card.html" with award=award %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

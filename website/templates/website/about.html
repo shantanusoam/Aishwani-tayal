@@ -5,67 +5,27 @@
 
 {% block content %}
 
-<!-- Bio Section -->
-<section class="bg-white py-16 sm:py-20 border-b border-[color:var(--line-soft)]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] grid lg:grid-cols-[591px_1fr] gap-12 items-center">
-        <div class="rounded-[10px] overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.22)] bg-white h-[373px]">
-            <img src="{% static 'images/portrait.png' %}" alt="CA Ashwani Tayal" class="w-full h-full object-cover">
-        </div>
-        <div>
-            <p class="text-[12px] text-[var(--brand-gold)] uppercase tracking-wide">KNOW ME BETTER</p>
-            <h2 class="mt-3 text-[32px] leading-[1.18] text-[var(--brand-navy)] font-semibold" style="font-family: 'Playfair Display', serif;">CA Ashwani Tayal</h2>
-            <div class="mt-5 h-[2px] w-[66px] bg-[var(--brand-gold)]"></div>
-            <p class="mt-6 text-[15px] leading-[1.5] text-[#1e1e1e] max-w-[494px]">A seasoned Chartered Accountant with over 25 years of experience, CA Ashwani Tayal has been the trusted financial backbone for hundreds of businesses across India. Known for his practical approach, depth of knowledge, and commitment to client success, he brings clarity to complexity.</p>
+{% include "website/sections/about_hero_section.html" with about_hero_section=about_hero_section about_hero_panels=about_hero_panels %}
 
-            <div class="mt-8 grid grid-cols-2 gap-3 max-w-[510px]">
-                <div class="flex items-center gap-3.5 bg-[#f8f6f1] border border-[rgba(13,43,92,0.1)] p-3 rounded-[10px]">
-                    <div class="bg-[rgba(13,43,92,0.06)] p-2 rounded-[10px] flex-shrink-0">
-                        <i data-lucide="user-check" class="w-5 h-5 text-[#0d2b5c]"></i>
-                    </div>
-                    <span class="text-[14px] font-semibold text-[#0d2b5c]">Chartered Accountant</span>
-                </div>
-                <div class="flex items-center gap-3.5 bg-[#f8f6f1] border border-[rgba(13,43,92,0.1)] p-3 rounded-[10px]">
-                    <div class="bg-[rgba(13,43,92,0.06)] p-2 rounded-[10px] flex-shrink-0">
-                        <i data-lucide="clock" class="w-5 h-5 text-[#0d2b5c]"></i>
-                    </div>
-                    <span class="text-[14px] font-semibold text-[#0d2b5c]">25+ Years Experience</span>
-                </div>
-                <div class="flex items-center gap-3.5 bg-[#f8f6f1] border border-[rgba(13,43,92,0.1)] p-3 rounded-[10px]">
-                    <div class="bg-[rgba(13,43,92,0.06)] p-2 rounded-[10px] flex-shrink-0">
-                        <i data-lucide="video" class="w-5 h-5 text-[#0d2b5c]"></i>
-                    </div>
-                    <span class="text-[14px] font-semibold text-[#0d2b5c]">Mentor &amp; Speaker</span>
-                </div>
-                <div class="flex items-center gap-3.5 bg-[#f8f6f1] border border-[rgba(13,43,92,0.1)] p-3 rounded-[10px]">
-                    <div class="bg-[rgba(13,43,92,0.06)] p-2 rounded-[10px] flex-shrink-0">
-                        <i data-lucide="building2" class="w-5 h-5 text-[#0d2b5c]"></i>
-                    </div>
-                    <span class="text-[14px] font-semibold text-[#0d2b5c]">Trusted Business Advisor</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{% include "website/sections/awards_section.html" with award_cards=award_cards %}
+{% include "website/sections/about_certifications_section.html" with about_award_cards_top=about_award_cards_top about_award_cards_bottom=about_award_cards_bottom %}
 
 <!-- Consultation Section -->
-<section class="bg-[#f9f8f6] py-16 sm:py-20">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
+<section class="bg-[#f9f8f6] py-14 sm:py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-[83px]">
         <!-- Header -->
-        <div class="text-center mb-12">
+        <div class="text-center mb-10 sm:mb-12">
             <p class="text-[12px] uppercase tracking-[0.18em] text-[var(--brand-gold)] font-semibold">
-                <span class="inline-block w-8 h-[2px] bg-[var(--brand-gold)] mr-3 align-middle"></span>
+                <span class="inline-block w-6 sm:w-8 h-[2px] bg-[var(--brand-gold)] mr-2 sm:mr-3 align-middle"></span>
                 Get in Touch
-                <span class="inline-block w-8 h-[2px] bg-[var(--brand-gold)] ml-3 align-middle"></span>
+                <span class="inline-block w-6 sm:w-8 h-[2px] bg-[var(--brand-gold)] ml-2 sm:ml-3 align-middle"></span>
             </p>
-            <h2 class="mt-4 text-[40px] leading-[1.2] text-[#0d2b5c] font-bold" style="font-family: 'Playfair Display', serif;">Book Your Consultation</h2>
-            <p class="mt-2 text-[15px] text-[#666]">Schedule a private consultation and take the first step towards financial clarity.</p>
+            <h2 class="mt-4 text-[30px] sm:text-[40px] leading-[1.2] text-[#0d2b5c] font-bold" style="font-family: 'Playfair Display', serif;">Book Your Consultation</h2>
+            <p class="mt-2 text-[14px] sm:text-[15px] text-[#666] px-2 sm:px-0">Schedule a private consultation and take the first step towards financial clarity.</p>
         </div>
 
-        <div class="grid lg:grid-cols-[1fr_1fr] gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 sm:gap-8">
             <!-- Form -->
-            <div class="bg-white rounded-[12px] border-t-4 border-t-[var(--brand-gold)] shadow-[0_8px_20px_rgba(13,43,92,0.08)] p-8">
+            <div class="bg-white rounded-[12px] border-t-4 border-t-[var(--brand-gold)] shadow-[0_8px_20px_rgba(13,43,92,0.08)] p-5 sm:p-8">
                 <form class="space-y-5"
                       x-data="{ formData: { full_name: '', email: '', phone: '', service: 'X-RAY', company: '', message: '' }, submitting: false, successMsg: '', errors: {}, submitForm() { this.submitting = true; this.successMsg = ''; this.errors = {}; let urlEncoded = new URLSearchParams(); urlEncoded.append('csrfmiddlewaretoken', '{{ csrf_token }}'); Object.keys(this.formData).forEach(key => urlEncoded.append(key, this.formData[key])); fetch('{% url "website:book_consultation" %}', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: urlEncoded }).then(response => response.json().then(data => ({ status: response.status, body: data }))).then(res => { this.submitting = false; if (res.status === 200 && res.body.success) { this.successMsg = res.body.message; this.formData = { full_name: '', email: '', phone: '', service: 'X-RAY', company: '', message: '' }; } else { this.errors = res.body.errors || {}; } }).catch(() => { this.submitting = false; this.errors = { __all__: 'A network connectivity error occurred. Please try again.' }; }); } }"
                       @submit.prevent="submitForm()">
@@ -109,11 +69,11 @@
             </div>
 
             <!-- Contact Panel -->
-            <div class="space-y-5">
+            <div class="space-y-4 sm:space-y-5">
                 <!-- Reach Us -->
-                <div class="rounded-[12px] bg-[#0d2b5c] shadow-[0_4px_12px_rgba(13,43,92,0.06)] p-7">
-                    <h3 class="text-[20px] font-semibold text-white" style="font-family: 'Playfair Display', serif;">Reach Us</h3>
-                    <div class="mt-5 space-y-5 text-[14px] text-white">
+                <div class="rounded-[12px] bg-[#0d2b5c] shadow-[0_4px_12px_rgba(13,43,92,0.06)] p-5 sm:p-7">
+                    <h3 class="text-[18px] sm:text-[20px] font-semibold text-white" style="font-family: 'Playfair Display', serif;">Reach Us</h3>
+                    <div class="mt-4 sm:mt-5 space-y-4 sm:space-y-5 text-[14px] text-white">
                         <div class="flex items-start gap-3">
                             <div class="bg-[rgba(212,175,55,0.2)] rounded-[6px] p-2 flex-shrink-0">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-[var(--brand-gold)]"></i>
@@ -142,7 +102,7 @@
                 </div>
 
                 <!-- Maps Preview -->
-                <div class="rounded-[12px] bg-[#e8edf5] shadow-[0_4px_24px_rgba(13,43,92,0.06)] h-[160px] flex items-center justify-center">
+                <div class="rounded-[12px] bg-[#e8edf5] shadow-[0_4px_24px_rgba(13,43,92,0.06)] h-[140px] sm:h-[160px] flex items-center justify-center">
                     <div class="text-center">
                         <i data-lucide="map-pin" class="w-8 h-8 text-[#666] mx-auto mb-2"></i>
                         <p class="text-[13px] text-[#666]">Google Maps Preview</p>
@@ -150,7 +110,7 @@
                 </div>
 
                 <!-- Social -->
-                <div class="flex gap-3">
+                <div class="flex flex-wrap gap-3">
                     <a href="https://linkedin.com" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-[#0d2b5c] flex items-center justify-center text-white hover:bg-[var(--brand-gold)] transition">
                         <i data-lucide="linkedin" class="w-5 h-5"></i>
                     </a>
@@ -170,7 +130,7 @@
 </section>
 
 <!-- Appointment booking form -->
-<section id="appointments" class="py-24 sm:py-32 bg-slate-950 text-white relative">
+{% comment %} <section id="appointments" class="py-24 sm:py-32 bg-slate-950 text-white relative">
     <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4.5rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_40%_50%,#000_80%,transparent_100%)] opacity-20"></div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -362,7 +322,7 @@
 
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
 {% endblock %}
 
@@ -380,9 +340,9 @@
             stagger: 0.12
         });
 
-        gsap.from('.scroll-anim-bio-left', {
+        gsap.from('.scroll-anim-about-image', {
             scrollTrigger: {
-                trigger: '#biography',
+                trigger: '#about-hero',
                 start: 'top 80%'
             },
             opacity: 0,
@@ -391,27 +351,50 @@
             ease: 'power3.out'
         });
 
-        gsap.from('.scroll-anim-bio-right', {
+        gsap.from('.scroll-anim-about-copy', {
             scrollTrigger: {
-                trigger: '#biography',
+                trigger: '#about-hero',
                 start: 'top 80%'
             },
             opacity: 0,
-            x: 50,
+            y: 28,
             duration: 1.2,
             ease: 'power3.out'
         });
 
-        gsap.from('.scroll-anim-awards > div', {
+        gsap.from('.scroll-anim-about-panel', {
             scrollTrigger: {
-                trigger: '#achievements',
+                trigger: '#about-hero',
                 start: 'top 75%'
             },
             opacity: 0,
-            y: 40,
+            y: 28,
             duration: 1,
-            stagger: 0.15,
-            ease: 'back.out(1.1)'
+            stagger: 0.08,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.scroll-anim-heading', {
+            scrollTrigger: {
+                trigger: '#achievements',
+                start: 'top 82%'
+            },
+            opacity: 0,
+            y: 24,
+            duration: 0.9,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.scroll-anim-cert-card', {
+            scrollTrigger: {
+                trigger: '#achievements',
+                start: 'top 78%'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.9,
+            stagger: 0.08,
+            ease: 'power3.out'
         });
 
         // Force ScrollTrigger to compute heights immediately after register
