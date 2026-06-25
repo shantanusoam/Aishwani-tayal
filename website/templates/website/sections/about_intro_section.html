@@ -1,0 +1,42 @@
+{% load static %}
+
+<section id="{{ about_intro_section.section_id }}" class="bg-[#f8f6f1] py-16 sm:py-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[74px]">
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <a href="{{ about_intro_section.cta_url }}" class="group relative overflow-hidden rounded-[10px] bg-[#dfdfdf] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] lg:col-span-6 scroll-anim-about-left block">
+                <img src="{% static 'images/' %}{{ about_intro_section.poster_filename }}" alt="{{ about_intro_section.poster_alt }}" class="h-full min-h-[280px] w-full object-cover transition duration-700 group-hover:scale-105">
+                <span class="absolute inset-0 flex items-center justify-center">
+                    <span class="flex h-[45px] w-16 items-center justify-center rounded-lg bg-[#ff0000] text-white shadow-lg transition duration-300 group-hover:scale-110">
+                        <i data-lucide="play" class="ml-1 h-6 w-6 fill-current"></i>
+                    </span>
+                </span>
+            </a>
+
+            <div class="lg:col-span-6 lg:pl-8 scroll-anim-about-right">
+                <p class="text-[14px] sm:text-[16px] font-normal uppercase tracking-[0.04em] text-[#b88e50]">
+                    {{ about_intro_section.pretitle }}
+                </p>
+                <h2 class="mt-2 text-[30px] sm:text-[32px] font-semibold leading-[1.12] text-[#011f42]" style="font-family: 'Playfair Display', serif;">
+                    {{ about_intro_section.title }}
+                </h2>
+                <div class="mt-4 h-px w-[66px] bg-[#b88e50]"></div>
+                <p class="mt-6 sm:mt-8 max-w-[494px] text-[15px] sm:text-[16px] leading-[1.6] text-[#1e1e1e]">
+                    {{ about_intro_section.description }}
+                </p>
+
+                <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                    {% for feature in about_intro_features %}
+                        <div class="flex items-center gap-[14px]">
+                            <span class="flex size-11 items-center justify-center rounded-[10px] border border-[rgba(13,43,92,0.1)] bg-[rgba(13,43,92,0.06)] text-[#d4af37]">
+                                <i data-lucide="{{ feature.icon_name }}" class="size-5"></i>
+                            </span>
+                            <span class="text-[14px] font-semibold text-[#0d2b5c]">
+                                {{ feature.title }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

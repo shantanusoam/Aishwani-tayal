@@ -53,7 +53,8 @@
                 <a href="{{ card.link_url }}"
                    aria-label="Open {{ card.title }}"
                    class="absolute right-6 top-[198px] z-20 flex size-[44px] items-center justify-center rounded-full bg-white shadow-[0px_4px_8px_rgba(13,43,92,0.18)]">
-                    <i data-lucide="arrow-up-right" class="h-[18px] w-[18px] text-[#0d2b5c]"></i>
+                    {% comment %} <i data-lucide="arrow-up-right" class="h-[18px] w-[18px]"></i> {% endcomment %}
+                     <i data-lucide="arrow-up-right" style="width:18px;height:18px;"></i>
                 </a>
 
                 <div class="flex flex-1 flex-col justify-between px-6 pb-6 pt-7">
@@ -82,7 +83,7 @@
 </section>
 
 <!-- CCTS Knowledge Hub (Specialized Carbon Credit Section) -->
-<section id="ccts-details" class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)] relative overflow-hidden scroll-mt-24">
+{% comment %} <section id="ccts-details" class="bg-[#f9f8f6] py-16 sm:py-20 border-b border-[color:var(--line-soft)] relative overflow-hidden scroll-mt-24">
     <!-- Background subtle shape or gradient -->
     <div class="absolute inset-0 pointer-events-none opacity-5 flex items-center justify-center">
         <div class="w-[800px] h-[800px] rounded-full bg-[var(--brand-gold)] filter blur-3xl"></div>
@@ -236,9 +237,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
-{% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %}
+{% comment %} {% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %} {% endcomment %}
 
 <!-- Book Consultation section -->
 <section id="appointments" class="bg-white py-16 sm:py-20">

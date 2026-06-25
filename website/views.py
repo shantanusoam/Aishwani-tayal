@@ -13,6 +13,8 @@ from .models import (
     HomeServiceCard,
     AboutHeroSection,
     AboutHeroPanel,
+    AboutIntroSection,
+    AboutIntroFeature,
 )
 from .forms import ConsultationForm
 
@@ -248,6 +250,39 @@ def _seed_about_hero_content():
     return section
 
 
+def _seed_about_intro_content():
+    section = AboutIntroSection.objects.order_by("id").first()
+    if section is None:
+        section = AboutIntroSection.objects.create(
+            section_id="about",
+            pretitle="Know Me Better",
+            title="CA Ashwani Tayal",
+            description=(
+                "A seasoned Chartered Accountant with over 25 years of experience, CA Ashwani Tayal has been "
+                "the trusted financial backbone for hundreds of businesses across India. Known for his practical "
+                "approach, depth of knowledge, and commitment to client success, he brings clarity to complexity."
+            ),
+            poster_filename="figma_ashwani_video_poster.png",
+            poster_alt="CA Ashwani Tayal video introduction",
+            cta_url="#appointments",
+        )
+
+    if section.features.exists():
+        return section
+
+    features = [
+        {"title": "Chartered Accountant", "icon_name": "user-check", "order": 1},
+        {"title": "25+ Years Experience", "icon_name": "clock", "order": 2},
+        {"title": "Mentor & Speaker", "icon_name": "video", "order": 3},
+        {"title": "Trusted Business Advisor", "icon_name": "building-2", "order": 4},
+    ]
+
+    for feature in features:
+        AboutIntroFeature.objects.create(section=section, **feature)
+
+    return section
+
+
 def home(request):
     """
     Renders the homepage with insights and consultation forms.
@@ -335,6 +370,8 @@ def about(request):
     form = ConsultationForm()
     about_hero_section = _seed_about_hero_content()
     about_hero_panels = list(about_hero_section.panels.all().order_by("order", "id"))
+    about_intro_section = _seed_about_intro_content()
+    about_intro_features = list(about_intro_section.features.all().order_by("order", "id"))
     about_award_cards = _get_about_award_cards()
     about_award_cards_top = about_award_cards[:4]
     about_award_cards_bottom = about_award_cards[4:]
@@ -347,6 +384,8 @@ def about(request):
             "about_award_cards_bottom": about_award_cards_bottom,
             "about_hero_section": about_hero_section,
             "about_hero_panels": about_hero_panels,
+            "about_intro_section": about_intro_section,
+            "about_intro_features": about_intro_features,
         },
     )
 

@@ -152,3 +152,45 @@ class AboutHeroPanel(models.Model):
 
     def __str__(self):
         return f"{self.number} - {self.title}"
+
+
+class AboutIntroSection(models.Model):
+    section_id = models.CharField(max_length=50, default="about")
+    pretitle = models.CharField(max_length=120, default="Know Me Better")
+    title = models.CharField(max_length=120, default="CA Ashwani Tayal")
+    description = models.TextField(
+        default=(
+            "A seasoned Chartered Accountant with over 25 years of experience, CA Ashwani Tayal has been "
+            "the trusted financial backbone for hundreds of businesses across India. Known for his practical "
+            "approach, depth of knowledge, and commitment to client success, he brings clarity to complexity."
+        )
+    )
+    poster_filename = models.CharField(max_length=120, default="figma_ashwani_video_poster.png")
+    poster_alt = models.CharField(max_length=180, default="CA Ashwani Tayal video introduction")
+    cta_url = models.CharField(max_length=250, default="#appointments")
+
+    class Meta:
+        verbose_name = "About Intro Section"
+        verbose_name_plural = "About Intro Sections"
+
+    def __str__(self):
+        return self.title
+
+
+class AboutIntroFeature(models.Model):
+    section = models.ForeignKey(
+        AboutIntroSection,
+        on_delete=models.CASCADE,
+        related_name="features",
+    )
+    title = models.CharField(max_length=120)
+    icon_name = models.CharField(max_length=50)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "About Intro Feature"
+        verbose_name_plural = "About Intro Features"
+
+    def __str__(self):
+        return self.title
