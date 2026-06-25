@@ -450,45 +450,223 @@
 </section>
 
 <!-- Testimonials Section -->
-<section id="testimonials" class="py-24 sm:py-32 bg-slate-50 relative overflow-hidden" x-data='{ activeStory: null, activeStoryIndex: null, activeStoryTitle: "", activeStoryQuote: "", list: [
-    { title: "Rajesh Mehta (CEO, Mehta Steel)", quote: "The pre-audit X-RAY audit literally saved us from a multi-crore GST risk invoice note. Absolute masterclass of defensive preparation.", desc: "Mehta Steel, Mumbai", img: "{% static "images/instagram_story_1.png" %}" },
-    { title: "Sunita Sharma (Founder, Nexa Tech)", quote: "Ashwani\u0027s strategic tax planning under CCTS is the best investment we made this year. Clarity drives confidence.", desc: "Nexa Tech, Bangalore", img: "{% static "images/instagram_story_2.png" %}" },
-    { title: "Vikram Singhal (Dir, GM Logistics)", quote: "Under his advise, our tax liabilities optimized by 18% in the first quarter itself. Extremely practical advice.", desc: "GM Logistics, Delhi", img: "{% static "images/instagram_story_3.png" %}" },
-    { title: "Neha Kapoor (Partner, Apex Retail)", quote: "A master in raid-preparedness. He brings incredibly detailed wisdom to defensive enterprise advisory.", desc: "Apex Retail, Jaipur", img: "{% static "images/instagram_story_4.png" %}" }
+<section id="testimonials" class="py-24 sm:py-32 relative overflow-hidden" 
+         style="background-image: linear-gradient(164.4deg, #0a2248 0%, #061830 100%);"
+         x-data='{ activeStory: null, activeStoryIndex: null, activeStoryTitle: "", activeStoryQuote: "", list: [
+    { title: "Rohit Mehra (Business Owner)", quote: "CA Ashwani Tayal guided us through complex tax matters with remarkable clarity. His practical advice and prompt support have been invaluable for our business.", desc: "Business Owner", img: "{% static "images/instagram_story_1.png" %}" },
+    { title: "Kunal Arora (Finance Professional)", quote: "An exceptional mentor and advisor. His workshops simplify even the most technical financial concepts. The actionable insights have helped us grow.", desc: "Finance Professional", img: "{% static "images/instagram_story_2.png" %}" },
+    { title: "Sanjay Khanna (Entrepreneur)", quote: "Ashwani Ji\u0027s expertise, integrity, and attention to detail make him someone you can trust completely. He always prioritizes his clients\u0027 interests.", desc: "Entrepreneur", img: "{% static "images/instagram_story_3.png" %}" },
+    { title: "Priyam Malhotra (@priyamalhotra)", quote: "Working with CA Ashwani Tayal has been one of the best decisions for our company. His deep understanding of regulations and proactive advice saved us both time and resources.", desc: "Priyam Malhotra", img: "{% static "images/portrait.png" %}" },
+    { title: "Vikram Sethi (@vikramsethi)", quote: "Professional, approachable, and highly knowledgeable. He explained every financial aspect patiently and ensured compliance.", desc: "Vikram Sethi", img: "{% static "images/team_meeting.png" %}" },
+    { title: "Catherine (@earnshaw)", quote: "The consultation sessions were insightful and solution-oriented. Highly recommended for any complex tax structuring.", desc: "Startup Founder", img: "{% static "images/about_hero_portrait.png" %}" }
 ]}'>
-    <!-- Background Image from Figma -->
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10 mix-blend-multiply" style="background-image: url('{% static "images/testimonials_bg.png" %}');"></div>
+    
+    <!-- Background grid decoration -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-5 pointer-events-none"></div>
+    <div class="absolute border border-[rgba(212,175,55,0.3)] rounded-full w-[400px] h-[400px] -right-20 top-[300px] pointer-events-none hidden lg:block"></div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Header -->
-        <div class="text-center max-w-xl mx-auto mb-16 space-y-4 scroll-anim-heading">
-            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Client Testimonials</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-serif tracking-tight">Interactive Stories of Trust</h2>
-            <p class="text-base text-slate-600 font-light">Click on any client story below to play their animated video response & view their audit case-study details.</p>
+        <div class="text-center max-w-2xl mx-auto mb-20 space-y-4 scroll-anim-heading">
+            <span class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Stories of Trust & Compliance</span>
+            <h2 class="text-3xl sm:text-[40px] leading-tight font-bold text-white font-serif">Stories of Trust</h2>
+            <p class="text-sm sm:text-base text-white/60 font-light max-w-xl mx-auto">Click on any testimonial below to play their animated video response & view their audit case-study details.</p>
         </div>
 
-        <!-- 4 stories container -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 scroll-anim-testimonials">
-            <template x-for="(item, idx) in list" :key="idx">
-                <div @click="activeStory = item.img; activeStoryIndex = idx; activeStoryTitle = item.title; activeStoryQuote = item.quote" 
-                     class="aspect-[9/16] rounded-2xl overflow-hidden relative cursor-pointer group shadow-lg border border-slate-200 select-none hover:shadow-xl hover:border-indigo-300 transform hover:-translate-y-1.5 transition duration-500">
-                    <img :src="item.img" :alt="item.title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent group-hover:via-slate-950/40 transition-all duration-300"></div>
-                    
-                    <!-- Center play icon -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-indigo-600 transition-all duration-500">
-                            <i data-lucide="play" class="w-6 h-6 fill-white ml-0.5"></i>
-                        </div>
+        <!-- 4-column Mosaic Grid using CSS columns (Pinterest/Masonry style) -->
+        <div class="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 scroll-anim-testimonials">
+            
+            <!-- Card 1: Rohit Mehra (Clickable) -->
+            <div @click="activeStory = list[0].img; activeStoryIndex = 0; activeStoryTitle = list[0].title; activeStoryQuote = list[0].quote"
+                 class="break-inside-avoid bg-white rounded-[20px] overflow-hidden shadow-xl border border-white/10 flex flex-col justify-between group hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-2 transition duration-500 cursor-pointer relative select-none">
+                <div class="p-6 space-y-4">
+                    <!-- Gold Stars -->
+                    <div class="flex gap-1 text-[#d4af37]">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                     </div>
-
-                    <!-- Texts bottom -->
-                    <div class="absolute bottom-5 left-4 right-4 text-white space-y-1">
-                        <span class="text-[10px] uppercase font-semibold tracking-wider text-indigo-300" x-text="item.desc"></span>
-                        <h4 class="text-sm font-bold truncate" x-text="item.title"></h4>
+                    <!-- Review text -->
+                    <p class="text-[14px] leading-relaxed text-slate-800 font-normal">
+                        "CA Ashwani Tayal guided us through complex tax matters with remarkable clarity. His practical advice and prompt support have been invaluable for our business."
+                    </p>
+                </div>
+                <!-- Bottom Author bar (Dark navy) -->
+                <div class="bg-[#0a2248] p-4 flex items-center gap-3">
+                    <img src="{% static 'images/instagram_story_1.png' %}" alt="Rohit Mehra" class="w-10 h-10 rounded-full object-cover border border-[#d4af37]/30">
+                    <div>
+                        <h4 class="text-xs font-bold text-white">Rohit Mehra</h4>
+                        <p class="text-[10px] text-[#d4af37]/80">Business Owner</p>
+                    </div>
+                    <div class="ml-auto w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#d4af37] transition duration-300">
+                        <i data-lucide="play" class="w-3.5 h-3.5 text-white fill-white"></i>
                     </div>
                 </div>
-            </template>
+            </div>
+
+            <!-- Card 2: Kunal Arora (Clickable) -->
+            <div @click="activeStory = list[1].img; activeStoryIndex = 1; activeStoryTitle = list[1].title; activeStoryQuote = list[1].quote"
+                 class="break-inside-avoid flex items-center gap-4 group cursor-pointer select-none">
+                <!-- Speech Bubble -->
+                <div class="bg-white p-6 rounded-[20px] shadow-xl border border-white/10 relative flex-1 hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-1.5 transition duration-500">
+                    <p class="text-[13px] leading-relaxed text-slate-800">
+                        "An exceptional mentor and advisor. His workshops simplify even the most technical financial concepts. The actionable insights have helped us grow."
+                    </p>
+                    <div class="mt-3 flex items-center justify-between">
+                        <span class="text-[10px] font-bold text-slate-400">Kunal Arora</span>
+                        <span class="bg-[#0a2248] text-[#d4af37] text-[10px] font-semibold px-2 py-0.5 rounded-full">★ 4.5</span>
+                    </div>
+                    <!-- Right pointing triangle -->
+                    <div class="absolute top-1/2 -right-2 transform -translate-y-1/2 border-y-8 border-y-transparent border-l-8 border-l-white"></div>
+                </div>
+                <!-- Avatar -->
+                <div class="shrink-0 relative">
+                    <img src="{% static 'images/instagram_story_2.png' %}" alt="Kunal Arora" class="w-12 h-12 rounded-full object-cover border-2 border-white group-hover:border-[#d4af37] transition duration-300">
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#d4af37] flex items-center justify-center text-white text-[9px]">
+                        <i data-lucide="play" class="w-2.5 h-2.5 fill-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Sanjay Khanna (Clickable) -->
+            <div @click="activeStory = list[2].img; activeStoryIndex = 2; activeStoryTitle = list[2].title; activeStoryQuote = list[2].quote"
+                 class="break-inside-avoid bg-white rounded-[20px] p-6 shadow-xl border border-white/10 hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-2 transition duration-500 cursor-pointer select-none group relative">
+                <!-- Double quotes decoration -->
+                <div class="text-[48px] font-serif text-[#0a2248]/10 leading-none absolute top-4 left-4">“</div>
+                <div class="space-y-4 relative z-10">
+                    <p class="text-[13px] leading-relaxed text-slate-800">
+                        "Ashwani Ji's expertise, integrity, and attention to detail make him someone you can trust completely. He always prioritizes his clients' interests."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <img src="{% static 'images/instagram_story_3.png' %}" alt="Sanjay Khanna" class="w-8 h-8 rounded-full object-cover">
+                        <span class="bg-[#0a2248] text-white text-[10px] px-3 py-1 rounded-full font-semibold tracking-wide">Sanjay Khanna / Entrepreneur</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Priyam Malhotra (Large Featured Card - Clickable) -->
+            <div @click="activeStory = list[3].img; activeStoryIndex = 3; activeStoryTitle = list[3].title; activeStoryQuote = list[3].quote"
+                 class="break-inside-avoid bg-white rounded-[20px] overflow-hidden shadow-2xl border border-white/10 hover:border-[#d4af37]/50 hover:shadow-[0_25px_50px_rgba(212,175,55,0.15)] transform hover:-translate-y-2 transition duration-500 cursor-pointer select-none group relative">
+                <!-- Top Portrait of Ashwani Tayal -->
+                <div class="h-[200px] overflow-hidden relative">
+                    <img src="{% static 'images/portrait.png' %}" alt="CA Ashwani Tayal" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <span class="absolute bottom-3 left-4 bg-[#d4af37] text-[#0a2248] text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded">Featured Review</span>
+                </div>
+                <!-- Card body -->
+                <div class="p-6 space-y-4">
+                    <p class="text-[13px] leading-relaxed text-slate-700 italic">
+                        "Working with CA Ashwani Tayal has been one of the best decisions for our company. His deep understanding of regulations and proactive advice saved us both time and resources."
+                    </p>
+                    <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-800">Priyam Malhotra</h4>
+                            <p class="text-[10px] text-slate-400">@priyamalhotra</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-[#0a2248]/10 text-[#0a2248] flex items-center justify-center group-hover:bg-[#0a2248] group-hover:text-white transition duration-300">
+                            <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Excellent Guidance! (The Bookmark Card) -->
+            <div class="break-inside-avoid bg-white rounded-[20px] p-6 shadow-xl border border-white/10 hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-1.5 transition duration-500 relative overflow-hidden select-none">
+                <!-- Bookmark tag -->
+                <div class="absolute top-0 right-4 w-6 h-8 bg-[#0a2248] flex items-center justify-center text-white rounded-b-sm">
+                    <span class="text-xs">★</span>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold text-[#0a2248] tracking-tight">Excellent Guidance!</h3>
+                    <p class="text-[13px] leading-relaxed text-slate-700">
+                        "From tax planning to compliance, every interaction has been smooth and reassuring."
+                    </p>
+                    <!-- Rating and overlapping avatars -->
+                    <div class="flex items-center justify-between pt-2">
+                        <div class="flex text-[#d4af37] text-xs">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span class="text-slate-200">★</span>
+                        </div>
+                        <div class="flex -space-x-2">
+                            <img src="{% static 'images/instagram_story_1.png' %}" class="w-6 h-6 rounded-full border border-white object-cover">
+                            <img src="{% static 'images/instagram_story_2.png' %}" class="w-6 h-6 rounded-full border border-white object-cover">
+                            <img src="{% static 'images/instagram_story_3.png' %}" class="w-6 h-6 rounded-full border border-white object-cover">
+                            <div class="w-6 h-6 rounded-full bg-[#d4af37] text-white text-[8px] font-bold flex items-center justify-center border border-white">+10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Vikram Sethi (The Image Background Card - Clickable) -->
+            <div @click="activeStory = list[4].img; activeStoryIndex = 4; activeStoryTitle = list[4].title; activeStoryQuote = list[4].quote"
+                 class="break-inside-avoid rounded-[20px] overflow-hidden shadow-xl relative cursor-pointer select-none group h-[200px] hover:shadow-[0_25px_50px_rgba(212,175,55,0.15)] transform hover:-translate-y-2 transition duration-500">
+                <img src="{% static 'images/team_meeting.png' %}" alt="Vikram Sethi" class="w-full h-full object-cover transition duration-500 group-hover:scale-103">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-between">
+                    <p class="text-[12px] leading-relaxed text-slate-200 italic line-clamp-4">
+                        "Professional, approachable, and highly knowledgeable. He explained every financial aspect patiently and ensured compliance."
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Vikram Sethi</h4>
+                            <p class="text-[9px] text-[#d4af37]">@vikramsethi</p>
+                        </div>
+                        <span class="bg-white/20 backdrop-blur-md text-[#d4af37] text-[9px] font-semibold px-2 py-1 rounded-full flex items-center gap-1">
+                            ★★★★★
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7: CEO @ Fermentum Ventures -->
+            <div class="break-inside-avoid bg-white rounded-[20px] p-5 shadow-xl border border-white/10 hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-1.5 transition duration-500 flex gap-4 items-start select-none">
+                <img src="{% static 'images/instagram_story_4.png' %}" class="w-12 h-16 rounded-lg object-cover shadow border border-slate-100 shrink-0">
+                <div class="space-y-2">
+                    <div class="text-xs text-[#0a2248] font-bold uppercase tracking-wider flex items-center gap-1">
+                        <i data-lucide="quote" class="w-3 h-3 text-[#d4af37] fill-current"></i>
+                        <span>Quote</span>
+                    </div>
+                    <p class="text-[12px] leading-relaxed text-slate-700">
+                        "Whether it's business structuring or taxation, his recommendations are always practical."
+                    </p>
+                    <div class="text-[10px] font-bold text-[#d4af37]">CEO @ Fermentum Ventures</div>
+                </div>
+            </div>
+
+            <!-- Card 8: Outstanding Support! -->
+            <div class="break-inside-avoid flex flex-col items-center group select-none">
+                <!-- Bubble body -->
+                <div class="bg-white p-6 rounded-[20px] shadow-xl border border-white/10 relative hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-1.5 transition duration-500 text-center w-full">
+                    <h3 class="text-xs font-extrabold text-[#d4af37] uppercase tracking-widest mb-2">Outstanding Support!</h3>
+                    <p class="text-[12px] leading-relaxed text-slate-700">
+                        "His commitment to excellence and timely execution gives immense confidence. We know our financial matters are in capable hands."
+                    </p>
+                    <!-- Bottom pointing triangle -->
+                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 border-x-8 border-x-transparent border-t-8 border-t-white"></div>
+                </div>
+                <!-- Label/Avatar below speech bubble -->
+                <div class="mt-4 bg-[#0a2248] text-white text-[10px] font-semibold px-3 py-1 rounded-full border border-white/10">
+                    @ridhim.shah <span class="text-[#d4af37] ml-1">★ 4.5</span>
+                </div>
+            </div>
+
+            <!-- Card 9: Catherine @earnshaw (Clickable) -->
+            <div @click="activeStory = list[5].img; activeStoryIndex = 5; activeStoryTitle = list[5].title; activeStoryQuote = list[5].quote"
+                 class="break-inside-avoid bg-white rounded-[20px] overflow-hidden shadow-xl border border-white/10 hover:border-[#d4af37]/50 hover:shadow-[0_20px_40px_rgba(212,175,55,0.1)] transform hover:-translate-y-2 transition duration-500 cursor-pointer select-none group">
+                <!-- Top author bar -->
+                <div class="bg-[#0a2248] px-4 py-2.5 text-white text-xs font-semibold flex justify-between items-center border-b border-white/5">
+                    <span>Catherine @earnshaw</span>
+                    <i data-lucide="play" class="w-3 h-3 text-[#d4af37] fill-current"></i>
+                </div>
+                <div class="p-5 space-y-4">
+                    <p class="text-[12px] leading-relaxed text-slate-700">
+                        "The consultation sessions were insightful and solution-oriented. Highly recommended for any complex tax structuring."
+                    </p>
+                    <div class="flex justify-between items-center text-[10px]">
+                        <span class="text-slate-400">Startup Founder</span>
+                        <span class="bg-[#d4af37]/10 text-[#d4af37] font-bold px-2 py-0.5 rounded">★ 5.0</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -507,54 +685,54 @@
         
         <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 relative shadow-2xl">
             <!-- Close Button -->
-            <button @click="activeStory = null" class="absolute top-4 right-4 z-20 bg-black/40 hover:bg-indigo-600 text-white rounded-full p-2.5 transition">
+            <button @click="activeStory = null" class="absolute top-4 right-4 z-20 bg-black/40 hover:bg-[#d4af37] text-white rounded-full p-2.5 transition">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
             <!-- Video/Image Left Panel -->
-            <div class="relative aspect-[9/16] md:h-[650px] overflow-hidden bg-slate-950 flex items-center justify-center">
+            <div class="relative aspect-[9/16] md:h-[600px] overflow-hidden bg-slate-950 flex items-center justify-center">
                 <img :src="activeStory" class="w-full h-full object-cover opacity-85">
                 <!-- Custom Story progress indicator -->
                 <div class="absolute top-4 left-6 right-6 flex gap-1 z-10">
-                    <div class="h-1 bg-white/20 rounded-full flex-grow overflow-hidden"><div class="h-full bg-indigo-500 w-full animate-[width_5s_linear]"></div></div>
+                    <div class="h-1 bg-white/20 rounded-full flex-grow overflow-hidden"><div class="h-full bg-[#d4af37] w-full animate-[width_5s_linear]"></div></div>
                     <div class="h-1 bg-white/20 rounded-full flex-grow"></div>
                 </div>
                 <!-- Simulating active audio visual bar -->
                 <div class="absolute bottom-6 left-6 flex items-end gap-1 text-white text-xs">
-                    <i data-lucide="video" class="w-4 h-4 text-indigo-400 mr-1 flex-shrink-0 animate-bounce"></i>
-                    <span>Simulated Video Testimonial Playback</span>
+                    <i data-lucide="video" class="w-4 h-4 text-[#d4af37] mr-1 flex-shrink-0 animate-bounce"></i>
+                    <span>Simulated Case Study Playback</span>
                 </div>
             </div>
 
             <!-- Context Quote Panel Right -->
             <div class="p-8 sm:p-12 flex flex-col justify-between space-y-8 text-white relative">
                 <div class="space-y-4">
-                    <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest flex items-center gap-2">
-                        <i data-lucide="star" class="w-4 h-4 fill-indigo-400 text-indigo-400"></i>
-                        <span>Highly Verified Case Study</span>
+                    <span class="text-xs font-bold text-[#d4af37] uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="star" class="w-4 h-4 fill-[#d4af37] text-[#d4af37]"></i>
+                        <span>Verified Case Study Details</span>
                     </span>
-                    <h3 class="text-3xl font-bold font-serif leading-tight" x-text="activeStoryTitle"></h3>
-                    <div class="h-0.5 w-12 bg-indigo-500 rounded"></div>
+                    <h3 class="text-2xl font-bold font-serif leading-tight text-white" x-text="activeStoryTitle"></h3>
+                    <div class="h-0.5 w-12 bg-[#d4af37] rounded"></div>
                 </div>
 
                 <div class="relative py-4">
-                    <span class="absolute -top-6 -left-4 text-8xl font-serif text-indigo-500/10 leading-none">“</span>
-                    <p class="text-lg text-slate-300 leading-relaxed italic relative z-10" x-text="activeStoryQuote"></p>
+                    <span class="absolute -top-6 -left-4 text-8xl font-serif text-white/5 leading-none">“</span>
+                    <p class="text-base text-slate-300 leading-relaxed italic relative z-10" x-text="activeStoryQuote"></p>
                 </div>
 
                 <div class="flex items-center gap-4.5 p-4 bg-slate-800/40 rounded-2xl border border-slate-800">
-                    <div class="text-indigo-400 bg-indigo-500/10 p-3 rounded-xl">
+                    <div class="text-[#d4af37] bg-[#d4af37]/10 p-3 rounded-xl">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
                     <div>
-                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Security State</div>
-                        <div class="text-sm font-semibold text-slate-200">Pre-Audit Mitigated & Compliant</div>
+                        <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Advisory State</div>
+                        <div class="text-sm font-semibold text-slate-200">Mitigated, Compliant & Secure</div>
                     </div>
                 </div>
 
                 <!-- Footer buttons -->
                 <div class="flex gap-4">
-                    <a href="#appointments" @click="activeStory = null" class="flex-grow inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold tracking-wider uppercase rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition text-center">
+                    <a href="#appointments" @click="activeStory = null" class="flex-grow inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold tracking-wider uppercase rounded-xl bg-[#d4af37] hover:bg-[#bfa030] text-[#0a2248] transition text-center">
                         Shield My Business
                     </a>
                 </div>
