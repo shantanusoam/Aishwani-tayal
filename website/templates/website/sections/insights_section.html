@@ -1,56 +1,126 @@
 {% load static %}
+{% url 'website:blogs' as default_blogs_url %}
 
-<section id="{{ section_id|default:'insights' }}" class="py-24 sm:py-32 bg-white relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-16 gap-4 scroll-anim-blogs">
-            <div class="space-y-3">
-                <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">MY Insights</span>
-                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 font-serif tracking-tight">Latest Insights & Blogs</h2>
-                <div class="h-0.5 w-16 bg-indigo-600 rounded"></div>
+<section id="{{ section_id|default:'insights' }}"
+         class="relative overflow-hidden bg-[#f9f8f6] py-[37px] sm:py-14"
+         x-data="{ activeSlide: 0, totalSlides: {{ insights|length|default:0 }}, next() { if (this.totalSlides > 0) this.activeSlide = (this.activeSlide + 1) % this.totalSlides }, prev() { if (this.totalSlides > 0) this.activeSlide = (this.activeSlide - 1 + this.totalSlides) % this.totalSlides } }">
+    <div class="mx-auto max-w-[1339px] px-6 sm:px-8 lg:px-12">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between scroll-anim-blogs">
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                    <span class="text-[12px] font-semibold uppercase leading-[18px] tracking-[0.15em] text-[#d4af37]">My Insights</span>
+                </div>
+                <h2 class="mt-4 font-serif text-[34px] font-bold leading-tight text-[#0d2b5c] sm:text-[37.95px] sm:leading-[56.925px]">
+                    Latest Insights & Blogs
+                </h2>
             </div>
-            <a href="{{ view_all_url|default:'#appointments' }}"
-               class="inline-flex items-center justify-center px-6 py-3 border border-slate-200 hover:border-indigo-600 hover:text-indigo-600 text-sm font-bold text-slate-700 rounded-xl transition duration-300 shadow-sm mt-4 sm:mt-0">
-                View All Blogs
-                <i data-lucide="external-link" class="ml-2 w-4 h-4"></i>
-            </a>
+
+            <div class="flex items-center gap-3">
+                <button type="button"
+                        @click="prev()"
+                        class="hidden size-11 items-center justify-center rounded border-2 border-[#0d2b5c] text-[#0d2b5c] transition hover:bg-[#0d2b5c] hover:text-white sm:flex"
+                        aria-label="Previous insight">
+                    <i data-lucide="arrow-left" class="size-4"></i>
+                </button>
+                <button type="button"
+                        @click="next()"
+                        class="hidden size-11 items-center justify-center rounded border-2 border-[#0d2b5c] text-[#0d2b5c] transition hover:bg-[#0d2b5c] hover:text-white sm:flex"
+                        aria-label="Next insight">
+                    <i data-lucide="arrow-right" class="size-4"></i>
+                </button>
+                <a href="{{ view_all_url|default:default_blogs_url }}"
+                   class="inline-flex h-[47px] items-center justify-center gap-2 rounded-[4px] border-2 border-[#0d2b5c] px-[26px] py-3 text-[13px] font-semibold uppercase leading-[19.5px] tracking-[0.08em] text-[#0d2b5c] transition duration-300 hover:bg-[#0d2b5c] hover:text-white">
+                    View All Blogs
+                    <i data-lucide="arrow-right" class="size-[14px]"></i>
+                </a>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 scroll-anim-blogs">
-            {% for post in insights %}
-            <div class="bg-white border border-slate-100 rounded-2xl shadow-md overflow-hidden flex flex-col group hover:border-indigo-200 hover:shadow-xl transition duration-500 transform hover:-translate-y-1">
-                <div class="aspect-video relative overflow-hidden bg-slate-100">
-                    <img src="{% static 'images/' %}{{ post.image_filename }}" alt="{{ post.title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-slate-950/10 group-hover:bg-transparent transition duration-300"></div>
-                </div>
+        <div class="mt-12 overflow-hidden scroll-anim-blogs">
+            <div class="flex gap-[30px] transition-transform duration-500 ease-out"
+                 :style="`transform: translateX(calc(-${activeSlide} * (365px + 30px)))`">
+                {% for post in insights %}
+                <article class="group flex h-[478px] w-[365px] shrink-0 flex-col overflow-hidden rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(13,43,92,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0px_18px_38px_rgba(13,43,92,0.14)]">
+                    <div class="h-[200px] w-full overflow-hidden bg-slate-100">
+                        {% if forloop.counter == 1 %}
+                            <img src="{% static 'images/figma_blog_tax.jpg' %}" alt="{{ post.title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                        {% elif forloop.counter == 2 %}
+                            <img src="{% static 'images/figma_blog_gst.jpg' %}" alt="{{ post.title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                        {% else %}
+                            <img src="{% static 'images/figma_blog_growth.jpg' %}" alt="{{ post.title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                        {% endif %}
+                    </div>
 
-                <div class="p-6 flex-grow flex flex-col justify-between space-y-6">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between text-xs font-semibold">
-                            <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
+                    <div class="flex flex-1 flex-col px-6 pb-7 pt-6">
+                        <div class="flex items-center justify-between">
+                            <span class="rounded-[4px] bg-[rgba(212,175,55,0.1)] px-[10px] py-1 text-[11px] font-bold uppercase leading-[16.5px] tracking-[0.1em] text-[#d4af37]">
                                 {{ post.get_category_display }}
                             </span>
-                            <span class="text-slate-400 flex items-center gap-1">
-                                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                            <span class="text-[11px] leading-[16.5px] text-[#999]">
                                 {{ post.published_date|date:"d M Y" }}
                             </span>
                         </div>
-                        <h4 class="text-xl font-bold font-serif text-slate-900 leading-snug group-hover:text-indigo-600 transition">
+
+                        <h3 class="mt-3 max-w-[300px] font-serif text-[17.6px] font-semibold leading-[24.64px] text-[#0d2b5c] transition group-hover:text-[#b88e50]">
                             {{ post.title }}
-                        </h4>
-                        <p class="text-sm text-slate-500 leading-relaxed font-light line-clamp-3">
+                        </h3>
+
+                        <p class="mt-3 max-w-[300px] text-[13px] leading-[22.1px] text-[#666] line-clamp-4">
                             {{ post.summary }}
                         </p>
-                    </div>
 
-                    <div class="border-t border-slate-50 pt-4">
-                        <a href="{{ post.read_more_link }}" class="inline-flex items-center gap-1 text-sm font-bold text-indigo-600 group-hover:text-slate-900 transition-colors">
-                            <span>Read More</span>
-                            <i data-lucide="chevron-right" class="w-4 h-4 transform group-hover:translate-x-1.5 transition"></i>
+                        <a href="{{ post.read_more_link }}"
+                           class="mt-auto inline-flex items-center gap-2 pt-5 text-[13px] font-semibold leading-[19.5px] text-[#d4af37] transition hover:text-[#0d2b5c]">
+                            Read More
+                            <i data-lucide="arrow-right" class="size-[14px]"></i>
                         </a>
                     </div>
+                </article>
+                {% empty %}
+                <div class="w-full rounded-xl bg-white p-8 text-center text-[#666] shadow-[0px_4px_16px_0px_rgba(13,43,92,0.06)]">
+                    No blog posts found.
                 </div>
+                {% endfor %}
+                {% for post in insights %}
+                <article aria-hidden="true" class="group flex h-[478px] w-[365px] shrink-0 flex-col overflow-hidden rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(13,43,92,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0px_18px_38px_rgba(13,43,92,0.14)]">
+                    <div class="h-[200px] w-full overflow-hidden bg-slate-100">
+                        {% if forloop.counter == 1 %}
+                            <img src="{% static 'images/figma_blog_tax.jpg' %}" alt="" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                        {% elif forloop.counter == 2 %}
+                            <img src="{% static 'images/figma_blog_gst.jpg' %}" alt="" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                        {% else %}
+                            <img src="{% static 'images/figma_blog_growth.jpg' %}" alt="" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                        {% endif %}
+                    </div>
+
+                    <div class="flex flex-1 flex-col px-6 pb-7 pt-6">
+                        <div class="flex items-center justify-between">
+                            <span class="rounded-[4px] bg-[rgba(212,175,55,0.1)] px-[10px] py-1 text-[11px] font-bold uppercase leading-[16.5px] tracking-[0.1em] text-[#d4af37]">
+                                {{ post.get_category_display }}
+                            </span>
+                            <span class="text-[11px] leading-[16.5px] text-[#999]">
+                                {{ post.published_date|date:"d M Y" }}
+                            </span>
+                        </div>
+
+                        <h3 class="mt-3 max-w-[300px] font-serif text-[17.6px] font-semibold leading-[24.64px] text-[#0d2b5c] transition group-hover:text-[#b88e50]">
+                            {{ post.title }}
+                        </h3>
+
+                        <p class="mt-3 max-w-[300px] text-[13px] leading-[22.1px] text-[#666] line-clamp-4">
+                            {{ post.summary }}
+                        </p>
+
+                        <a href="{{ post.read_more_link }}" tabindex="-1"
+                           class="mt-auto inline-flex items-center gap-2 pt-5 text-[13px] font-semibold leading-[19.5px] text-[#d4af37] transition hover:text-[#0d2b5c]">
+                            Read More
+                            <i data-lucide="arrow-right" class="size-[14px]"></i>
+                        </a>
+                    </div>
+                </article>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </section>
