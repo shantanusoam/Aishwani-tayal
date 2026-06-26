@@ -6,19 +6,21 @@
 {% block content %}
 <!-- Hero (Figma node 1:859) -->
 <section class="relative min-h-[639px] overflow-hidden bg-[#f9f8f6] pt-[83px]">
-    <img src="{% static 'images/ccts_figma_hero.png' %}" alt="Carbon Credits: Real Money" class="absolute inset-0 h-full w-full object-cover">
-    <div class="absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-transparent"></div>
+    <img src="{% static 'images/ccts_hero_bg.png' %}" alt="Carbon Credits: Real Money" class="absolute inset-0 h-full w-full object-cover">
+    <div class="absolute inset-y-0 left-0 w-full bg-[linear-gradient(90deg,rgba(247,244,237,0.88)_0%,rgba(247,244,237,0.78)_33%,rgba(247,244,237,0.18)_56%,rgba(247,244,237,0)_78%)]"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-[74px]">
-        <div class="max-w-[614px] pt-32 sm:pt-40">
-            <h1 class="font-serif text-[46px] font-semibold leading-[1.12] text-[#011f42] sm:text-[64px]">
+        <div class="max-w-[614px] pt-28 sm:pt-32">
+            <p class="text-[18px] leading-[1.5] text-[#011f42] sm:text-[20px]">Let’s Talk About India’s</p>
+            <h1 class="mt-2 font-serif text-[46px] font-semibold leading-[1.12] text-[#011f42] sm:text-[64px]">
                 Carbon Credits:<br>Real Money
             </h1>
             <p class="mt-7 max-w-[494px] text-[18px] leading-[1.5] text-[#011f42] sm:text-[20px]">
-                India's Carbon finance rules are moving from policy talk to balance sheet reality.
+                India’s Carbon finance and CCUS Authority.
             </p>
-            <a href="#appointments" class="mt-8 inline-flex h-[52px] min-w-[213px] items-center justify-center rounded-[4px] bg-[#d4af37] px-6 text-[14px] font-bold uppercase tracking-[0.08em] text-[#0d2b5c] transition hover:bg-[#bfa030]">
-                Book Consultation
+            <a href="#ccts-details" class="mt-12 inline-flex h-[47px] min-w-[192px] items-center justify-center rounded-[4px] bg-[#b88e50] px-4 text-[15px] font-semibold uppercase tracking-[0.05em] text-white transition hover:bg-[#a67e45] sm:text-[18px]">
+                Scroll Down
+                <i data-lucide="arrow-right" class="ml-2 size-5"></i>
             </a>
         </div>
     </div>
@@ -29,7 +31,7 @@
     <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
         <div class="grid gap-10 lg:grid-cols-[430px_1fr] lg:items-center">
             <div class="overflow-hidden rounded-[10px] shadow-[0px_4px_16px_rgba(13,43,92,0.08)]">
-                <img src="{% static 'images/ccts_figma_intro.jpg' %}" alt="CCTS consultation" class="h-[260px] w-full object-cover">
+                <img src="{% static 'images/ccts_story.png' %}" alt="CCTS consultation" class="h-[260px] w-full object-cover">
             </div>
             <div>
                 <div class="flex items-center gap-3">
@@ -87,7 +89,7 @@
     <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
         <div class="grid gap-10 lg:grid-cols-[430px_1fr] lg:items-center">
             <div class="relative h-[360px]">
-                <img src="{% static 'images/ccts_figma_book.png' %}" alt="Carbon Credits Real Money book" class="absolute left-1/2 top-1/2 h-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain">
+                <img src="{% static 'images/carbon_credits_book_cover.png' %}" alt="Carbon Credits Real Money book" class="absolute left-1/2 top-1/2 h-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain">
             </div>
             <div>
                 <div class="flex items-center gap-3">
@@ -127,22 +129,22 @@
 
         <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/ccts_figma_service_tax.png' %}" alt="Tax Planning" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Tax Planning</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Strategic tax planning for compliant, efficient financial outcomes.</p></div>
+                <img src="{% static 'images/service_tax.png' %}" alt="Tax Planning" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Tax Planning</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Strategic tax planning for compliant, efficient financial outcomes.</p></div>
             </article>
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/ccts_figma_service_audit.png' %}" alt="Audit & Assurance" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Audit & Assurance</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Reliable audits and assurance for confidence in every decision.</p></div>
+                <img src="{% static 'images/service_audit.png' %}" alt="Audit & Assurance" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Audit & Assurance</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Reliable audits and assurance for confidence in every decision.</p></div>
             </article>
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/ccts_figma_service_biz.png' %}" alt="Business Advisory" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Business Advisory</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Growth, structuring, and decision support for business owners.</p></div>
+                <img src="{% static 'images/service_biz.png' %}" alt="Business Advisory" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Business Advisory</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Growth, structuring, and decision support for business owners.</p></div>
             </article>
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/ccts_figma_service_gst.png' %}" alt="GST Consultancy" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">GST Consultancy</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">GST advisory, credit review, and compliance readiness.</p></div>
+                <img src="{% static 'images/service_gst.png' %}" alt="GST Consultancy" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">GST Consultancy</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">GST advisory, credit review, and compliance readiness.</p></div>
             </article>
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/ccts_figma_service_compliance.png' %}" alt="Corporate Compliance" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Corporate Compliance</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">ROC, company law, and governance systems for enterprises.</p></div>
+                <img src="{% static 'images/service_compliance.png' %}" alt="Corporate Compliance" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Corporate Compliance</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">ROC, company law, and governance systems for enterprises.</p></div>
             </article>
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/ccts_figma_service_strategy.png' %}" alt="Financial Strategy" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Financial Strategy</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Forecasting, CFO advisory, fundraising, and board-level clarity.</p></div>
+                <img src="{% static 'images/service_strategy.png' %}" alt="Financial Strategy" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Financial Strategy</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Forecasting, CFO advisory, fundraising, and board-level clarity.</p></div>
             </article>
         </div>
     </div>
