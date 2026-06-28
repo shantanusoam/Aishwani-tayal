@@ -30,6 +30,7 @@ class Insight(models.Model):
         ("GST", "GST"),
         ("BIZ", "Business Advisory"),
         ("LAW", "Compliance"),
+        ("CCTS", "CCTS"),
     ]
 
     title = models.CharField(max_length=200)
@@ -88,12 +89,21 @@ class HomeServiceCard(models.Model):
         related_name="cards",
     )
     title = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=170, unique=True, null=True, blank=True)
     summary = models.TextField()
     image = models.ImageField(upload_to="home_services/")
     image_alt = models.CharField(max_length=180, blank=True)
     badge_one = models.CharField(max_length=80)
     badge_two = models.CharField(max_length=80)
     link_url = models.CharField(max_length=250, default="/services/")
+    detail_kicker = models.CharField(max_length=120, default="Strategic Advisory")
+    detail_heading = models.CharField(max_length=180, blank=True)
+    detail_intro = models.TextField(blank=True)
+    detail_body = models.TextField(blank=True)
+    detail_points = models.TextField(
+        blank=True,
+        help_text="One service-detail bullet per line.",
+    )
     order = models.PositiveIntegerField(default=0, help_text="Order in which cards are displayed.")
 
     class Meta:
@@ -103,6 +113,25 @@ class HomeServiceCard(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title) or "service"
+            candidate = base_slug
+            suffix = 2
+            while HomeServiceCard.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
+                candidate = f"{base_slug}-{suffix}"
+                suffix += 1
+            self.slug = candidate
+
+        if not self.detail_heading:
+            self.detail_heading = self.title
+
+        super().save(*args, **kwargs)
+
+    @property
+    def detail_points_list(self):
+        return [point.strip() for point in self.detail_points.splitlines() if point.strip()]
 
 
 class AboutHeroSection(models.Model):
@@ -194,3 +223,225 @@ class AboutIntroFeature(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class AboutCertification(models.Model):
+    year = models.CharField(max_length=10)
+    title = models.CharField(max_length=150)
+    source = models.CharField(max_length=180)
+    image = models.ImageField(upload_to="about_certifications/")
+    image_alt = models.CharField(max_length=180, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "About Certification"
+        verbose_name_plural = "About Certifications"
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ""
+
+
+class TestimonialVideo(models.Model):
+    title = models.CharField(max_length=150)
+    thumbnail = models.ImageField(upload_to="testimonial_videos/")
+    thumbnail_alt = models.CharField(max_length=180, blank=True)
+    youtube_url = models.URLField(max_length=500, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Testimonial Video"
+        verbose_name_plural = "Testimonial Videos"
+
+    def __str__(self):
+        return self.title
+
+
+class HomeFeaturedServiceSection(models.Model):
+    title = models.CharField(max_length=150, default="Home Featured Services")
+
+    class Meta:
+        verbose_name = "Home Featured Service Section"
+        verbose_name_plural = "Home Featured Service Sections"
+
+    def __str__(self):
+        return self.title
+
+
+class HomeFeaturedServiceCard(models.Model):
+    section = models.ForeignKey(
+        HomeFeaturedServiceSection,
+        on_delete=models.CASCADE,
+        related_name="cards",
+    )
+    title = models.CharField(max_length=120)
+    subtitle = models.CharField(max_length=120, blank=True)
+    image = models.ImageField(upload_to="home_featured_services/")
+    image_alt = models.CharField(max_length=180, blank=True)
+    cta_url = models.CharField(max_length=250, default="/services/")
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Home Featured Service Card"
+        verbose_name_plural = "Home Featured Service Cards"
+
+    def __str__(self):
+        return self.title
+
+
+class Award(models.Model):
+    year = models.CharField(max_length=10)
+    title = models.CharField(max_length=150)
+    source = models.CharField(max_length=180)
+    image = models.ImageField(upload_to="awards/")
+    image_alt = models.CharField(max_length=180, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    featured = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Award"
+        verbose_name_plural = "Awards"
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ""
+
+
+class MomentMilestone(models.Model):
+    title = models.CharField(max_length=180)
+    image = models.ImageField(upload_to="moments_milestones/")
+    image_alt = models.CharField(max_length=180, blank=True)
+    is_tall = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Moment & Milestone"
+        verbose_name_plural = "Moments & Milestones"
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ""
+
+
+class FAQ(models.Model):
+    PAGE_CHOICES = [
+        ("HOME", "Home"),
+        ("CCTS", "CCTS"),
+        ("GENERAL", "General"),
+    ]
+
+    page = models.CharField(max_length=20, choices=PAGE_CHOICES, default="CCTS")
+    question = models.CharField(max_length=250)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "FAQ"
+        verbose_name_plural = "FAQs"
+
+    def __str__(self):
+        return self.question
+
+
+class CCTSServiceSection(models.Model):
+    label = models.CharField(max_length=120, default="CCTS Services")
+    title = models.CharField(max_length=180, default="Explore CCTS From Every Angle")
+    description = models.TextField(
+        default="Curated insights and practical frameworks for every stakeholder in India's carbon market."
+    )
+
+    class Meta:
+        verbose_name = "CCTS Service Section"
+        verbose_name_plural = "CCTS Service Sections"
+
+    def __str__(self):
+        return self.title
+
+
+class CCTSServiceCard(models.Model):
+    section = models.ForeignKey(
+        CCTSServiceSection,
+        on_delete=models.CASCADE,
+        related_name="cards",
+    )
+    number = models.CharField(max_length=10, default="01")
+    audience = models.CharField(max_length=180)
+    title = models.CharField(max_length=200)
+    summary = models.TextField()
+    image = models.ImageField(upload_to="ccts_services/", blank=True)
+    image_alt = models.CharField(max_length=180, blank=True)
+    cta_text = models.CharField(max_length=100, default="Learn More")
+    cta_url = models.CharField(max_length=250, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "CCTS Service Card"
+        verbose_name_plural = "CCTS Service Cards"
+
+    def __str__(self):
+        return self.title
+
+
+class ServiceDetailHeroSlide(models.Model):
+    service = models.ForeignKey(
+        HomeServiceCard,
+        on_delete=models.CASCADE,
+        related_name="hero_slides",
+    )
+    title = models.CharField(max_length=160, blank=True)
+    subtitle = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to="service_hero_slides/")
+    image_alt = models.CharField(max_length=180, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Service Detail Hero Slide"
+        verbose_name_plural = "Service Detail Hero Slides"
+
+    def __str__(self):
+        return self.title or self.service.title
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ""
+
+
+class SocialLink(models.Model):
+    label = models.CharField(max_length=80, default="Linktree")
+    url = models.URLField(max_length=500, default="https://linktr.ee/ca_ashwanitayal")
+    icon_name = models.CharField(max_length=50, default="link")
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Social Link"
+        verbose_name_plural = "Social Links"
+
+    def __str__(self):
+        return self.label

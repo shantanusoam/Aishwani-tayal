@@ -1,0 +1,123 @@
+<section id="appointments" class="bg-[#f9f8f6] py-14 sm:py-16">
+    <div class="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <div class="inline-flex items-center gap-4">
+                <span class="h-[2px] w-10 bg-[#d4af37]"></span>
+                <span class="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#d4af37]">Get in Touch</span>
+                <span class="h-[2px] w-10 bg-[#d4af37]"></span>
+            </div>
+            <h2 class="mt-4 font-serif text-[32px] font-bold leading-tight text-[#0d2b5c] sm:text-[38px]">Book Your Consultation</h2>
+            <p class="mt-3 text-[15px] leading-[1.5] text-[#666]">Schedule a private consultation and take the first step towards financial clarity.</p>
+        </div>
+
+        <div class="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+            <div class="rounded-[16px] border-t-4 border-[#d4af37] bg-white p-6 shadow-[0_8px_20px_rgba(13,43,92,0.08)] sm:p-8 lg:p-9">
+                <form class="contact-form space-y-5"
+                      x-data="{ submitting: false, successMsg: '', errors: {}, submitForm(event) { this.submitting = true; this.successMsg = ''; this.errors = {}; let urlEncoded = new URLSearchParams(new FormData(event.target)); urlEncoded.append('csrfmiddlewaretoken', '{{ csrf_token }}'); fetch('{% url "website:book_consultation" %}', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: urlEncoded }).then(response => response.json().then(data => ({ status: response.status, body: data }))).then(res => { this.submitting = false; if (res.status === 200 && res.body.success) { this.successMsg = res.body.message; event.target.reset(); } else { this.errors = res.body.errors || {}; } }).catch(() => { this.submitting = false; this.errors = { __all__: 'A network connectivity error occurred. Please try again.' }; }); } }"
+                      @submit.prevent="submitForm($event)">
+                    <div x-show="successMsg !== ''" class="rounded-[8px] bg-[rgba(212,175,55,0.14)] p-3 text-[13px] text-[#0d2b5c]" style="display:none;" x-text="successMsg"></div>
+                    <div x-show="errors.__all__" class="rounded-[8px] bg-red-50 p-3 text-[13px] text-red-700" style="display:none;" x-text="errors.__all__"></div>
+
+                    <div class="grid gap-5 sm:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-[13px] font-semibold leading-[19.5px] text-[#0d2b5c]">Full Name</label>
+                            {{ form.full_name }}
+                            <p x-show="errors.full_name" class="mt-1 text-xs text-red-600" style="display:none;" x-text="errors.full_name"></p>
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-[13px] font-semibold leading-[19.5px] text-[#0d2b5c]">Email Address</label>
+                            {{ form.email }}
+                            <p x-show="errors.email" class="mt-1 text-xs text-red-600" style="display:none;" x-text="errors.email"></p>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-5 sm:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-[13px] font-semibold leading-[19.5px] text-[#0d2b5c]">Phone Number</label>
+                            {{ form.phone }}
+                            <p x-show="errors.phone" class="mt-1 text-xs text-red-600" style="display:none;" x-text="errors.phone"></p>
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-[13px] font-semibold leading-[19.5px] text-[#0d2b5c]">Service Required</label>
+                            {{ form.service }}
+                            <p x-show="errors.service" class="mt-1 text-xs text-red-600" style="display:none;" x-text="errors.service"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-[13px] font-semibold leading-[19.5px] text-[#0d2b5c]">Company/ Organisation</label>
+                        {{ form.company }}
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-[13px] font-semibold leading-[19.5px] text-[#0d2b5c]">Message</label>
+                        {{ form.message }}
+                        <p x-show="errors.message" class="mt-1 text-xs text-red-600" style="display:none;" x-text="errors.message"></p>
+                    </div>
+
+                    <button type="submit" :disabled="submitting" class="h-[53px] w-full rounded-[8px] bg-[#0d2b5c] text-[14px] font-bold uppercase tracking-[0.08em] text-white transition hover:bg-[#011f42] disabled:cursor-not-allowed disabled:opacity-60">
+                        <span x-show="!submitting">Book Your Consultation</span>
+                        <span x-show="submitting" style="display:none;">Submitting...</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="space-y-6">
+                <div class="rounded-[16px] bg-[#0d2b5c] p-7 text-white shadow-[0_4px_12px_rgba(13,43,92,0.06)] sm:p-8">
+                    <h3 class="font-serif text-[19px] font-semibold leading-[1.5]">Reach Us</h3>
+                    <div class="mt-6 space-y-5 text-[14px] leading-[1.6]">
+                        <div class="flex items-start gap-3.5">
+                            <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="map-pin" class="size-4"></i></span>
+                            <span>302, Prestige Tower, MG Road, New Delhi — 110001</span>
+                        </div>
+                        <div class="flex items-center gap-3.5">
+                            <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="phone" class="size-4"></i></span>
+                            <span>+91 11 4567 8900</span>
+                        </div>
+                        <div class="flex items-center gap-3.5">
+                            <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="mail" class="size-4"></i></span>
+                            <a href="mailto:info@ashwanitayal.com" class="hover:text-[#d4af37]">info@ashwanitayal.com</a>
+                        </div>
+                        <div class="flex items-center gap-3.5">
+                            <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="clock" class="size-4"></i></span>
+                            <span>Mon-Fri: 9:30 AM - 6:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex h-[200px] items-center justify-center rounded-[16px] bg-[#e8edf5] text-center text-[#666] shadow-[0_4px_24px_rgba(13,43,92,0.06)]">
+                    <div>
+                        <i data-lucide="map-pin" class="mx-auto size-8 text-[#0d2b5c]"></i>
+                        <p class="mt-2 text-[13px] leading-[19.5px]">Google Maps Preview</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    {% for social_link in social_links %}
+                    <a href="{{ social_link.url }}" target="_blank" rel="noopener" class="flex size-11 items-center justify-center rounded-full bg-[#0d2b5c] text-white transition hover:bg-[#d4af37]" aria-label="{{ social_link.label }}"><i data-lucide="{{ social_link.icon_name|default:'link' }}" class="size-[18px]"></i></a>
+                    {% empty %}
+                    <a href="https://linktr.ee/ca_ashwanitayal" target="_blank" rel="noopener" class="flex size-11 items-center justify-center rounded-full bg-[#0d2b5c] text-white transition hover:bg-[#d4af37]" aria-label="Linktree"><i data-lucide="link" class="size-[18px]"></i></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        background-color: #fafafa !important;
+        border-color: rgba(13, 43, 92, 0.15) !important;
+        border-radius: 8px !important;
+        color: #333 !important;
+        font-size: 14px !important;
+        min-height: 47px;
+        box-shadow: none !important;
+    }
+
+    .contact-form textarea {
+        min-height: 110px;
+    }
+</style>

@@ -1,0 +1,19 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | CA Ashwani Tayal{% endblock %}
+{% block body_class %}contact-page{% endblock %}
+
+{% block content %}
+<section class="relative overflow-hidden bg-[#011f42] bg-cover bg-center py-20 sm:py-24" style="background-image: url('{% static 'images/contact_navy_panel.png' %}');">
+    <div class="absolute inset-0 bg-[#011f42]/25"></div>
+    <div class="relative mx-auto max-w-5xl px-4 text-center text-white sm:px-6 lg:px-8">
+        <h1 class="font-serif text-[42px] font-semibold leading-tight sm:text-[54px]">Contact Us</h1>
+        <p class="mx-auto mt-5 max-w-[560px] text-[14px] leading-[1.6] text-white/90 sm:text-[16px]">
+            Have a question or need expert advice? Connect with us today and let us help you find the right financial solutions.
+        </p>
+    </div>
+</section>
+
+{% include "website/sections/consultation_section.html" %}
+{% endblock %}

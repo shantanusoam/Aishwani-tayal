@@ -54,32 +54,34 @@
 
 <!-- Explore CCTS -->
 <section id="explore-ccts" class="bg-white py-16 sm:py-20">
-    <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
+    <div class="mx-auto max-w-[1100px] px-3 sm:px-6 lg:px-0">
         <div class="text-center">
-            <h2 class="font-serif text-[34px] font-bold leading-tight text-[#0d2b5c] sm:text-[37.95px]">
+            <h2 class="font-serif text-[34px] font-bold leading-[1.22] text-[#0d2b5c] sm:text-[37.95px] sm:leading-[56.925px]">
                 Explore CCTS From Every Angle
             </h2>
-            <p class="mx-auto mt-3 max-w-[575px] text-[15px] leading-[1.6] text-[#666]">
-                Understand the policy, financial impact, and action steps through a structured 3-part roadmap.
+            <p class="mx-auto mt-3 max-w-[760px] text-[15px] font-normal leading-[22.5px] text-[#666]">
+                Curated Insights and practical frameworks for every stakeholder in India’s Carbon Market.
             </p>
         </div>
 
-        <div class="mt-12 grid gap-7 md:grid-cols-3">
-            <article class="rounded-[10px] border border-[rgba(13,43,92,0.12)] bg-white p-7 shadow-[0px_4px_16px_rgba(13,43,92,0.06)]">
-                <div class="font-serif text-[36px] font-bold text-[#d4af37]/35">01</div>
-                <h3 class="mt-3 font-serif text-[18px] font-semibold leading-tight text-[#0d2b5c]">What Is CCTS?</h3>
-                <p class="mt-3 text-[13px] leading-[1.65] text-[#666]">Learn the notified policy foundation, obligated entities, and how compliance cycles are triggered.</p>
+        <div class="mt-9 grid gap-[50px] md:grid-cols-3 md:gap-[50px]">
+            {% for card in ccts_service_cards %}
+            <article class="relative block min-h-[349px] overflow-hidden rounded-[8px] bg-white px-4 pb-8 pt-[146px] shadow-[0px_4px_2px_rgba(0,0,0,0.25)]">
+                <span class="absolute left-4 top-5 font-['Open_Sans'] text-[100px] font-semibold leading-[1.122] text-[rgba(212,175,55,0.34)]">{{ card.number }}</span>
+                <span class="relative inline-flex min-h-6 max-w-full items-center rounded-[4px] bg-[#0d2b5c] px-[10px] py-1 text-[11px] font-bold uppercase leading-[16.5px] tracking-[1.1px] text-[#d4af37]">
+                    {{ card.audience }}
+                </span>
+                <span class="relative mt-6 block font-serif text-[17.6px] font-semibold leading-[24.64px] text-[#0d2b5c]">
+                    {{ card.title }}
+                </span>
+                <span class="relative mt-6 block text-[13px] font-normal leading-[22.1px] text-[#666]">
+                    {{ card.summary }}
+                </span>
+                <span class="relative mt-[7px] block text-[13px] font-semibold leading-[19.5px] text-[#d4af37]">
+                    {{ card.cta_text }}
+                </span>
             </article>
-            <article class="rounded-[10px] border border-[rgba(13,43,92,0.12)] bg-white p-7 shadow-[0px_4px_16px_rgba(13,43,92,0.06)]">
-                <div class="font-serif text-[36px] font-bold text-[#d4af37]/35">02</div>
-                <h3 class="mt-3 font-serif text-[18px] font-semibold leading-tight text-[#0d2b5c]">Financial Impact</h3>
-                <p class="mt-3 text-[13px] leading-[1.65] text-[#666]">Understand valuation, accounting treatment, tax positioning, and disclosure responsibilities.</p>
-            </article>
-            <article class="rounded-[10px] border border-[rgba(13,43,92,0.12)] bg-white p-7 shadow-[0px_4px_16px_rgba(13,43,92,0.06)]">
-                <div class="font-serif text-[36px] font-bold text-[#d4af37]/35">03</div>
-                <h3 class="mt-3 font-serif text-[18px] font-semibold leading-tight text-[#0d2b5c]">What To Do Next?</h3>
-                <p class="mt-3 text-[13px] leading-[1.65] text-[#666]">Set policy tracking, controls, and risk documentation before enforcement windows create exposure.</p>
-            </article>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -120,32 +122,33 @@
         <div class="text-center">
             <div class="flex items-center justify-center gap-3">
                 <span class="h-[2px] w-8 bg-[#d4af37]"></span>
-                <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">What We Offer</span>
+                <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">{{ ccts_service_section.label }}</span>
                 <span class="h-[2px] w-8 bg-[#d4af37]"></span>
             </div>
-            <h2 class="mt-4 font-serif text-[38px] font-bold leading-tight text-[#0d2b5c] sm:text-[48px]">Expertise That Drives Real Results</h2>
-            <p class="mx-auto mt-4 max-w-[510px] text-[15px] leading-[1.65] text-[#666]">Comprehensive financial solutions designed to support every stage of your business journey.</p>
+            <h2 class="mt-4 font-serif text-[38px] font-bold leading-tight text-[#0d2b5c] sm:text-[48px]">{{ ccts_service_section.title }}</h2>
+            <p class="mx-auto mt-4 max-w-[510px] text-[15px] leading-[1.65] text-[#666]">{{ ccts_service_section.description }}</p>
         </div>
 
         <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {% for card in ccts_service_cards %}
             <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/service_tax.png' %}" alt="Tax Planning" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Tax Planning</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Strategic tax planning for compliant, efficient financial outcomes.</p></div>
+                <div class="block h-full">
+                    <span class="relative block h-[220px] overflow-hidden">
+                        {% if card.image %}
+                        <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover">
+                        {% else %}
+                        <img src="{% static 'images/ccts_story.png' %}" alt="{{ card.title }}" class="h-full w-full object-cover">
+                        {% endif %}
+                        <span class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></span>
+                    </span>
+                    <span class="block p-6">
+                        <span class="font-serif text-[17px] font-bold leading-tight text-[#0d2b5c]">{{ card.title }}</span>
+                        <span class="mt-2 block text-[13px] leading-[1.6] text-[#666]">{{ card.summary }}</span>
+                        <span class="mt-4 inline-flex rounded-[4px] bg-[#0d2b5c] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-[#d4af37]">{{ card.audience }}</span>
+                    </span>
+                </div>
             </article>
-            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/service_audit.png' %}" alt="Audit & Assurance" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Audit & Assurance</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Reliable audits and assurance for confidence in every decision.</p></div>
-            </article>
-            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/service_biz.png' %}" alt="Business Advisory" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Business Advisory</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Growth, structuring, and decision support for business owners.</p></div>
-            </article>
-            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/service_gst.png' %}" alt="GST Consultancy" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">GST Consultancy</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">GST advisory, credit review, and compliance readiness.</p></div>
-            </article>
-            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/service_compliance.png' %}" alt="Corporate Compliance" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Corporate Compliance</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">ROC, company law, and governance systems for enterprises.</p></div>
-            </article>
-            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
-                <img src="{% static 'images/service_strategy.png' %}" alt="Financial Strategy" class="h-[220px] w-full object-cover"><div class="p-6"><h3 class="font-serif text-[17px] font-bold text-[#0d2b5c]">Financial Strategy</h3><p class="mt-2 text-[13px] leading-[1.6] text-[#666]">Forecasting, CFO advisory, fundraising, and board-level clarity.</p></div>
-            </article>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -153,23 +156,18 @@
 {% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %}
 
 <!-- FAQs -->
-<section id="faqs" class="bg-[#f9f8f6] py-16 sm:py-20" x-data="{ open: 1 }">
+<section id="faqs" class="bg-[#f9f8f6] py-16 sm:py-20" x-data="{ open: 0 }">
     <div class="mx-auto max-w-[973px] px-6 sm:px-8">
         <h2 class="text-center font-serif text-[38px] font-bold text-[#0d2b5c] sm:text-[48px]">Frequently Asked Questions</h2>
         <div class="mt-10 space-y-5">
-            <template x-for="item in [
-                ['What is CCTS and why does it matter?', 'CCTS converts carbon reduction into a regulated financial and compliance matter for Indian businesses.'],
-                ['How does it affect accounting and taxation?', 'Credits, obligations, timing, valuation, and disclosures can all affect books and tax positions.'],
-                ['Who should read this guide?', 'Business owners, CFOs, finance teams, tax professionals, and policy stakeholders.'],
-                ['Is it relevant for SMEs?', 'Yes, direct and supply-chain obligations can affect contracts, reporting, and valuation.']
-            ]">
-                <div class="overflow-hidden rounded-[12px] bg-[#eef0f3]">
-                    <button @click="open = open === item[0] ? 0 : item[0]" class="flex w-full items-center justify-between px-6 py-5 text-left text-[14px] font-semibold text-[#0d2b5c]">
-                        <span x-text="item[0]"></span><span x-text="open === item[0] ? '−' : '+'"></span>
-                    </button>
-                    <div x-show="open === item[0]" class="px-6 pb-5 text-[13.5px] leading-[1.6] text-[#666]" x-text="item[1]"></div>
-                </div>
-            </template>
+            {% for item in ccts_faqs %}
+            <div class="overflow-hidden rounded-[12px] bg-[#eef0f3]">
+                <button @click="open = open === {{ item.id }} ? 0 : {{ item.id }}" class="flex w-full items-center justify-between px-6 py-5 text-left text-[14px] font-semibold text-[#0d2b5c]">
+                    <span>{{ item.question }}</span><span x-text="open === {{ item.id }} ? '−' : '+'"></span>
+                </button>
+                <div x-show="open === {{ item.id }}" class="px-6 pb-5 text-[13.5px] leading-[1.6] text-[#666]">{{ item.answer }}</div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

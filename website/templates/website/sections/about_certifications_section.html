@@ -1,6 +1,22 @@
 {% load static %}
 
 <section id="achievements" class="bg-white py-20 sm:py-24 lg:py-32 border-t border-[color:var(--line-soft)] border-b border-[color:var(--line-soft)] overflow-hidden">
+    <style>
+        @keyframes about-cert-scroll-left {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .about-cert-track {
+            width: max-content;
+            animation: about-cert-scroll-left 38s linear infinite;
+            will-change: transform;
+        }
+
+        .about-cert-track:hover {
+            animation-play-state: paused;
+        }
+    </style>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 space-y-4 scroll-anim-heading">
             <div class="flex items-center justify-center gap-3">
@@ -16,18 +32,15 @@
             </p>
         </div>
 
-        <div class="space-y-4 sm:space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 scroll-anim-awards-grid">
-                {% for award in about_award_cards_top %}
-                    <div class="scroll-anim-cert-card">
+        <div class="-mx-4 sm:-mx-6 lg:-mx-8 overflow-hidden">
+            <div class="about-cert-track flex gap-5 pr-5 scroll-anim-awards-grid">
+                {% for award in about_certifications %}
+                    <div class="w-[322px] shrink-0 scroll-anim-cert-card">
                         {% include "website/components/award_card.html" with award=award %}
                     </div>
                 {% endfor %}
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 xl:max-w-[1020px] xl:mx-auto scroll-anim-awards-grid">
-                {% for award in about_award_cards_bottom %}
-                    <div class="scroll-anim-cert-card">
+                {% for award in about_certifications %}
+                    <div class="w-[322px] shrink-0 scroll-anim-cert-card" aria-hidden="true">
                         {% include "website/components/award_card.html" with award=award %}
                     </div>
                 {% endfor %}

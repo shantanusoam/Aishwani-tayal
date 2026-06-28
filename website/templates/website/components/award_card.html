@@ -5,7 +5,11 @@
     <article class="relative overflow-hidden rounded-[16px] bg-white p-px shadow-[0px_4px_20px_0px_rgba(13,43,92,0.08)]">
         <div class="overflow-hidden rounded-t-[15px]">
             <div class="relative min-h-[220px] w-full overflow-hidden bg-slate-100">
-                <img src="{% static award.image %}" alt="{{ award.image_alt|default:award.title }}" class="absolute inset-0 size-full max-w-none object-cover">
+                {% if award.image_url %}
+                    <img src="{{ award.image_url }}" alt="{{ award.image_alt|default:award.title }}" class="absolute inset-0 size-full max-w-none object-cover">
+                {% else %}
+                    <img src="{% static award.image %}" alt="{{ award.image_alt|default:award.title }}" class="absolute inset-0 size-full max-w-none object-cover">
+                {% endif %}
                 {% comment %} <div class="absolute right-5 top-4 rounded-[4px] bg-[#d4af37] px-3 py-[5px]">
                     <p class="whitespace-nowrap text-[12px] font-extrabold uppercase tracking-[0.08em] text-[#0d2b5c]">
                         {{ award.year }}

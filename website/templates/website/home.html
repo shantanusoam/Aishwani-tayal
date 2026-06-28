@@ -7,45 +7,35 @@
 
 {% block content %}
 
-<!-- Hero Section (Slider) -->
-<section id="hero" class="relative h-[720px] max-h-[84vh] min-h-[540px] overflow-hidden" 
-         x-data="{ currentSlide: 0, slides: ['{% static "images/hero_bg.png" %}'], init() { setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides.length }, 5000) } }">
-    
-    <!-- Slides -->
-    <template x-for="(slide, index) in slides" :key="index">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
-             :style="`background-image: url('${slide}');`"
-             :class="currentSlide === index ? 'opacity-100' : 'opacity-0'"></div>
-    </template>
-
-    <div class="absolute left-0 top-0 h-full w-[811px] max-w-[78vw] rounded-br-[26px] backdrop-blur-[4px] bg-gradient-to-r from-[rgba(247,244,237,0.86)] to-[rgba(247,244,237,0)] z-[5]"></div>
+<!-- Hero Section -->
+<section id="hero" class="relative h-[720px] overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-[center_35%] bg-no-repeat" style="background-image: url('{% static "images/hero_bg.png" %}');"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[rgba(247,244,237,0.92)] via-[rgba(247,244,237,0.55)] to-transparent"></div>
+    <div class="absolute left-0 top-0 z-[3] h-[651px] w-[811px] max-w-[82vw] rounded-br-[26px] backdrop-blur-[4px] bg-gradient-to-r from-[rgba(247,244,237,0.86)] to-[rgba(247,244,237,0)]"></div>
+    <div class="absolute bottom-0 left-0 right-0 z-[4] h-[2px] bg-[#b88e50]"></div>
+    <div class="absolute -bottom-[238px] -right-[206px] z-[4] h-[420px] w-[620px] rounded-full border-2 border-[#b88e50] opacity-95"></div>
 
     <div class="relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
-        <div class="max-w-[710px] pt-[165px] sm:pt-[178px] lg:pt-[200px]">
-            <span class="inline-flex items-center gap-2 rounded-full border border-[var(--brand-navy)]/30 bg-[rgba(1,31,66,0.08)] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-wider text-[var(--brand-navy)]">
-                <i data-lucide="shield-check" class="h-4 w-4"></i>
-                Raid & Investigation Preparedness
-            </span>
-
-            <h1 class="mt-6 text-[48px] leading-[1.08] sm:text-[56px] lg:text-[64px] font-semibold text-[#011f42]" style="font-family: 'Playfair Display', serif;">
+        <div class="max-w-[710px] pt-[150px] sm:pt-[170px] lg:pt-[200px]">
+            <div class="rounded-[20px] bg-gradient-to-r from-[rgba(247,244,237,0.88)] via-[rgba(247,244,237,0.72)] to-[rgba(247,244,237,0.28)] p-6 sm:p-8 backdrop-blur-[8px] shadow-[0_12px_36px_rgba(1,31,66,0.14)]">
+            <h1 class="scale-up text-[44px] leading-[1.1] sm:text-[56px] lg:text-[64px] font-semibold text-[#011f42]" style="font-family: 'Playfair Display', serif;">
                 The Raid-Ready<br>Business.
             </h1>
 
-            <div class="mt-3 h-[2px] w-[112px] bg-[var(--brand-gold)]"></div>
+            <div class="scale-up mt-5 h-[2px] w-[112px] bg-[var(--brand-gold)]"></div>
 
-            <p class="mt-6 max-w-[494px] text-[24px] leading-[1.5] text-[#011f42] font-normal sm:text-[20px]">
+            <p class="scale-up mt-4 max-w-[494px] text-[18px] leading-[1.5] text-[#011f42] font-normal sm:text-[20px]">
                 Notice, Survey, Investigation, Raid- Nobody can control, but we can control preparedness.
             </p>
 
             <a href="#appointments"
-               class="mt-8 inline-flex h-[52px] w-full max-w-[319px] items-center justify-center gap-2 rounded-[4px] bg-[var(--brand-gold)] px-4 text-[18px] font-normal uppercase tracking-[0.02em] text-white hover:bg-[#a67e45] transition shadow-md">
+               class="scale-up mt-10 inline-flex h-[52px] w-full max-w-[319px] items-center justify-center gap-2 rounded-[4px] bg-[#b88e50] px-4 text-[18px] font-normal uppercase tracking-[0.02em] text-white hover:bg-[#a67e45] transition shadow-[0_6px_16px_rgba(0,0,0,0.2)]">
                 BOOK YOUR CONSULTATION
-                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                <i data-lucide="arrow-right-circle" class="h-[18px] w-[18px]"></i>
             </a>
+            </div>
         </div>
     </div>
-
-    <!-- Moved floating buttons to be globally fixed -->
 </section>
 
 <!-- Floating WhatsApp and Email -->
@@ -63,58 +53,31 @@
     </a>
 </div>
 
-<!-- Featured Frameworks and About Section (Figma node 46:92) -->
+<!-- Dynamic Services and About Section (Figma node 52:92) -->
 <section id="home-services" class="bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[62px] py-14 sm:py-16">
         <div class="grid gap-8 md:grid-cols-3 lg:gap-[45px]">
-            <a href="{% url 'website:services' %}#expertise"
+            {% for card in featured_service_cards %}
+            <a href="{{ card.cta_url }}"
                class="group relative aspect-[396/457] overflow-hidden rounded-lg border border-[#d4af37] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                <img src="{% static 'images/figma_xray_framework.png' %}" alt="X-RAY Framework" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
                 <div class="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#011f42] via-[#011f42]/80 to-transparent"></div>
                 <div class="absolute bottom-6 left-7 right-7 flex items-end justify-between">
                     <div class="border-l-2 border-[#d4af37] pl-4 text-white">
-                        <h2 class="font-serif text-[20px] font-semibold leading-tight">X-RAY Framework</h2>
-                        <p class="mt-1 text-[14px] font-light">Investigation & Diagnosis</p>
+                        <h2 class="font-serif text-[20px] font-semibold leading-tight">{{ card.title }}</h2>
+                        {% if card.subtitle %}
+                        <p class="mt-1 text-[14px] font-light">{{ card.subtitle }}</p>
+                        {% endif %}
                     </div>
                     <span class="flex size-11 items-center justify-center rounded-full bg-white text-[#b88e50] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] transition duration-300 group-hover:bg-[#d4af37] group-hover:text-white">
                         <i data-lucide="arrow-up-right" class="size-[18px]"></i>
                     </span>
                 </div>
             </a>
-
-            <a href="{% url 'website:services' %}#ccts-details"
-               class="group relative aspect-[396/457] overflow-hidden rounded-lg border border-[#d4af37] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                <img src="{% static 'images/figma_ccts_card.png' %}" alt="CCTS" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
-                <div class="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#011f42] via-[#011f42]/80 to-transparent"></div>
-                <div class="absolute bottom-6 left-7 right-7 flex items-end justify-between">
-                    <div class="border-l-2 border-[#d4af37] pl-4 text-white">
-                        <h2 class="font-serif text-[20px] font-semibold leading-tight">CCTS</h2>
-                        <p class="mt-1 text-[14px] font-light">Measure & Monetize</p>
-                    </div>
-                    <span class="flex size-11 items-center justify-center rounded-full bg-white text-[#b88e50] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] transition duration-300 group-hover:bg-[#d4af37] group-hover:text-white">
-                        <i data-lucide="arrow-up-right" class="size-[18px]"></i>
-                    </span>
-                </div>
-            </a>
-
-            <a href="{% url 'website:services' %}#expertise"
-               class="group relative aspect-[396/457] overflow-hidden rounded-lg border border-[#d4af37] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                <img src="{% static 'images/figma_virtual_cfo.png' %}" alt="Virtual CFO" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
-                <div class="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#011f42] via-[#011f42]/80 to-transparent"></div>
-                <div class="absolute bottom-6 left-7 right-7 flex items-end justify-between">
-                    <div class="border-l-2 border-[#d4af37] pl-4 text-white">
-                        <h2 class="font-serif text-[20px] font-semibold leading-tight">Virtual CFO</h2>
-                        <p class="mt-1 text-[14px] font-light">Review & Forecast</p>
-                    </div>
-                    <span class="flex size-11 items-center justify-center rounded-full bg-white text-[#b88e50] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] transition duration-300 group-hover:bg-[#d4af37] group-hover:text-white">
-                        <i data-lucide="arrow-up-right" class="size-[18px]"></i>
-                    </span>
-                </div>
-            </a>
+            {% endfor %}
         </div>
     </div>
-
-    <div id="about" class="bg-[#f8f6f1] py-16 sm:py-20">
+  <div id="about" class="bg-[#f8f6f1] py-16 sm:py-20">
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[74px]">
             <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
                 <a href="#appointments" class="group relative overflow-hidden rounded-[10px] bg-[#dfdfdf] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] lg:col-span-6 scroll-anim-about-left">
@@ -164,177 +127,58 @@
             </div>
         </div>
     </div>
-</section>
-
-<!-- Dynamic Services Auto-scroll (Figma annotation aligned) -->
-<section class="py-16 sm:py-20 bg-[var(--brand-cream)] border-y border-[color:var(--line-soft)] overflow-hidden" id="service-flow">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-        <div class="text-center max-w-3xl mx-auto space-y-3">
-            <span class="text-xs font-bold text-[var(--brand-gold)] uppercase tracking-widest">Dynamic Services</span>
-            <h2 class="text-3xl sm:text-4xl font-semibold text-[var(--brand-navy)] font-serif">Moving Capability Wall</h2>
-            <p class="text-[var(--brand-navy-soft)]">As services expand, this section keeps flowing. Top row moves left, bottom row moves right.</p>
-        </div>
-    </div>
-
-    <div class="space-y-5">
-        <div class="overflow-hidden">
-            <div class="services-marquee-track">
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Tax Planning</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Audit & Assurance</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Business Advisory</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">GST Consultancy</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Corporate Compliance</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Financial Strategy</p>
-                </a>
-
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Tax Planning</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Audit & Assurance</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Business Advisory</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">GST Consultancy</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Corporate Compliance</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[280px] bg-white border border-[rgba(1,31,66,0.14)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Service</p>
-                    <p class="text-[var(--brand-navy)] font-semibold mt-1">Financial Strategy</p>
-                </a>
-            </div>
-        </div>
-
-        <div class="overflow-hidden">
-            <div class="services-marquee-track reverse">
-                <a href="{% url 'website:services' %}#ccts-details" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Framework</p>
-                    <p class="font-semibold mt-1">CCTS - Measure & Monetize</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Framework</p>
-                    <p class="font-semibold mt-1">X-RAY - Investigation & Diagnosis</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Coverage</p>
-                    <p class="font-semibold mt-1">Carbon Credits, GST, Tax, Audit, Legal</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Outcomes</p>
-                    <p class="font-semibold mt-1">Risk Visibility, Recovery, Compliance Readiness</p>
-                </a>
-                <a href="{% url 'website:services' %}#ccts-details" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Framework</p>
-                    <p class="font-semibold mt-1">CCTS - Measure & Monetize</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Framework</p>
-                    <p class="font-semibold mt-1">X-RAY - Investigation & Diagnosis</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Coverage</p>
-                    <p class="font-semibold mt-1">Carbon Credits, GST, Tax, Audit, Legal</p>
-                </a>
-                <a href="{% url 'website:services' %}#all-services" class="min-w-[320px] bg-[var(--brand-navy)] text-white border border-[rgba(184,142,80,0.25)] rounded-xl px-5 py-4 shadow-sm">
-                    <p class="text-[11px] uppercase tracking-widest text-[var(--brand-gold)] font-semibold">Outcomes</p>
-                    <p class="font-semibold mt-1">Risk Visibility, Recovery, Compliance Readiness</p>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Core Pillars Section -->
-<section id="pillars" class="py-24 sm:py-32 bg-slate-50 border-t border-b border-slate-100 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Header -->
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 scroll-anim-heading">
-            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Our Strategic Frameworks</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-serif leading-none">Investigation & Diagnosis Pillars</h2>
-            <p class="text-base text-slate-600 font-light">With decades of defensive advisory experience, we've formalized two core tactical structures to shield corporate enterprise value.</p>
-        </div>
-
-        <!-- Cards Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            
-            <!-- Pillar Card 1: X-RAY -->
-            <div class="bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-indigo-200 hover:shadow-2xl transition duration-500 scroll-anim-pillar">
-                <div class="p-8 sm:p-10 space-y-6">
-                    <div class="flex justify-between items-center border-b border-slate-100 pb-6">
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Framework I</span>
-                            <h3 class="text-2xl sm:text-3xl font-bold font-serif text-slate-900">X-RAY Framework</h3>
-                        </div>
-                        <div class="text-white bg-slate-950 p-4 rounded-xl group-hover:bg-indigo-600 transition-colors duration-500">
-                            <i data-lucide="shield-check" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                    <div class="text-indigo-600 font-bold text-lg">Investigation & Diagnosis</div>
-                    <p class="text-sm text-slate-600 leading-relaxed font-light">
-                        The ultimate mock-audit framework. We stress-test and review corporate ledger books, transactional compliance, transfer pricing parameters, and physical-documentation workflows to formulate comprehensive defense tactics before notices are filed.
-                    </p>
-                    <ul class="space-y-2.5 text-xs text-slate-500 font-light">
-                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0"></i> 120+ notice trigger evaluation tests</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0"></i> Gap analysis on systemic compliance</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0"></i> Pre-notice legal review & defense strategies</li>
-                    </ul>
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[62px] py-16 sm:py-20">
+        <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-12">
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                    <span class="font-['Inter'] text-[12px] font-semibold uppercase leading-[18px] tracking-[1.8px] text-[#d4af37]">{{ home_service_section.label }}</span>
                 </div>
+                <h2 class="mt-4 max-w-[480px] font-serif text-[38px] font-bold leading-[1.1] text-[#0d2b5c] sm:text-[48px]">
+                    {{ home_service_section.title }}
+                </h2>
             </div>
-
-            <!-- Pillar Card 2: CCTS -->
-            <div class="bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-indigo-200 hover:shadow-2xl transition duration-500 scroll-anim-pillar">
-                <div class="p-8 sm:p-10 space-y-6">
-                    <div class="flex justify-between items-center border-b border-slate-100 pb-6">
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Framework II</span>
-                            <h3 class="text-2xl sm:text-3xl font-bold font-serif text-slate-900">CCTS Framework</h3>
-                        </div>
-                        <div class="text-white bg-slate-950 p-4 rounded-xl group-hover:bg-indigo-600 transition-colors duration-500">
-                            <i data-lucide="zap" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                    <div class="text-indigo-600 font-bold text-lg">Measure & Monetize</div>
-                    <p class="text-sm text-slate-600 leading-relaxed font-light">
-                        A proprietary structured method designed to review accounting systems to recover locked working capital and optimize annual direct/indirect tax liabilities under statutory guidelines.
-                    </p>
-                    <ul class="space-y-2.5 text-xs text-slate-500 font-light">
-                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0"></i> Optimization of structural tax write-offs</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0"></i> Re-evaluation of working capital allocations</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0"></i> Continuous optimization monitors and dashboards</li>
-                    </ul>
-                </div>
+            <div class="lg:max-w-[360px] lg:pt-1 lg:text-left">
+                <p class="max-w-[430px] text-[15px] leading-[1.7] text-[#6b7280]">
+                    {{ home_service_section.description }}
+                </p>
+                <a href="{{ home_service_section.cta_url }}" class="mt-6 inline-flex h-[43px] items-center justify-center gap-2 rounded-full bg-[#0d2b5c] px-7 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-[#12386f]">
+                    {{ home_service_section.cta_text }}
+                    <i data-lucide="arrow-right" class="size-[14px]"></i>
+                </a>
             </div>
+        </div>
 
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {% for card in home_service_cards %}
+            <a href="{% url 'website:service_detail' card.slug %}" class="group flex min-h-[355px] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] ring-1 ring-[rgba(1,31,66,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0px_18px_38px_rgba(13,43,92,0.14)]">
+                <span class="relative h-[220px] w-full overflow-hidden">
+                    <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                    <span class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></span>
+                </span>
+                <span class="flex flex-1 flex-col px-6 pb-6 pt-5">
+                    <span class="font-serif text-[18px] font-bold leading-[1.3] text-[#0d2b5c]">{{ card.title }}</span>
+                    <span class="mt-3 text-[13px] leading-[1.65] text-[#666]">{{ card.summary }}</span>
+                    <span class="mt-auto flex flex-col gap-4 pt-5 sm:flex-row sm:items-end sm:justify-between">
+                        <span class="flex flex-wrap gap-2">
+                            <span class="rounded-[4px] bg-[rgba(13,43,92,0.07)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#0d2b5c]">{{ card.badge_one }}</span>
+                            <span class="rounded-[4px] bg-[rgba(212,175,55,0.12)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#b88e50]">{{ card.badge_two }}</span>
+                        </span>
+                        <span class="flex size-11 items-center justify-center self-end rounded-full bg-white text-[#b88e50] shadow-[0px_4px_8px_rgba(13,43,92,0.18)] transition duration-300 group-hover:bg-[#d4af37] group-hover:text-white">
+                            <i data-lucide="arrow-up-right" class="size-[18px]"></i>
+                        </span>
+                    </span>
+                </span>
+            </a>
+            {% endfor %}
         </div>
     </div>
+
+  
 </section>
+
+
+
 
 <!-- Stats Section -->
 <!-- Stats Section (Figma node 1:240) -->
@@ -399,12 +243,37 @@
 
     </div>
 </section>
-
-<!-- Testimonials Section -->
-<section id="testimonials" class="relative overflow-hidden bg-[#303d69]">
-    <img src="{% static 'images/testimonials_mosaic.png' %}"
+ <img src="{% static 'images/testimonials_mosaic.png' %}"
          alt="CA Ashwani Tayal client testimonials"
          class="block w-full h-auto object-cover">
+<!-- Testimonials Section -->
+<section id="testimonials" class="relative overflow-hidden bg-[#edf1ff] py-[37px] sm:py-12">
+    <div class="mx-auto max-w-[1368px] px-6 sm:px-8 lg:px-[50px]">
+        <div class="text-center">
+            <h2 class="font-serif text-[32px] font-semibold leading-[1.122] text-[#011f42]">Testimonials</h2>
+            <div class="mx-auto mt-2 h-[2px] w-[66px] bg-[#d4af37]"></div>
+        </div>
+
+        <div class="mt-[38px] grid grid-flow-col auto-cols-[207px] gap-[19px] overflow-x-auto pb-2 sm:justify-start xl:grid-flow-row xl:grid-cols-6 xl:overflow-visible">
+            {% for video in testimonial_videos %}
+                {% if video.youtube_url %}
+                    <a href="{{ video.youtube_url }}" target="_blank" rel="noopener" class="group relative h-[342px] overflow-hidden rounded-[8px] bg-[#d4d4d4]" aria-label="Watch {{ video.title }}">
+                {% else %}
+                    <div class="group relative h-[342px] overflow-hidden rounded-[8px] bg-[#d4d4d4]" aria-label="{{ video.title }}">
+                {% endif %}
+                    <img src="{{ video.thumbnail.url }}" alt="{{ video.thumbnail_alt|default:video.title }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    <span class="absolute inset-0 bg-black/0 transition group-hover:bg-black/10"></span>
+                    <span class="absolute left-1/2 top-1/2 flex size-[35px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 text-black shadow-[0_2px_8px_rgba(0,0,0,0.22)] transition duration-300 group-hover:scale-110 group-hover:bg-white">
+                        <i data-lucide="play" class="ml-0.5 size-[18px] fill-current"></i>
+                    </span>
+                {% if video.youtube_url %}
+                    </a>
+                {% else %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 </section>
 
 <!-- Book Showcase Section (Figma node 1:809) -->
@@ -452,7 +321,7 @@
                     </ul>
                 </div>
 
-                <a href="{% url 'website:services' %}#ccts-details"
+                <a href="{% url 'website:ccts' %}"
                    class="mt-9 inline-flex h-[49px] w-[173px] items-center justify-center rounded-[4px] bg-[#d4af37] text-[14px] font-bold uppercase tracking-[0.08em] text-[#0d2b5c] transition duration-300 hover:bg-[#bfa030] hover:scale-[1.02] active:scale-[0.98]">
                     Know More
                 </a>
@@ -466,14 +335,7 @@
 {% include "website/sections/awards_section.html" with award_cards=award_cards %}
 
 <!-- Moments & Milestones Gallery Section -->
-<section id="gallery" class="py-24 sm:py-32 bg-white relative" x-data="{ openImg: null, zoomTitle: '', listImg: [
-    { title: 'Workshop — Mumbai 2024', file: 'workshop_mumbai.png', isTall: true },
-    { title: 'Keynote Address', file: 'keynote.png', isTall: false },
-    { title: 'Client Advisory Session', file: 'advisory.png', isTall: false },
-    { title: 'Award Ceremony 2024', file: 'award_ceremony.png', isTall: true },
-    { title: 'Team Meeting', file: 'team_meeting.png', isTall: false },
-    { title: 'Professional Portrait', file: 'portrait.png', isTall: true }
-]}">
+<section id="gallery" class="py-24 sm:py-32 bg-white relative" x-data="{ openImg: null, zoomTitle: '', listImg: [{% for item in moments_milestones %}{ title: '{{ item.title|escapejs }}', url: '{{ item.image.url }}', isTall: {% if item.is_tall %}true{% else %}false{% endif %} }{% if not forloop.last %}, {% endif %}{% endfor %}] }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Header -->
@@ -486,9 +348,9 @@
         <!-- Grid layout container -->
         <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 scroll-anim-gallery">
             <template x-for="(img, idx) in listImg" :key="idx">
-                <div @click="openImg = '/static/images/' + img.file; zoomTitle = img.title" 
+                <div @click="openImg = img.url; zoomTitle = img.title" 
                      class="break-inside-avoid relative rounded-2xl overflow-hidden cursor-pointer group shadow-md border border-slate-100 hover:shadow-xl hover:border-indigo-300 transition duration-500 inline-block w-full">
-                    <img :src="'/static/images/' + img.file" :alt="img.title" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-103">
+                    <img :src="img.url" :alt="img.title" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-103">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between">
                         <span class="text-sm font-bold font-serif" x-text="img.title"></span>
@@ -523,214 +385,7 @@
     </div>
 </section>
 
-<!-- Consultation and Map Panel Section -->
-<section id="appointments" class="py-24 sm:py-32 bg-slate-950 text-white relative">
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4.5rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_40%_50%,#000_80%,transparent_100%)] opacity-20"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Header text -->
-        <div class="text-center max-w-xl mx-auto mb-20 space-y-4">
-            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Get In Touch</span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-white font-serif leading-tight">Book Your Consultation</h2>
-            <p class="text-slate-300 font-light text-base">Schedule a private session with CA Ashwani Tayal's core team online or at our head offices in Prestige Tower.</p>
-            <div class="h-0.5 w-16 bg-gradient-to-r from-transparent via-indigo-500 to-transparent mx-auto rounded"></div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            
-            <!-- Ajax Alpine contact form container (Left) -->
-            <div class="lg:col-span-7 bg-slate-900 border border-slate-800 p-8 sm:p-10 rounded-3xl shadow-xl scroll-anim-form" 
-                 x-data="{ 
-                    formData: {
-                        full_name: '',
-                        email: '',
-                        phone: '',
-                        service: 'X-RAY',
-                        company: '',
-                        message: ''
-                    },
-                    submitting: false,
-                    successMsg: '',
-                    errors: {},
-                    submitForm() {
-                        this.submitting = true;
-                        this.successMsg = '';
-                        this.errors = {};
-
-                        // Create form post body
-                        let urlEncoded = new URLSearchParams();
-                        urlEncoded.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-                        Object.keys(this.formData).forEach(key => urlEncoded.append(key, this.formData[key]));
-
-                        fetch('{% url "website:book_consultation" %}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'X-Requested-With': 'XMLHttpRequest'
-                            },
-                            body: urlEncoded
-                        })
-                        .then(response => response.json().then(data => ({ status: response.status, body: data })))
-                        .then(res => {
-                            this.submitting = false;
-                            if (res.status === 200 && res.body.success) {
-                                this.successMsg = res.body.message;
-                                this.formData = { full_name: '', email: '', phone: '', service: 'X-RAY', company: '', message: '' };
-                                // Trigger check animations
-                                gsap.fromTo('#success-alert', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out' });
-                            } else {
-                                this.errors = res.body.errors || {};
-                            }
-                        })
-                        .catch(err => {
-                            this.submitting = false;
-                            this.errors = { __all__: 'A network connectivity error occurred. Please try again.' };
-                        });
-                    }
-                 }">
-                
-                <!-- Success State Toast Alert -->
-                <div id="success-alert" x-show="successMsg !== ''" class="mb-8 p-6 bg-indigo-900/40 border border-indigo-500/30 rounded-2xl flex items-start gap-4" style="display: none">
-                    <div class="bg-indigo-600 text-white rounded-xl p-3 flex-shrink-0">
-                        <i data-lucide="check-circle-2" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg text-white">Booking Confirmed!</h4>
-                        <p class="text-sm text-slate-300 leading-relaxed mt-1" x-text="successMsg"></p>
-                    </div>
-                </div>
-
-                <!-- Form Fields -->
-                <form @submit.prevent="submitForm()" class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Full Name -->
-                        <div class="space-y-2.5">
-                            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Full Name</label>
-                            {{ form.full_name }}
-                            <p class="text-xs text-rose-500 mt-1" x-show="errors.full_name" x-text="errors.full_name" style="display: none"></p>
-                        </div>
-                        <!-- Email Address -->
-                        <div class="space-y-2.5">
-                            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Email Address</label>
-                            {{ form.email }}
-                            <p class="text-xs text-rose-500 mt-1" x-show="errors.email" x-text="errors.email" style="display: none"></p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Phone Number -->
-                        <div class="space-y-2.5">
-                            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Phone Number</label>
-                            {{ form.phone }}
-                            <p class="text-xs text-rose-500 mt-1" x-show="errors.phone" x-text="errors.phone" style="display: none"></p>
-                        </div>
-                        <!-- Service Dropdown -->
-                        <div class="space-y-2.5">
-                            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Service Required</label>
-                            {{ form.service }}
-                            <p class="text-xs text-rose-500 mt-1" x-show="errors.service" x-text="errors.service" style="display: none"></p>
-                        </div>
-                    </div>
-
-                    <!-- Company / Org -->
-                    <div class="space-y-2.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Company/ Organisation</label>
-                        {{ form.company }}
-                        <p class="text-xs text-rose-500 mt-1" x-show="errors.company" x-text="errors.company" style="display: none"></p>
-                    </div>
-
-                    <!-- Message text area -->
-                    <div class="space-y-2.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Message</label>
-                        {{ form.message }}
-                        <p class="text-xs text-rose-500 mt-1" x-show="errors.message" x-text="errors.message" style="display: none"></p>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" 
-                            :disabled="submitting"
-                            class="w-full flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-wider rounded-xl text-white bg-indigo-600 hover:bg-indigo-500 transition-all duration-300 disabled:opacity-50 cursor-pointer active:scale-98">
-                        <span x-show="!submitting">Book consultation</span>
-                        <span x-show="submitting" style="display: none">Securing appointment slot...</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4" x-show="!submitting"></i>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Reach Us & Maps Column (Right) -->
-            <div class="lg:col-span-5 space-y-10 scroll-anim-contact">
-                <div class="bg-slate-900/60 border border-slate-800 p-8 rounded-3xl shadow-xl space-y-6">
-                    <h3 class="text-2xl font-bold font-serif">Reach Us</h3>
-                    <!-- Contact rows -->
-                    <div class="space-y-5 text-sm text-slate-400">
-                        <div class="flex items-start gap-4">
-                            <div class="text-indigo-400 bg-indigo-500/10 p-2.5 rounded-lg mt-0.5">
-                                <i data-lucide="map-pin" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold text-white text-xs uppercase tracking-wider">Office Details</div>
-                                <p class="text-slate-300 mt-1 font-light leading-relaxed">302, Prestige Tower, MG Road, New Delhi — 110001</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="text-indigo-400 bg-indigo-500/10 p-2.5 rounded-lg mt-0.5">
-                                <i data-lucide="phone" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold text-white text-xs uppercase tracking-wider">Call Inquiries</div>
-                                <p class="text-slate-300 mt-1 font-semibold">+91 11 4567 8900</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="text-indigo-400 bg-indigo-500/10 p-2.5 rounded-lg mt-0.5">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold text-white text-xs uppercase tracking-wider">Secure Email</div>
-                                <p class="text-slate-300 mt-1 font-semibold text-indigo-400 hover:text-white transition">
-                                    <a href="mailto:info@ashwanitayal.com">info@ashwanitayal.com</a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="text-indigo-400 bg-indigo-500/10 p-2.5 rounded-lg mt-0.5">
-                                <i data-lucide="clock" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold text-white text-xs uppercase tracking-wider">Active Office timings</div>
-                                <p class="text-slate-300 mt-1 font-light">Mon–Fri: 9:30 AM – 6:30 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Google Maps Simulated Container -->
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl h-64 relative overflow-hidden group shadow-xl">
-                    <div class="absolute inset-0 bg-slate-950 opacity-40 group-hover:opacity-20 transition duration-300"></div>
-                    <!-- Minimal grid background that looks like map lines -->
-                    <div class="absolute inset-0 bg-[linear-gradient(to_right,#334155_2px,transparent_2px),linear-gradient(to_bottom,#334155_2px,transparent_2px)] bg-[size:2rem_2rem] opacity-25"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6 space-y-4">
-                        <div class="bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 w-12 h-12 rounded-full flex items-center justify-center animate-bounce shadow-lg">
-                            <i data-lucide="map-pin" class="w-5 h-5 fill-indigo-400"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs uppercase font-extrabold tracking-widest text-indigo-400">Prestige Tower Delhi</span>
-                            <div class="text-sm text-slate-300 mt-1">Google Maps Interactive Preview</div>
-                        </div>
-                        <a href="https://maps.google.com" target="_blank" class="px-5 py-2 bg-slate-800 text-xs font-bold uppercase tracking-wider rounded-lg border border-slate-700 hover:bg-indigo-600 hover:text-white transition duration-300">
-                            Navigate Directly
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+{% include "website/sections/consultation_section.html" %}
 
 {% endblock %}
 

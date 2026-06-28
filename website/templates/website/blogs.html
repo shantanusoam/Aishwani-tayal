@@ -59,6 +59,11 @@
                     class="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border transition-all duration-300">
                 Business Advisory
             </button>
+            <button @click="activeTab = 'CCTS'"
+                    :class="activeTab === 'CCTS' ? 'bg-[var(--brand-navy)] text-white border-[var(--brand-navy)] shadow-md' : 'bg-white text-[var(--brand-navy)] border-slate-200 hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'"
+                    class="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase border transition-all duration-300">
+                CCTS
+            </button>
         </div>
 
         <!-- Articles Grid -->
@@ -92,6 +97,8 @@
                                     GST
                                 {% elif insight.category == 'BIZ' %}
                                     Business Advisory
+                                {% elif insight.category == 'CCTS' %}
+                                    CCTS
                                 {% else %}
                                     {{ insight.get_category_display }}
                                 {% endif %}

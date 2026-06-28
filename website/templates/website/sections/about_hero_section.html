@@ -1,22 +1,20 @@
 {% load static %}
 
-<section id="about-hero" class="bg-white border-b border-[color:var(--line-soft)] overflow-hidden">
+<section id="about-hero" class="bg-white border-b border-[color:var(--line-soft)]">
     <div class="mx-auto w-full">
-        <div class="grid lg:grid-cols-[1.02fr_1.08fr_2fr]">
-            <div class="scroll-anim-about-image relative min-h-[340px] sm:min-h-[420px] lg:min-h-[720px] bg-[#0d1624]">
+        <div class="grid lg:grid-cols-[1.02fr_1.08fr_2fr] overflow-visible">
+            <div class="scroll-anim-about-image relative z-10 min-h-[340px] sm:min-h-[420px] lg:min-h-[720px] bg-[#0d1624]">
                 {% with hero_image='images/'|add:about_hero_section.image_filename %}
-                    <img src="{% static hero_image %}" alt="{{ about_hero_section.image_alt }}" class="absolute z-10 inset-0 h-full w-full object-cover object-[50%_22%] sm:object-[48%_38%] xl:object-[0%_45%]">
+                    <img src="{% static hero_image %}" alt="{{ about_hero_section.image_alt }}" class="absolute z-10 inset-0 h-full w-[115%] object-cover object-[50%_22%] sm:object-[48%_38%] xl:object-[0%_45%]">
                 {% endwith %}
-                <div class="absolute inset-0 bg-gradient-to-r from-[rgba(7,12,20,0.06)] via-transparent to-[rgba(7,12,20,0.3)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-[rgba(7,12,20,0.06)] via-transparent to-[rgba(7,12,20,0.15)]"></div>
             </div>
 
             <div class="scroll-anim-about-copy min-h-[340px] sm:min-h-[420px] lg:min-h-[720px] border-l border-r border-[color:var(--line-soft)] bg-[#f7f8fa] px-5 py-10 sm:px-10 lg:px-12 xl:px-16 flex items-center">
                 <div class="max-w-[440px] w-full">
-                    <p class="text-[12px] font-semibold uppercase tracking-[0.32em] text-[var(--brand-gold)]">
-                        {{ about_hero_section.pretitle }}
-                    </p>
+                    <div class="h-[3px] w-10 sm:w-12 bg-[var(--brand-gold)]"></div>
 
-                    <h1 class="mt-4 text-[36px] leading-[0.98] sm:text-[54px] xl:text-[64px] font-semibold text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
+                    <h1 class="mt-6 text-[36px] leading-[1.05] sm:text-[54px] xl:text-[64px] font-semibold text-[#0d2b5c]" style="font-family: 'Playfair Display', serif;">
                         <span class="block">{{ about_hero_section.title_line_one }}</span>
                         <span class="block">{{ about_hero_section.title_line_two }}</span>
                         <span class="block text-[var(--brand-gold)]">{{ about_hero_section.title_highlight }}</span>
@@ -43,41 +41,37 @@
                     {% else %}
                         <article class="scroll-anim-about-panel relative flex h-full min-h-[200px] sm:min-h-[230px] flex-col justify-between bg-[#efd584] px-5 py-6 text-[#0d2b5c]">
                     {% endif %}
+                        <!-- Number at top -->
                         <div>
-                            <div class="flex items-start justify-between gap-3">
-                                <p class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.22em] opacity-90">{{ panel.number }}</p>
-                                <div class="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-current/20 bg-white/10">
-                                    <i data-lucide="{{ panel.icon_name }}" class="h-4 w-4 sm:h-5 sm:w-5"></i>
+                            <p class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.28em] opacity-80">{{ panel.number }}</p>
+
+                            <div class="mt-3 h-px w-full bg-current/25"></div>
+
+                            <!-- Centered icon in gold-bordered circle -->
+                            <div class="mt-5 sm:mt-6 flex justify-center">
+                                <div class="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border-2 border-[var(--brand-gold)] bg-white/10">
+                                    <i data-lucide="{{ panel.icon_name }}" class="h-6 w-6 sm:h-7 sm:w-7"></i>
                                 </div>
                             </div>
 
-                            <div class="mt-4 sm:mt-5 h-px w-10 sm:w-12 bg-current/60"></div>
+                            <div class="mt-5 sm:mt-6 h-px w-full bg-current/25"></div>
 
-                            <h2 class="mt-4 sm:mt-5 max-w-[170px] text-[18px] sm:text-[21px] font-semibold leading-[1.2]" style="font-family: 'Playfair Display', serif;">
+                            <h2 class="mt-4 sm:mt-5 text-[16px] sm:text-[18px] font-bold leading-[1.25]" style="font-family: 'Playfair Display', serif;">
                                 {{ panel.title }}
                             </h2>
 
                             {% if panel.subtitle %}
-                                <p class="mt-2.5 sm:mt-3 max-w-[170px] text-[12px] sm:text-[13px] leading-[1.6] opacity-85">
+                                <p class="mt-2 text-[12px] sm:text-[13px] leading-[1.6] opacity-80">
                                     {{ panel.subtitle }}
                                 </p>
                             {% endif %}
                         </div>
 
-                        <div class="flex items-center justify-between">
-                            <div class="grid grid-cols-4 gap-1 opacity-30">
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-current sm:h-1.5 sm:w-1.5"></span>
-                            </div>
-                            <div class="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-white/12 flex items-center justify-center">
-                                <span class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-current"></span>
-                            </div>
+                        <!-- Dot grid at bottom (5×2 = 10 dots) -->
+                        <div class="grid grid-cols-5 gap-[5px] opacity-25 mt-4">
+                            {% for _ in "1234567890" %}
+                                <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+                            {% endfor %}
                         </div>
                     </article>
                 {% endfor %}

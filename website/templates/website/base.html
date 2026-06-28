@@ -87,32 +87,15 @@
                 --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
             }
 
-            @keyframes marquee-left {
-                from { transform: translateX(0); }
-                to { transform: translateX(-50%); }
-            }
-            @keyframes marquee-right {
-                from { transform: translateX(-50%); }
-                to { transform: translateX(0); }
-            }
-            .services-marquee-track {
-                width: max-content;
-                display: flex;
-                gap: 1.25rem;
-                animation: marquee-left 22s linear infinite;
-                will-change: transform;
-            }
-            .services-marquee-track.reverse {
-                animation-name: marquee-right;
-            }
         </style>
         {% block extra_head %}{% endblock %}
     </head>
     <body class="flex flex-col min-h-screen antialiased bg-white overflow-x-hidden selection:bg-[var(--brand-gold)] selection:text-white {% block body_class %}{% endblock %}">
         <!-- Navbar -->
         <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300" 
-                x-data="{ mobileMenuOpen: false, scrolled: false }" 
-                @scroll.window="scrolled = (window.pageYOffset > 20)"
+                x-data="{ mobileMenuOpen: false, isHomePage: {% if request.resolver_match.url_name == 'home' %}true{% else %}false{% endif %}, scrolled: {% if request.resolver_match.url_name == 'home' %}false{% else %}true{% endif %} }"
+                x-init="scrolled = isHomePage ? (window.pageYOffset > 20) : true"
+                @scroll.window="scrolled = isHomePage ? (window.pageYOffset > 20) : true"
                 :class="scrolled ? 'bg-white shadow-md' : 'bg-transparent'">
             <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] relative">
                 <div class="flex justify-end lg:justify-between h-[83px] items-center">
@@ -135,9 +118,9 @@
                         <a href="{% url 'website:about' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">About</a>
                         <a href="{% url 'website:services' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Services</a>
                         <a href="{% url 'website:home' %}#gallery" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
-                        <a href="{% url 'website:services' %}#ccts-details" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
+                        <a href="{% url 'website:ccts' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
                         <a href="{% url 'website:blogs' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
-                        <a href="{% url 'website:about' %}#appointments" class="ml-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 border border-[var(--brand-navy)]">
+                        <a href="{% url 'website:contact' %}" class="ml-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 border border-[var(--brand-navy)]">
                             Connect
                             <i data-lucide="arrow-right" class="ml-1.5 w-3.5 h-3.5"></i>
                         </a>
@@ -172,11 +155,11 @@
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Services</a>
                           <a href="{% url 'website:home' %}#gallery" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Workshops</a>
-                          <a href="{% url 'website:services' %}#ccts-details" @click="mobileMenuOpen = false"
+                          <a href="{% url 'website:ccts' %}" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">CCTS</a>
                           <a href="{% url 'website:blogs' %}" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Blogs</a>
-                    <a href="#appointments" @click="mobileMenuOpen = false"
+                    <a href="{% url 'website:contact' %}" @click="mobileMenuOpen = false"
                               class="block text-center px-4 py-3 rounded-lg text-base font-bold text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition mt-4">Connect</a>
                 </div>
             </div>
@@ -186,130 +169,105 @@
             {% block content %}{% endblock %}
         </main>
         <!-- Footer -->
-        <!-- CTA Banner (full-width dark navy, rounded, above white footer) -->
-        <div class="bg-white relative z-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 lg:p-16 text-center text-white bg-[var(--brand-navy)]">
-                    <!-- Subtle diagonal lines overlay -->
-                    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
-                   <div class="relative z-10 space-y-6">
-                        <h2 class="text-3xl sm:text-4xl lg:text-[38px] font-bold font-serif tracking-tight text-white leading-tight">
-                            Ready To Build A Raid-Ready Business?
-                        </h2>
-                        <p class="text-slate-200 max-w-2xl mx-auto leading-relaxed font-normal text-sm sm:text-base">
-                            Expert guidance across compliance, carbon credits, taxation, and strategic financial leadership.
-                        </p>
-                        <div class="pt-4 flex justify-center">
-                            <a href="#appointments" class="inline-flex items-center justify-center px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-xl text-[#0d2b5c] bg-[#d4af37] hover:bg-[#bfa030] hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl">
-                                BOOK YOUR CONSULTATION
-                                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 text-[#0d2b5c]"></i>
-                            </a>
-                        </div>
-                    </div>
+        <div class="relative z-10 bg-white">
+            <div class="relative mx-auto h-[210px] max-w-[1185px] overflow-hidden rounded-[24px] bg-[#011f42] bg-cover bg-center px-6 text-center text-white sm:h-[260px] lg:h-[295px]" style="background-image: linear-gradient(180deg, rgba(1,31,66,0.08), rgba(1,31,66,0.18)), url('{% static 'images/raid_ready_banner_bg.png' %}');">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(76,128,213,0.28),transparent_33%),linear-gradient(110deg,rgba(1,31,66,0),rgba(0,12,34,0.32)_68%)]"></div>
+                <div class="relative z-10 mx-auto flex h-full max-w-[870px] flex-col items-center justify-start pt-9 sm:pt-11 lg:pt-[34px]">
+                    <h2 class="font-serif text-[24px] font-semibold leading-[1.122] text-white sm:text-[29px] lg:text-[32px]">
+                        Ready To Build A Raid-Ready Business ?
+                    </h2>
+                    <p class="mt-4 max-w-[546px] text-center text-[14px] font-normal leading-[1.35] text-white sm:text-[16px]">
+                        Expert guidance across compliance, carbon credits, taxation, and strategic financial leadership.
+                    </p>
+                    <a href="{% url 'website:contact' %}" class="mt-7 inline-flex h-[47px] w-full max-w-[319px] items-center justify-center gap-2 rounded-[4px] bg-[#b88e50] px-4 text-[15px] font-normal uppercase leading-[1.5] text-white transition hover:bg-[#a67e45] sm:mt-[28px] sm:text-[18px]">
+                        BOOK YOUR CONSULTATION
+                        <i data-lucide="arrow-right" class="h-[25px] w-[25px]"></i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Informational Footer (white background to match Figma) -->
-            <footer class="text-[var(--brand-navy)] pt-16 pb-8 relative overflow-hidden">
-                <!-- Giant Watermark Logo -->
-                <img src="{% static 'images/logo.png' %}" alt="Watermark Logo" class="absolute top-0 right-[10%] h-[420px] w-auto opacity-[0.04] select-none pointer-events-none">
+            <footer class="relative overflow-hidden bg-white pt-[52px] pb-8 text-black sm:pt-[70px]">
+                <div class="pointer-events-none absolute -left-[138px] -top-[71px] h-[856px] w-[839px] bg-[#4c80d5] opacity-10" style="-webkit-mask-image: url('{% static 'images/logo.png' %}'); mask-image: url('{% static 'images/logo.png' %}'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 1350px 1198px; mask-size: 1350px 1198px; -webkit-mask-position: -320px -239px; mask-position: -320px -239px;"></div>
 
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-12 border-b border-[var(--line-soft)]">
-                        
-                        <!-- Column 1: Info & Brand (Spans 4) -->
-                        <div class="lg:col-span-4 space-y-5">
-                            <div>
-                                <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-16 w-auto object-contain">
+                <div class="relative z-10 mx-auto max-w-[1186px] px-6 sm:px-8 lg:px-0">
+                    <div class="grid gap-10 pb-[56px] md:grid-cols-2 lg:grid-cols-[317px_227px_227px_272px] lg:gap-12">
+                        <div class="lg:w-[317px]">
+                            <div class="pt-5">
+                                <img src="{% static 'images/logo.png' %}" alt="Ashwani Tayal Logo" class="h-auto w-[86px] object-contain">
+                                <p class="max-w-[260px] text-[14px] font-normal leading-[25.2px] text-black">
+                                    Trusted by over 1,000 businesses and professionals for 25+ years of strategic financial advisory, compliance excellence, and thought leadership.
+                                </p>
                             </div>
-                            <p class="text-sm text-[var(--brand-navy)]/60 max-w-xs leading-relaxed">
-                                Trusted by over 1,000 businesses and professionals for 25+ years of strategic financial advisory, compliance excellence, and thought leadership.
-                            </p>
-                            <!-- Social Icons -->
-                            <div class="flex items-center gap-3 pt-1">
-                                <a href="https://linkedin.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
-                                    <i data-lucide="linkedin" class="w-4 h-4"></i>
+                            <div class="mt-6 flex items-center gap-[10px]">
+                                {% for social_link in social_links %}
+                                <a href="{{ social_link.url }}" target="_blank" rel="noopener" class="flex h-[38px] w-[38px] items-center justify-center rounded-[19px] text-black transition hover:text-[#b88e50]" aria-label="{{ social_link.label }}">
+                                    <i data-lucide="{{ social_link.icon_name|default:'link' }}" class="h-4 w-4"></i>
                                 </a>
-                                <a href="https://twitter.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
-                                    <i data-lucide="twitter" class="w-4 h-4"></i>
+                                {% empty %}
+                                <a href="https://linktr.ee/ca_ashwanitayal" target="_blank" rel="noopener" class="flex h-[38px] w-[38px] items-center justify-center rounded-[19px] text-black transition hover:text-[#b88e50]" aria-label="Linktree">
+                                    <i data-lucide="link" class="h-4 w-4"></i>
                                 </a>
-                                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
-                                    <i data-lucide="instagram" class="w-4 h-4"></i>
-                                </a>
-                                <a href="https://youtube.com" target="_blank" class="w-9 h-9 rounded-full border border-[var(--line-soft)] flex items-center justify-center text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-all duration-300">
-                                    <i data-lucide="youtube" class="w-4 h-4"></i>
-                                </a>
+                                {% endfor %}
                             </div>
                         </div>
 
-                        <!-- Column 2: Quick Links (Spans 2) -->
-                        <div class="lg:col-span-2 space-y-5">
-                            <div class="space-y-2">
-                                <h4 class="text-[var(--brand-gold)] font-semibold text-[11px] tracking-widest uppercase">Quick Links</h4>
-                                <div class="h-[2px] w-8 bg-[var(--brand-gold)]"></div>
-                            </div>
-                            <ul class="space-y-2.5 text-sm text-[var(--brand-navy)]/70">
-                                <li><a href="{% url 'website:home' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Home</a></li>
-                                <li><a href="{% url 'website:about' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">About</a></li>
-                                <li><a href="{% url 'website:services' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Services</a></li>
-                                <li><a href="{% url 'website:home' %}#gallery" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Workshops</a></li>
-                                <li><a href="{% url 'website:services' %}#ccts-details" class="hover:text-[var(--brand-gold)] transition-colors duration-200">CCTS</a></li>
-                                <li><a href="{% url 'website:blogs' %}" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Blogs</a></li>
-                                <li><a href="{% url 'website:about' %}#appointments" class="hover:text-[var(--brand-gold)] transition-colors duration-200">Connect</a></li>
+                        <div>
+                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">Quick Links</h4>
+                            <div class="mt-5 h-[2px] w-8 bg-[rgba(212,175,55,0.4)]"></div>
+                            <ul class="mt-5 space-y-3 text-[14px] font-medium leading-[21px] text-black">
+                                <li><a href="{% url 'website:home' %}" class="transition hover:text-[#b88e50]">Home</a></li>
+                                <li><a href="{% url 'website:about' %}" class="transition hover:text-[#b88e50]">About</a></li>
+                                <li><a href="{% url 'website:services' %}" class="transition hover:text-[#b88e50]">Services</a></li>
+                                <li><a href="{% url 'website:home' %}#gallery" class="transition hover:text-[#b88e50]">Workshops</a></li>
+                                <li><a href="{% url 'website:ccts' %}" class="transition hover:text-[#b88e50]">CCTS</a></li>
+                                <li><a href="{% url 'website:blogs' %}" class="transition hover:text-[#b88e50]">Blogs</a></li>
+                                <li><a href="{% url 'website:contact' %}" class="transition hover:text-[#b88e50]">Connect</a></li>
                             </ul>
                         </div>
 
-                        <!-- Column 3: Services (Spans 3) -->
-                        <div class="lg:col-span-3 space-y-5">
-                            <div class="space-y-2">
-                                <h4 class="text-[var(--brand-gold)] font-semibold text-[11px] tracking-widest uppercase">Services</h4>
-                                <div class="h-[2px] w-8 bg-[var(--brand-gold)]"></div>
-                            </div>
-                            <ul class="space-y-2.5 text-sm text-[var(--brand-navy)]/70">
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Tax Planning</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Audit & Assurance</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Business Advisory</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">GST Consultancy</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Corporate Compliance</a></li>
-                                <li><a href="{% url 'website:services' %}#all-services" class="hover:text-[var(--brand-gold)] transition duration-200">Financial Strategy</a></li>
+                        <div>
+                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">Services</h4>
+                            <div class="mt-5 h-[2px] w-8 bg-[rgba(212,175,55,0.4)]"></div>
+                            <ul class="mt-5 space-y-3 text-[14px] font-normal leading-[21px] text-black">
+                                <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Tax Planning</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Audit &amp; Assurance</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Business Advisory</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">GST Consultancy</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Corporate Compliance</a></li>
+                                <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Financial Strategy</a></li>
                             </ul>
                         </div>
 
-                        <!-- Column 4: Contact Details (Spans 3) -->
-                        <div class="lg:col-span-3 space-y-5">
-                            <div class="space-y-2">
-                                <h4 class="text-[var(--brand-gold)] font-semibold text-[11px] tracking-widest uppercase">Contact Details</h4>
-                                <div class="h-[2px] w-8 bg-[var(--brand-gold)]"></div>
-                            </div>
-                            <ul class="space-y-4 text-sm text-[var(--brand-navy)]/70">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="map-pin" class="w-4 h-4 text-[var(--brand-gold)] mt-0.5 flex-shrink-0"></i>
-                                    <span>302, Prestige Tower, MG Road, New Delhi — 110001</span>
+                        <div>
+                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">Contact Details</h4>
+                            <div class="mt-5 h-[2px] w-8 bg-[rgba(212,175,55,0.4)]"></div>
+                            <ul class="mt-5 space-y-4 text-[14px] font-normal leading-[22.4px] text-black">
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="map-pin" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>
+                                    <span class="max-w-[245px]">302, Prestige Tower, MG Road, New Delhi — 110001</span>
                                 </li>
-                                <li class="flex items-center gap-2.5">
-                                    <i data-lucide="phone" class="w-4 h-4 text-[var(--brand-gold)] flex-shrink-0"></i>
-                                    <span class="font-medium text-[var(--brand-navy)]">+91 11 4567 8900</span>
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="phone" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>
+                                    <span>+91 11 4567 8900</span>
                                 </li>
-                                <li class="flex items-center gap-2.5">
-                                    <i data-lucide="mail" class="w-4 h-4 text-[var(--brand-gold)] flex-shrink-0"></i>
-                                    <a href="mailto:info@ashwanitayal.com" class="text-[var(--brand-gold)] hover:underline transition-colors duration-200">info@ashwanitayal.com</a>
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="mail" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>
+                                    <a href="mailto:info@ashwanitayal.com" class="transition hover:text-[#b88e50]">info@ashwanitayal.com</a>
                                 </li>
                             </ul>
                         </div>
-
                     </div>
 
-                    <!-- Bottom Copyright strip -->
-                    <div class="pt-8 text-xs text-[var(--brand-navy)]/50 sm:flex sm:justify-between sm:items-center">
+                    <div class="border-t border-black/10 pt-7 text-[13px] font-normal leading-[19.5px] text-black/45 sm:flex sm:items-center sm:justify-between">
                         <p>© 2026 Ashwani Tayal. All Rights Reserved.</p>
-                        <p class="mt-2 sm:mt-0">Handcrafted with Elegance by <span class="text-[var(--brand-gold)] hover:underline cursor-pointer">Invincible Web Solutions</span></p>
+                        <p class="mt-3 sm:mt-0">Handcrafted with Elegance by Invincible Web Solutions</p>
                     </div>
                 </div>
             </footer>
         </div>
         <!-- Lucide Icons initialization -->
         <script type="module">
-        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, ArrowLeft, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube } from 'lucide'
+        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, ArrowLeft, ArrowUpRight, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube } from 'lucide'
         createIcons({
             icons: {
                 Sparkles,
@@ -320,6 +278,7 @@
                 MapPin,
                 ArrowRight,
                 ArrowLeft,
+                ArrowUpRight,
                 Zap,
                 CheckCircle2,
                 ChevronRight,

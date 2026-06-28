@@ -1,5 +1,8 @@
 import pytest
+import datetime
 from django.urls import reverse
+
+from website.models import Insight
 
 pytestmark = pytest.mark.django_db
 
@@ -76,6 +79,58 @@ def test_blogs_page_template_used(client):
     assert "website/blogs.html" in [t.name for t in response.templates]
 
 
+def test_contact_page_status_code(client):
+    """
+    Test that the contact page loads successfully (HTTP 200).
+    """
+    url = reverse("website:contact")
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_contact_page_template_used(client):
+    """
+    Test that the contact page uses the correct template.
+    """
+    url = reverse("website:contact")
+    response = client.get(url)
+    assert "website/contact.html" in [t.name for t in response.templates]
+
+
+def test_ccts_page_status_code_and_template(client):
+    url = reverse("website:ccts")
+    response = client.get(url)
+    assert response.status_code == 200
+    assert "website/services.html" in [t.name for t in response.templates]
+
+
+def test_ccts_page_only_shows_ccts_blogs_in_context(client):
+    Insight.objects.create(
+        title="CCTS Topic",
+        category="CCTS",
+        published_date=datetime.date(2026, 6, 20),
+        summary="CCTS post",
+        image_filename="blog_tax.png",
+    )
+    Insight.objects.create(
+        title="Tax Topic",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 10),
+        summary="Tax post",
+        image_filename="blog_tax.png",
+    )
+
+    response = client.get(reverse("website:ccts"))
+    insights = response.context["insights"]
+    assert insights
+    assert all(insight.category == "CCTS" for insight in insights)
+
+
+def test_service_detail_page_status_code(client):
+    response = client.get(reverse("website:service_detail", kwargs={"slug": "tax-planning"}))
+    assert response.status_code == 200
+
+
 def test_global_context_processor(client):
     """
     Test that the global context processor injects the correct site name and email.
@@ -124,4 +179,3 @@ def test_book_consultation_failure(client):
     assert res_data["success"] is False
     assert "full_name" in res_data["errors"]
     assert "email" in res_data["errors"]
-

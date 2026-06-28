@@ -1,0 +1,106 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}{{ service.title }} | CA Ashwani Tayal{% endblock %}
+
+{% block content %}
+<section class="relative overflow-hidden min-h-[520px] lg:min-h-[620px]"
+         x-data="{ currentSlide: 0, slides: [{% for slide in hero_slides %}'{{ slide.image.url }}'{% if not forloop.last %}, {% endif %}{% empty %}'{{ service.image.url }}'{% endfor %}], init() { if (this.slides.length > 1) { setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides.length }, 5000) } } }">
+    <template x-for="(slide, index) in slides" :key="index">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+             :class="currentSlide === index ? 'opacity-100' : 'opacity-0'"
+             :style="`background-image:url('${slide}')`"></div>
+    </template>
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(247,244,237,0.92)_0%,rgba(247,244,237,0.82)_40%,rgba(247,244,237,0.08)_75%,rgba(247,244,237,0.05)_100%)]"></div>
+
+    <div class="relative mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-24 lg:px-[83px]">
+        <div class="max-w-[680px]">
+            <div class="flex items-center gap-3">
+                <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">{{ service.detail_kicker }}</span>
+            </div>
+            <h1 class="mt-5 font-serif text-[42px] font-bold leading-[1.12] text-[#0d2b5c] sm:text-[58px]">
+                {{ service.detail_heading|default:service.title }}
+            </h1>
+            <p class="mt-6 max-w-[590px] text-[17px] leading-[1.7] text-[#444]">
+                {{ service.detail_intro|default:service.summary }}
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+                <span class="rounded-full bg-[rgba(13,43,92,0.08)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0d2b5c]">{{ service.badge_one }}</span>
+                <span class="rounded-full bg-[rgba(212,175,55,0.14)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#b88e50]">{{ service.badge_two }}</span>
+            </div>
+            <a href="#appointments" class="mt-9 inline-flex h-[49px] items-center justify-center rounded-[4px] bg-[#d4af37] px-7 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0d2b5c] transition hover:bg-[#bfa030]">
+                Book Consultation
+                <i data-lucide="arrow-right" class="ml-2 size-4"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="bg-white py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 sm:px-10 lg:grid-cols-12 lg:px-[83px]">
+        <div class="lg:col-span-7">
+            <h2 class="font-serif text-[34px] font-bold leading-tight text-[#0d2b5c] sm:text-[42px]">How We Help</h2>
+            <p class="mt-5 text-[16px] leading-[1.75] text-[#555]">
+                {{ service.detail_body|default:service.summary }}
+            </p>
+        </div>
+        <div class="lg:col-span-5">
+            <div class="rounded-[20px] border border-[rgba(13,43,92,0.08)] bg-[#f9f8f6] p-6 shadow-sm">
+                <h3 class="font-serif text-[24px] font-semibold text-[#0d2b5c]">Focus Areas</h3>
+                <ul class="mt-6 space-y-4">
+                    {% for point in service.detail_points_list %}
+                    <li class="flex gap-3 text-[14px] leading-[1.6] text-[#444]">
+                        <i data-lucide="check-circle-2" class="mt-0.5 size-5 shrink-0 text-[#d4af37]"></i>
+                        <span>{{ point }}</span>
+                    </li>
+                    {% empty %}
+                    <li class="flex gap-3 text-[14px] leading-[1.6] text-[#444]">
+                        <i data-lucide="check-circle-2" class="mt-0.5 size-5 shrink-0 text-[#d4af37]"></i>
+                        <span>Custom advisory plan based on your business stage and compliance exposure.</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if other_services %}
+<section class="bg-[#f9f8f6] py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-6 sm:px-10 lg:px-[83px]">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">More Services</span>
+                </div>
+                <h2 class="mt-4 font-serif text-[34px] font-bold text-[#0d2b5c]">Explore Related Expertise</h2>
+            </div>
+            <a href="{% url 'website:services' %}#expertise" class="inline-flex h-[43px] items-center justify-center rounded-full bg-[#0d2b5c] px-6 text-[12px] font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-[#12386f]">View All</a>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {% for card in other_services %}
+            <a href="{% url 'website:service_detail' card.slug %}" class="group overflow-hidden rounded-[18px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] transition hover:-translate-y-1 hover:shadow-[0px_18px_38px_rgba(13,43,92,0.14)]">
+                <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-[170px] w-full object-cover transition duration-700 group-hover:scale-105">
+                <span class="block p-5">
+                    <span class="font-serif text-[17px] font-bold text-[#0d2b5c]">{{ card.title }}</span>
+                    <span class="mt-2 block text-[13px] leading-[1.6] text-[#666]">{{ card.summary }}</span>
+                </span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section id="appointments" class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+        <div class="rounded-[24px] bg-[#0d2b5c] p-8 text-center text-white shadow-[0px_24px_60px_rgba(13,43,92,0.18)] sm:p-12">
+            <h2 class="font-serif text-[32px] font-bold sm:text-[42px]">Need Help With {{ service.title }}?</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.7] text-slate-200">Book a focused consultation and get a practical next-step plan for your compliance, tax, or strategy requirements.</p>
+            <a href="{% url 'website:about' %}#appointments" class="mt-8 inline-flex h-[49px] items-center justify-center rounded-[4px] bg-[#d4af37] px-7 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0d2b5c] transition hover:bg-[#bfa030]">Book Your Consultation</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
