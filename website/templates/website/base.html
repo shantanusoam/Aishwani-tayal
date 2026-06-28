@@ -54,6 +54,10 @@
             body.home-page main {
                 padding-top: 0;
             }
+            body.home-page #hero .hero-reveal {
+                opacity: 1;
+                visibility: visible;
+            }
             h1, h2, h3, .serif-heading {
                 font-family: 'Playfair Display', serif;
             }
@@ -100,12 +104,12 @@
             <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px] relative">
                 <div class="flex justify-end lg:justify-between h-[83px] items-center">
                     <!-- Logo container -->
-                    <div class="absolute left-6 sm:left-10 lg:left-[83px] top-0 transition-all duration-300 flex-shrink-0 flex items-start"
-                         :class="scrolled ? 'h-[83px] items-center' : 'h-[140px] lg:h-[180px] pt-6'">
+                    <div class="absolute left-6 sm:left-10 lg:left-[83px] top-0 transition-all duration-300 flex-shrink-0 flex items-center h-[83px]"
+                         :class="scrolled ? '' : 'lg:items-start lg:h-[180px] lg:pt-6'">
                         <a href="{% url 'website:home' %}" class="flex items-center justify-center h-full" aria-label="CA Ashwani Tayal Home">
                             <img src="{% static 'images/logo.png' %}" alt="CA Ashwani Tayal Logo" 
-                                 class="w-auto object-contain transition-all duration-300"
-                                 :class="scrolled ? 'h-12' : 'h-24 lg:h-32'">
+                                 class="h-12 w-auto object-contain transition-all duration-300"
+                                 :class="scrolled ? '' : 'lg:h-32'">
                         </a>
                     </div>
                     
@@ -267,7 +271,7 @@
         </div>
         <!-- Lucide Icons initialization -->
         <script type="module">
-        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, ArrowLeft, ArrowUpRight, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube } from 'lucide'
+        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, ArrowLeft, ArrowUpRight, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube, BookOpen, Mic, GraduationCap, Briefcase, Users } from 'lucide'
         createIcons({
             icons: {
                 Sparkles,
@@ -296,7 +300,12 @@
                 Linkedin,
                 Twitter,
                 Instagram,
-                Youtube
+                Youtube,
+                BookOpen,
+                Mic,
+                GraduationCap,
+                Briefcase,
+                Users
             }
         })
         </script>

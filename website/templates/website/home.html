@@ -8,32 +8,27 @@
 {% block content %}
 
 <!-- Hero Section -->
-<section id="hero" class="relative h-[720px] overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-[center_35%] bg-no-repeat" style="background-image: url('{% static "images/hero_bg.png" %}');"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-[rgba(247,244,237,0.92)] via-[rgba(247,244,237,0.55)] to-transparent"></div>
-    <div class="absolute left-0 top-0 z-[3] h-[651px] w-[811px] max-w-[82vw] rounded-br-[26px] backdrop-blur-[4px] bg-gradient-to-r from-[rgba(247,244,237,0.86)] to-[rgba(247,244,237,0)]"></div>
-    <div class="absolute bottom-0 left-0 right-0 z-[4] h-[2px] bg-[#b88e50]"></div>
-    <div class="absolute -bottom-[238px] -right-[206px] z-[4] h-[420px] w-[620px] rounded-full border-2 border-[#b88e50] opacity-95"></div>
+<section id="hero" class="relative min-h-[620px] h-[min(720px,100svh)] max-h-[720px] overflow-hidden sm:min-h-[540px]">
+    <div class="absolute inset-0 bg-cover bg-[72%_center] bg-no-repeat sm:bg-center" style="background-image: url('{% static "images/hero_bg.png" %}');"></div>
+    <div class="absolute left-0 top-0 z-[3] h-full w-[92%] max-w-[440px] rounded-br-[26px] bg-gradient-to-r from-[rgba(247,244,237,0.52)] via-[rgba(247,244,237,0.28)] to-transparent sm:max-w-[78vw] sm:w-[811px] sm:backdrop-blur-[4px] sm:from-[rgba(247,244,237,0.86)] sm:via-[rgba(247,244,237,0.55)] sm:to-[rgba(247,244,237,0)]"></div>
 
     <div class="relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-[83px]">
-        <div class="max-w-[710px] pt-[150px] sm:pt-[170px] lg:pt-[200px]">
-            <div class="rounded-[20px] bg-gradient-to-r from-[rgba(247,244,237,0.88)] via-[rgba(247,244,237,0.72)] to-[rgba(247,244,237,0.28)] p-6 sm:p-8 backdrop-blur-[8px] shadow-[0_12px_36px_rgba(1,31,66,0.14)]">
-            <h1 class="scale-up text-[44px] leading-[1.1] sm:text-[56px] lg:text-[64px] font-semibold text-[#011f42]" style="font-family: 'Playfair Display', serif;">
+        <div class="max-w-[710px] pt-[108px] pr-14 sm:pt-[178px] sm:pr-0 lg:pt-[200px]">
+            <h1 class="hero-reveal text-[34px] leading-[1.1] sm:text-[48px] sm:leading-[1.08] lg:text-[64px] font-semibold text-[#011f42]" style="font-family: 'Playfair Display', serif;">
                 The Raid-Ready<br>Business.
             </h1>
 
-            <div class="scale-up mt-5 h-[2px] w-[112px] bg-[var(--brand-gold)]"></div>
+            <div class="hero-reveal mt-4 h-[2px] w-[72px] bg-[var(--brand-gold)] sm:mt-3 sm:w-[112px]"></div>
 
-            <p class="scale-up mt-4 max-w-[494px] text-[18px] leading-[1.5] text-[#011f42] font-normal sm:text-[20px]">
+            <p class="hero-reveal mt-5 max-w-[494px] text-[16px] leading-[1.55] text-[#011f42] font-normal sm:mt-6 sm:text-[20px] sm:leading-[1.5]">
                 Notice, Survey, Investigation, Raid- Nobody can control, but we can control preparedness.
             </p>
 
             <a href="#appointments"
-               class="scale-up mt-10 inline-flex h-[52px] w-full max-w-[319px] items-center justify-center gap-2 rounded-[4px] bg-[#b88e50] px-4 text-[18px] font-normal uppercase tracking-[0.02em] text-white hover:bg-[#a67e45] transition shadow-[0_6px_16px_rgba(0,0,0,0.2)]">
+               class="hero-reveal mt-7 inline-flex h-[48px] w-full max-w-[319px] items-center justify-center gap-2 rounded-[4px] bg-[#b88e50] px-4 text-[15px] font-normal uppercase tracking-[0.02em] text-white hover:bg-[#a67e45] transition shadow-md sm:mt-8 sm:h-[52px] sm:text-[18px]">
                 BOOK YOUR CONSULTATION
-                <i data-lucide="arrow-right-circle" class="h-[18px] w-[18px]"></i>
+                <i data-lucide="arrow-right" class="h-[18px] w-[18px]"></i>
             </a>
-            </div>
         </div>
     </div>
 </section>
@@ -398,12 +393,15 @@
 
         // Core timelines
         // 1. Hero Reveal
-        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-        heroTl.from('.scale-up', {
-            opacity: 0,
-            y: 40,
+        const heroItems = gsap.utils.toArray('#hero .hero-reveal');
+        gsap.set(heroItems, { autoAlpha: 0, y: 40 });
+        gsap.to(heroItems, {
+            autoAlpha: 1,
+            y: 0,
             duration: 1.2,
-            stagger: 0.12
+            stagger: 0.12,
+            ease: 'power3.out',
+            clearProps: 'transform',
         });
 
         // 2. About section reveal on scroll
