@@ -8,6 +8,7 @@ SERVICE_NAME="${SERVICE_NAME:-aishwani-tayal}"
 PORT="${PORT:-8010}"
 SERVER_NAME="${SERVER_NAME:-$REMOTE_HOST}"
 DJANGO_ALLOWED_HOSTS="${DJANGO_ALLOWED_HOSTS:-$SERVER_NAME,127.0.0.1,localhost}"
+DJANGO_CSRF_TRUSTED_ORIGINS="${DJANGO_CSRF_TRUSTED_ORIGINS:-http://$SERVER_NAME:$PORT,https://$SERVER_NAME,http://127.0.0.1:$PORT,http://localhost:$PORT}"
 GUNICORN_WORKERS="${GUNICORN_WORKERS:-3}"
 CLIENT_MAX_BODY_SIZE="${CLIENT_MAX_BODY_SIZE:-25M}"
 
@@ -60,7 +61,7 @@ scp "$LOCAL_ARCHIVE" "$REMOTE:$REMOTE_ARCHIVE"
 
 echo "Deploying on $REMOTE"
 ssh "$REMOTE" \
-    "APP_DIR=$(quote_remote "$APP_DIR") SERVICE_NAME=$(quote_remote "$SERVICE_NAME") PORT=$(quote_remote "$PORT") SERVER_NAME=$(quote_remote "$SERVER_NAME") DJANGO_ALLOWED_HOSTS=$(quote_remote "$DJANGO_ALLOWED_HOSTS") GUNICORN_WORKERS=$(quote_remote "$GUNICORN_WORKERS") CLIENT_MAX_BODY_SIZE=$(quote_remote "$CLIENT_MAX_BODY_SIZE") REMOTE_ARCHIVE=$(quote_remote "$REMOTE_ARCHIVE") bash -s" <<'REMOTE_SCRIPT'
+    "APP_DIR=$(quote_remote "$APP_DIR") SERVICE_NAME=$(quote_remote "$SERVICE_NAME") PORT=$(quote_remote "$PORT") SERVER_NAME=$(quote_remote "$SERVER_NAME") DJANGO_ALLOWED_HOSTS=$(quote_remote "$DJANGO_ALLOWED_HOSTS") DJANGO_CSRF_TRUSTED_ORIGINS=$(quote_remote "$DJANGO_CSRF_TRUSTED_ORIGINS") GUNICORN_WORKERS=$(quote_remote "$GUNICORN_WORKERS") CLIENT_MAX_BODY_SIZE=$(quote_remote "$CLIENT_MAX_BODY_SIZE") REMOTE_ARCHIVE=$(quote_remote "$REMOTE_ARCHIVE") bash -s" <<'REMOTE_SCRIPT'
 set -Eeuo pipefail
 
 if [[ "$(id -u)" -eq 0 ]]; then
@@ -132,12 +133,14 @@ if [[ ! -f "$APP_DIR/.env" ]]; then
 DEBUG=False
 SECRET_KEY=$SECRET
 ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
+CSRF_TRUSTED_ORIGINS=$DJANGO_CSRF_TRUSTED_ORIGINS
 EOF
     $SUDO chmod 600 "$APP_DIR/.env"
 else
     echo "Updating existing .env"
     ensure_env_value "DEBUG" "False"
     ensure_env_value "ALLOWED_HOSTS" "$DJANGO_ALLOWED_HOSTS"
+    ensure_env_value "CSRF_TRUSTED_ORIGINS" "$DJANGO_CSRF_TRUSTED_ORIGINS"
     if ! $SUDO grep -q "^SECRET_KEY=" "$APP_DIR/.env"; then
         SECRET="$($SUDO python3 -c 'import secrets; print(secrets.token_urlsafe(64))')"
         ensure_env_value "SECRET_KEY" "$SECRET"

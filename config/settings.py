@@ -14,6 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, False),
     PORT=(int, 8010),
+    CSRF_TRUSTED_ORIGINS=(list, []),
 )
 
 # Take environment variables from .env file
@@ -29,6 +30,7 @@ SECRET_KEY = env(
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 
 # Application definition
