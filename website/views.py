@@ -771,7 +771,6 @@ def services(request):
     """
     home_service_section = _seed_home_services_content()
     home_service_cards = list(home_service_section.cards.all().order_by("order", "id"))
-    featured_service_cards = _seed_home_featured_services()
     form = ConsultationForm()
     return render(
         request,
@@ -780,7 +779,6 @@ def services(request):
             "form": form,
             "home_service_section": home_service_section,
             "home_service_cards": home_service_cards,
-            "featured_service_cards": featured_service_cards,
         },
     )
 

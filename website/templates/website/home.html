@@ -330,7 +330,7 @@
 {% include "website/sections/awards_section.html" with award_cards=award_cards %}
 
 <!-- Moments & Milestones Gallery Section -->
-<section id="gallery" class="py-24 sm:py-32 bg-white relative" x-data="{ openImg: null, zoomTitle: '', listImg: [{% for item in moments_milestones %}{ title: '{{ item.title|escapejs }}', url: '{{ item.image.url }}', isTall: {% if item.is_tall %}true{% else %}false{% endif %} }{% if not forloop.last %}, {% endif %}{% endfor %}] }">
+<section id="gallery" class="py-16 sm:py-16 bg-white relative" x-data="{ openImg: null, zoomTitle: '', listImg: [{% for item in moments_milestones %}{ title: '{{ item.title|escapejs }}', url: '{{ item.image.url }}', isTall: {% if item.is_tall %}true{% else %}false{% endif %} }{% if not forloop.last %}, {% endif %}{% endfor %}] }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Header -->
