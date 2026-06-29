@@ -767,7 +767,27 @@ def home(request):
 
 def services(request):
     """
-    Renders the Carbon Credit Trading Scheme (CCTS) & comprehensive services page.
+    Renders the main services listing page with all service cards.
+    """
+    home_service_section = _seed_home_services_content()
+    home_service_cards = list(home_service_section.cards.all().order_by("order", "id"))
+    featured_service_cards = _seed_home_featured_services()
+    form = ConsultationForm()
+    return render(
+        request,
+        "website/services.html",
+        {
+            "form": form,
+            "home_service_section": home_service_section,
+            "home_service_cards": home_service_cards,
+            "featured_service_cards": featured_service_cards,
+        },
+    )
+
+
+def ccts(request):
+    """
+    Renders the Carbon Credit Trading Scheme (CCTS) page.
     """
     _ensure_default_insights()
     insights = list(Insight.objects.filter(category="CCTS").order_by("-published_date")[:3])
@@ -776,7 +796,7 @@ def services(request):
     ccts_faqs = _seed_faqs()
     return render(
         request,
-        "website/services.html",
+        "website/ccts.html",
         {
             "insights": insights,
             "form": form,

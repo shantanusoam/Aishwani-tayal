@@ -101,7 +101,7 @@ def test_ccts_page_status_code_and_template(client):
     url = reverse("website:ccts")
     response = client.get(url)
     assert response.status_code == 200
-    assert "website/services.html" in [t.name for t in response.templates]
+    assert "website/ccts.html" in [t.name for t in response.templates]
 
 
 def test_ccts_page_only_shows_ccts_blogs_in_context(client):

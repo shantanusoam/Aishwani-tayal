@@ -1,0 +1,211 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Carbon Credits & CCTS | CA Ashwani Tayal{% endblock %}
+
+{% block content %}
+<!-- Hero (Figma node 1:859) -->
+<section class="relative min-h-[639px] overflow-hidden bg-[#f9f8f6] pt-[83px]">
+    <img src="{% static 'images/ccts_hero_bg.png' %}" alt="Carbon Credits: Real Money" class="absolute inset-0 h-full w-full object-cover">
+    <div class="absolute inset-y-0 left-0 w-full bg-[linear-gradient(90deg,rgba(247,244,237,0.88)_0%,rgba(247,244,237,0.78)_33%,rgba(247,244,237,0.18)_56%,rgba(247,244,237,0)_78%)]"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-[74px]">
+        <div class="max-w-[614px] pt-28 sm:pt-32">
+            <p class="text-[18px] leading-[1.5] text-[#011f42] sm:text-[20px]">Let’s Talk About India’s</p>
+            <h1 class="mt-2 font-serif text-[46px] font-semibold leading-[1.12] text-[#011f42] sm:text-[64px]">
+                Carbon Credits:<br>Real Money
+            </h1>
+            <p class="mt-7 max-w-[494px] text-[18px] leading-[1.5] text-[#011f42] sm:text-[20px]">
+                India’s Carbon finance and CCUS Authority.
+            </p>
+            <a href="#ccts-details" class="mt-12 inline-flex h-[47px] min-w-[192px] items-center justify-center rounded-[4px] bg-[#b88e50] px-4 text-[15px] font-semibold uppercase tracking-[0.05em] text-white transition hover:bg-[#a67e45] sm:text-[18px]">
+                Scroll Down
+                <i data-lucide="arrow-right" class="ml-2 size-5"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CCTS Intro -->
+<section id="ccts-details" class="bg-white py-16 sm:py-20 scroll-mt-24">
+    <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
+        <div class="grid gap-10 lg:grid-cols-[430px_1fr] lg:items-center">
+            <div class="overflow-hidden rounded-[10px] shadow-[0px_4px_16px_rgba(13,43,92,0.08)]">
+                <img src="{% static 'images/ccts_story.png' %}" alt="CCTS consultation" class="h-[260px] w-full object-cover">
+            </div>
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">CCTS Specialization</span>
+                </div>
+                <h2 class="mt-4 font-serif text-[34px] font-bold leading-tight text-[#0d2b5c] sm:text-[38px]">
+                    India's Carbon Credit Trading Scheme Explained
+                </h2>
+                <p class="mt-5 text-[15px] leading-[1.7] text-[#555]">
+                    On 28 June 2023, India notified the Carbon Credit Trading Scheme. It created assets, liabilities, taxable income, and personal responsibility for CFOs and directors across industries. This page brings the framework, financial impact, and practical readiness steps into one clear path.
+                </p>
+                <a href="#explore-ccts" class="mt-6 inline-flex h-[45px] items-center justify-center rounded-[4px] bg-[#d4af37] px-6 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0d2b5c] transition hover:bg-[#bfa030]">
+                    Explore the Guide
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Explore CCTS -->
+<section id="explore-ccts" class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-[1100px] px-3 sm:px-6 lg:px-0">
+        <div class="text-center">
+            <h2 class="font-serif text-[34px] font-bold leading-[1.22] text-[#0d2b5c] sm:text-[37.95px] sm:leading-[56.925px]">
+                Explore CCTS From Every Angle
+            </h2>
+            <p class="mx-auto mt-3 max-w-[760px] text-[15px] font-normal leading-[22.5px] text-[#666]">
+                Curated Insights and practical frameworks for every stakeholder in India’s Carbon Market.
+            </p>
+        </div>
+
+        <div class="mt-9 grid gap-[50px] md:grid-cols-3 md:gap-[50px]">
+            {% for card in ccts_service_cards %}
+            <article class="relative block min-h-[349px] overflow-hidden rounded-[8px] bg-white px-4 pb-8 pt-[146px] shadow-[0px_4px_2px_rgba(0,0,0,0.25)]">
+                <span class="absolute left-4 top-5 font-['Open_Sans'] text-[100px] font-semibold leading-[1.122] text-[rgba(212,175,55,0.34)]">{{ card.number }}</span>
+                <span class="relative inline-flex min-h-6 max-w-full items-center rounded-[4px] bg-[#0d2b5c] px-[10px] py-1 text-[11px] font-bold uppercase leading-[16.5px] tracking-[1.1px] text-[#d4af37]">
+                    {{ card.audience }}
+                </span>
+                <span class="relative mt-6 block font-serif text-[17.6px] font-semibold leading-[24.64px] text-[#0d2b5c]">
+                    {{ card.title }}
+                </span>
+                <span class="relative mt-6 block text-[13px] font-normal leading-[22.1px] text-[#666]">
+                    {{ card.summary }}
+                </span>
+                <span class="relative mt-[7px] block text-[13px] font-semibold leading-[19.5px] text-[#d4af37]">
+                    {{ card.cta_text }}
+                </span>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Inside the Book -->
+<section id="book-showcase" class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
+        <div class="grid gap-10 lg:grid-cols-[430px_1fr] lg:items-center">
+            <div class="relative h-[360px]">
+                <img src="{% static 'images/carbon_credits_book_cover.png' %}" alt="Carbon Credits Real Money book" class="absolute left-1/2 top-1/2 h-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain">
+            </div>
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">Authority</span>
+                </div>
+                <h2 class="mt-4 font-serif text-[37.95px] font-bold leading-[49.335px] text-[#0d2b5c]">Inside the Book</h2>
+                <p class="mt-5 max-w-[557px] text-[15px] leading-[27px] text-[#555]">
+                    A practical guide to the legal, financial, compliance, and strategic dimensions of India's Carbon Credit Trading Scheme. Designed for decision-makers, professionals, policymakers, and anyone seeking a complete understanding of the country's evolving carbon economy.
+                </p>
+                <h3 class="mt-8 text-[13px] font-bold uppercase tracking-[0.1em] text-[#0d2b5c]">What's Inside</h3>
+                <ul class="mt-4 space-y-3">
+                    <li class="flex items-center gap-[10px] text-[14px] leading-[21px] text-[#444]"><img src="{% static 'images/figma_book_check_icon.svg' %}" alt="" class="size-4"> Legal Framework & Regulatory Architecture</li>
+                    <li class="flex items-center gap-[10px] text-[14px] leading-[21px] text-[#444]"><img src="{% static 'images/figma_book_check_icon.svg' %}" alt="" class="size-4"> Accounting, Taxation & Compliance Guidance</li>
+                    <li class="flex items-center gap-[10px] text-[14px] leading-[21px] text-[#444]"><img src="{% static 'images/figma_book_check_icon.svg' %}" alt="" class="size-4"> 16 Chapters + 5 Appendices Backed by Official Sources</li>
+                </ul>
+                <a href="#appointments" class="mt-9 inline-flex h-[49px] w-[173px] items-center justify-center rounded-[4px] bg-[#d4af37] text-[14px] font-bold uppercase tracking-[0.08em] text-[#0d2b5c] transition hover:bg-[#bfa030]">
+                    Know More
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Expertise -->
+<section id="expertise" class="bg-[#f9f8f6] py-16 sm:py-20">
+    <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
+        <div class="text-center">
+            <div class="flex items-center justify-center gap-3">
+                <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+                <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">{{ ccts_service_section.label }}</span>
+                <span class="h-[2px] w-8 bg-[#d4af37]"></span>
+            </div>
+            <h2 class="mt-4 font-serif text-[38px] font-bold leading-tight text-[#0d2b5c] sm:text-[48px]">{{ ccts_service_section.title }}</h2>
+            <p class="mx-auto mt-4 max-w-[510px] text-[15px] leading-[1.65] text-[#666]">{{ ccts_service_section.description }}</p>
+        </div>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {% for card in ccts_service_cards %}
+            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
+                <div class="block h-full">
+                    <span class="relative block h-[220px] overflow-hidden">
+                        {% if card.image %}
+                        <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover">
+                        {% else %}
+                        <img src="{% static 'images/ccts_story.png' %}" alt="{{ card.title }}" class="h-full w-full object-cover">
+                        {% endif %}
+                        <span class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></span>
+                    </span>
+                    <span class="block p-6">
+                        <span class="font-serif text-[17px] font-bold leading-tight text-[#0d2b5c]">{{ card.title }}</span>
+                        <span class="mt-2 block text-[13px] leading-[1.6] text-[#666]">{{ card.summary }}</span>
+                        <span class="mt-4 inline-flex rounded-[4px] bg-[#0d2b5c] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-[#d4af37]">{{ card.audience }}</span>
+                    </span>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include "website/sections/insights_section.html" with insights=insights section_id="services-insights" view_all_url=blogs_url %}
+
+<!-- FAQs -->
+<section id="faqs" class="bg-[#f9f8f6] py-16 sm:py-20" x-data="{ open: 0 }">
+    <div class="mx-auto max-w-[973px] px-6 sm:px-8">
+        <h2 class="text-center font-serif text-[38px] font-bold text-[#0d2b5c] sm:text-[48px]">Frequently Asked Questions</h2>
+        <div class="mt-10 space-y-5">
+            {% for item in ccts_faqs %}
+            <div class="overflow-hidden rounded-[12px] bg-[#eef0f3]">
+                <button @click="open = open === {{ item.id }} ? 0 : {{ item.id }}" class="flex w-full items-center justify-between px-6 py-5 text-left text-[14px] font-semibold text-[#0d2b5c]">
+                    <span>{{ item.question }}</span><span x-text="open === {{ item.id }} ? '−' : '+'"></span>
+                </button>
+                <div x-show="open === {{ item.id }}" class="px-6 pb-5 text-[13.5px] leading-[1.6] text-[#666]">{{ item.answer }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Book Consultation -->
+<section id="appointments" class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
+        <div class="text-center">
+            <div class="flex items-center justify-center gap-3"><span class="h-[2px] w-8 bg-[#d4af37]"></span><span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">Get In Touch</span><span class="h-[2px] w-8 bg-[#d4af37]"></span></div>
+            <h2 class="mt-4 font-serif text-[37.95px] font-bold text-[#0d2b5c]">Book Your Consultation</h2>
+            <p class="mx-auto mt-3 max-w-[510px] text-[15px] leading-[1.65] text-[#666]">Schedule a private consultation and take the first step towards financial clarity.</p>
+        </div>
+
+        <div class="mt-12 grid gap-10 lg:grid-cols-12">
+            <div class="rounded-[20px] border border-[rgba(1,31,66,0.08)] bg-[#fdfcf9] p-6 shadow-sm lg:col-span-7"
+                 x-data="{ formData: { full_name: '', email: '', phone: '', service: 'CCTS', company: '', message: '' }, submitting: false, successMsg: '', errors: {}, submitForm() { this.submitting = true; this.successMsg = ''; this.errors = {}; let urlEncoded = new URLSearchParams(); urlEncoded.append('csrfmiddlewaretoken', '{{ csrf_token }}'); Object.keys(this.formData).forEach(key => urlEncoded.append(key, this.formData[key])); fetch('{% url "website:book_consultation" %}', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: urlEncoded }).then(response => response.json().then(data => ({ status: response.status, body: data }))).then(res => { this.submitting = false; if (res.status === 200 && res.body.success) { this.successMsg = res.body.message; this.formData = { full_name: '', email: '', phone: '', service: 'CCTS', company: '', message: '' }; } else { this.errors = res.body.errors || {}; } }).catch(() => { this.submitting = false; this.errors = { __all__: 'A network connectivity error occurred. Please try again.' }; }); } }">
+                <div x-show="successMsg !== ''" class="mb-5 rounded bg-[rgba(184,142,80,0.12)] p-3 text-[13px] text-[#0d2b5c]" style="display:none;" x-text="successMsg"></div>
+                <form @submit.prevent="submitForm()" class="space-y-4">
+                    <div class="grid gap-4 sm:grid-cols-2"><div><label class="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#0d2b5c]">Full Name</label>{{ form.full_name }}</div><div><label class="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#0d2b5c]">Email</label>{{ form.email }}</div></div>
+                    <div class="grid gap-4 sm:grid-cols-2"><div><label class="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#0d2b5c]">Phone</label>{{ form.phone }}</div><div><label class="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#0d2b5c]">Service Required</label>{{ form.service }}</div></div>
+                    <div><label class="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#0d2b5c]">Company / Organization</label>{{ form.company }}</div>
+                    <div><label class="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#0d2b5c]">Message</label>{{ form.message }}</div>
+                    <button type="submit" :disabled="submitting" class="w-full rounded-lg bg-[#0d2b5c] px-5 py-3.5 text-[12.5px] font-bold uppercase tracking-wider text-white transition hover:bg-[#12386f] disabled:opacity-50">
+                        Book Your Consultation
+                    </button>
+                </form>
+            </div>
+
+            <div class="rounded-[20px] bg-[#0d2b5c] p-7 text-white shadow-sm lg:col-span-5">
+                <h3 class="font-serif text-[24px] font-semibold">Reach Us</h3>
+                <div class="mt-6 space-y-5 text-[14px] text-slate-200">
+                    <p class="flex gap-3"><i data-lucide="map-pin" class="mt-0.5 size-5 shrink-0 text-[#d4af37]"></i>302, Prestige Tower, MG Road, New Delhi - 110001</p>
+                    <p class="flex gap-3"><i data-lucide="phone" class="mt-0.5 size-5 shrink-0 text-[#d4af37]"></i>+91 11 4567 8900</p>
+                    <p class="flex gap-3"><i data-lucide="mail" class="mt-0.5 size-5 shrink-0 text-[#d4af37]"></i>info@ashwanitayal.com</p>
+                    <p class="flex gap-3"><i data-lucide="clock" class="mt-0.5 size-5 shrink-0 text-[#d4af37]"></i>Mon-Fri: 9:30 AM - 6:30 PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
