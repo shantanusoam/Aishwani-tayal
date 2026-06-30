@@ -117,23 +117,25 @@
 </section>
 
 <!-- Expertise -->
-<section id="expertise" class="bg-[#f9f8f6] py-16 sm:py-20">
-    <div class="mx-auto max-w-[1100px] px-6 sm:px-8">
+<section id="expertise" class="bg-[#f9f8f6] py-[56px] sm:py-[72px]">
+    <div class="mx-auto w-full max-w-[1339px] px-6 sm:px-8">
         <div class="text-center">
             <div class="flex items-center justify-center gap-3">
                 <span class="h-[2px] w-8 bg-[#d4af37]"></span>
                 <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#d4af37]">{{ ccts_service_section.label }}</span>
                 <span class="h-[2px] w-8 bg-[#d4af37]"></span>
             </div>
-            <h2 class="mt-4 font-serif text-[38px] font-bold leading-tight text-[#0d2b5c] sm:text-[48px]">{{ ccts_service_section.title }}</h2>
-            <p class="mx-auto mt-4 max-w-[510px] text-[15px] leading-[1.65] text-[#666]">{{ ccts_service_section.description }}</p>
+            <h2 class="mx-auto mt-4 max-w-[775px] font-serif text-[34px] font-bold leading-[1.2] text-[#0d2b5c] sm:text-[48px] sm:leading-[57.6px]">
+                {{ ccts_service_section.title }}
+            </h2>
+            <p class="mx-auto mt-3 max-w-[510px] text-[15px] leading-[27px] text-[#666]">{{ ccts_service_section.description }}</p>
         </div>
 
-        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mx-auto mt-12 grid max-w-[1226px] gap-y-[24px] md:grid-cols-2 md:gap-x-[24px] lg:grid-cols-3 lg:gap-x-[37px]">
             {% for card in ccts_service_cards %}
-            <article class="rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)] overflow-hidden">
+            <article class="overflow-hidden rounded-[20px] bg-white shadow-[0px_4px_10px_rgba(13,43,92,0.06)]">
                 <div class="block h-full">
-                    <span class="relative block h-[220px] overflow-hidden">
+                    <span class="relative block h-[220px] overflow-hidden rounded-t-[20px]">
                         {% if card.image %}
                         <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-full w-full object-cover">
                         {% else %}
@@ -141,10 +143,12 @@
                         {% endif %}
                         <span class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></span>
                     </span>
-                    <span class="block p-6">
-                        <span class="font-serif text-[17px] font-bold leading-tight text-[#0d2b5c]">{{ card.title }}</span>
-                        <span class="mt-2 block text-[13px] leading-[1.6] text-[#666]">{{ card.summary }}</span>
-                        <span class="mt-4 inline-flex rounded-[4px] bg-[#0d2b5c] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-[#d4af37]">{{ card.audience }}</span>
+                    <span class="block px-6 pb-[26px] pt-7">
+                        <span class="block font-serif text-[18.4px] font-bold leading-[23.92px] text-[#0d2b5c]">{{ card.title }}</span>
+                        <span class="mt-[10px] block text-[13px] leading-[22.75px] text-[#666]">{{ card.summary }}</span>
+                        <span class="mt-5 inline-flex min-h-[26.5px] items-center rounded-[20px] border border-[rgba(0,0,0,0.1)] bg-[rgba(13,43,92,0.07)] px-3 text-[11px] font-semibold uppercase tracking-[0.06em] text-[#0d2b5c]">
+                            {{ card.audience }}
+                        </span>
                     </span>
                 </div>
             </article>
