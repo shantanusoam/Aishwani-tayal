@@ -181,28 +181,30 @@ def _seed_home_services_content():
         },
     ]
 
+    existing_cards = list(section.cards.order_by("order", "id"))
+    if existing_cards:
+        return section
+
     for card_data in seed_cards:
-        card, created = HomeServiceCard.objects.get_or_create(
+        card = HomeServiceCard(
             section=section,
             title=card_data["title"],
-            defaults={"summary": card_data["summary"]},
+            slug=card_data["slug"],
+            summary=card_data["summary"],
+            image_alt=card_data["title"],
+            badge_one=card_data["badge_one"],
+            badge_two=card_data["badge_two"],
+            link_url=reverse("website:service_detail", kwargs={"slug": card_data["slug"]}),
+            detail_kicker=card_data["detail_kicker"],
+            detail_heading=card_data["detail_heading"],
+            detail_intro=card_data["detail_intro"],
+            detail_body=card_data["detail_body"],
+            detail_points=card_data["detail_points"],
+            order=card_data["order"],
         )
-        card.title = card_data["title"]
-        card.slug = card_data["slug"]
-        card.summary = card_data["summary"]
-        card.image_alt = card_data["title"]
-        card.badge_one = card_data["badge_one"]
-        card.badge_two = card_data["badge_two"]
-        card.link_url = reverse("website:service_detail", kwargs={"slug": card_data["slug"]})
-        card.detail_kicker = card_data["detail_kicker"]
-        card.detail_heading = card_data["detail_heading"]
-        card.detail_intro = card_data["detail_intro"]
-        card.detail_body = card_data["detail_body"]
-        card.detail_points = card_data["detail_points"]
-        card.order = card_data["order"]
 
         image_path = static_dir / card_data["filename"]
-        if created and image_path.exists():
+        if image_path.exists():
             card.image.save(
                 card_data["filename"],
                 ContentFile(image_path.read_bytes()),

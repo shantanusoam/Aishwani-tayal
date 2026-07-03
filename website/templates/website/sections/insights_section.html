@@ -1,4 +1,4 @@
-{% load static %}
+{% load static richtext %}
 {% url 'website:blogs' as default_blogs_url %}
 
 <section id="{{ section_id|default:'insights' }}"
@@ -60,9 +60,9 @@
                             {{ post.title }}
                         </h3>
 
-                        <p class="mt-3 max-w-[300px] text-[13px] leading-[22.1px] text-[#666] line-clamp-4">
-                            {{ post.summary }}
-                        </p>
+                        <div class="mt-3 max-w-[300px] text-[13px] leading-[22.1px] text-[#666] line-clamp-4">
+                            {{ post.summary|richtext_excerpt:30 }}
+                        </div>
 
                         <a href="{{ post.read_more_link }}"
                            class="mt-auto inline-flex items-center gap-2 pt-5 text-[13px] font-semibold leading-[19.5px] text-[#d4af37] transition hover:text-[#0d2b5c]">
@@ -96,9 +96,9 @@
                             {{ post.title }}
                         </h3>
 
-                        <p class="mt-3 max-w-[300px] text-[13px] leading-[22.1px] text-[#666] line-clamp-4">
-                            {{ post.summary }}
-                        </p>
+                        <div class="mt-3 max-w-[300px] text-[13px] leading-[22.1px] text-[#666] line-clamp-4">
+                            {{ post.summary|richtext_excerpt:30 }}
+                        </div>
 
                         <a href="{{ post.read_more_link }}" tabindex="-1"
                            class="mt-auto inline-flex items-center gap-2 pt-5 text-[13px] font-semibold leading-[19.5px] text-[#d4af37] transition hover:text-[#0d2b5c]">

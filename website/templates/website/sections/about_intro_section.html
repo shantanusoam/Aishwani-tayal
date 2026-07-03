@@ -1,4 +1,4 @@
-{% load static %}
+{% load static richtext %}
 
 <section id="{{ about_intro_section.section_id }}" class="bg-[#f8f6f1] py-16 sm:py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-[74px]">
@@ -20,9 +20,9 @@
                     {{ about_intro_section.title }}
                 </h2>
                 <div class="mt-4 h-px w-[66px] bg-[#b88e50]"></div>
-                <p class="mt-6 sm:mt-8 max-w-[494px] text-[15px] sm:text-[16px] leading-[1.6] text-[#1e1e1e]">
-                    {{ about_intro_section.description }}
-                </p>
+                <div class="richtext-content mt-6 sm:mt-8 max-w-[494px] text-[15px] sm:text-[16px] leading-[1.6] text-[#1e1e1e]">
+                    {{ about_intro_section.description|richtext }}
+                </div>
 
                 <div class="mt-8 grid gap-4 sm:grid-cols-2">
                     {% for feature in about_intro_features %}

@@ -1,5 +1,5 @@
 {% extends "website/base.html" %}
-{% load static %}
+{% load static richtext %}
 
 {% block title %}{{ service.title }} | CA Ashwani Tayal{% endblock %}
 
@@ -22,9 +22,9 @@
             <h1 class="mt-5 font-serif text-[42px] font-bold leading-[1.12] text-[#0d2b5c] sm:text-[58px]">
                 {{ service.detail_heading|default:service.title }}
             </h1>
-            <p class="mt-6 max-w-[590px] text-[17px] leading-[1.7] text-[#444]">
-                {{ service.detail_intro|default:service.summary }}
-            </p>
+            <div class="richtext-content mt-6 max-w-[590px] text-[17px] leading-[1.7] text-[#444]">
+                {{ service.detail_intro|default:service.summary|richtext }}
+            </div>
             <div class="mt-8 flex flex-wrap gap-3">
                 <span class="rounded-full bg-[rgba(13,43,92,0.08)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0d2b5c]">{{ service.badge_one }}</span>
                 <span class="rounded-full bg-[rgba(212,175,55,0.14)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#b88e50]">{{ service.badge_two }}</span>
@@ -41,9 +41,9 @@
     <div class="mx-auto grid max-w-7xl gap-12 px-6 sm:px-10 lg:grid-cols-12 lg:px-[83px]">
         <div class="lg:col-span-7">
             <h2 class="font-serif text-[34px] font-bold leading-tight text-[#0d2b5c] sm:text-[42px]">How We Help</h2>
-            <p class="mt-5 text-[16px] leading-[1.75] text-[#555]">
-                {{ service.detail_body|default:service.summary }}
-            </p>
+            <div class="richtext-content mt-5 text-[16px] leading-[1.75] text-[#555]">
+                {{ service.detail_body|default:service.summary|richtext }}
+            </div>
         </div>
         <div class="lg:col-span-5">
             <div class="rounded-[20px] border border-[rgba(13,43,92,0.08)] bg-[#f9f8f6] p-6 shadow-sm">
@@ -85,7 +85,7 @@
                 <img src="{{ card.image.url }}" alt="{{ card.image_alt|default:card.title }}" class="h-[170px] w-full object-cover transition duration-700 group-hover:scale-105">
                 <span class="block p-5">
                     <span class="font-serif text-[17px] font-bold text-[#0d2b5c]">{{ card.title }}</span>
-                    <span class="mt-2 block text-[13px] leading-[1.6] text-[#666]">{{ card.summary }}</span>
+                    <span class="mt-2 block text-[13px] leading-[1.6] text-[#666]">{{ card.summary|richtext_excerpt:24 }}</span>
                 </span>
             </a>
             {% endfor %}

@@ -1,5 +1,5 @@
 {% extends "website/base.html" %}
-{% load static %}
+{% load static richtext %}
 
 {% block title %}CA Ashwani Tayal | Trusted Financial backbone & Raid-Ready Planning{% endblock %}
 
@@ -135,9 +135,9 @@
                 </h2>
             </div>
             <div class="lg:max-w-[360px] lg:pt-1 lg:text-left">
-                <p class="max-w-[430px] text-[15px] leading-[1.7] text-[#6b7280]">
-                    {{ home_service_section.description }}
-                </p>
+                <div class="richtext-content max-w-[430px] text-[15px] leading-[1.7] text-[#6b7280]">
+                    {{ home_service_section.description|richtext }}
+                </div>
                 <a href="{{ home_service_section.cta_url }}" class="mt-6 inline-flex h-[43px] items-center justify-center gap-2 rounded-full bg-[#0d2b5c] px-7 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-[#12386f]">
                     {{ home_service_section.cta_text }}
                     <i data-lucide="arrow-right" class="size-[14px]"></i>
@@ -154,7 +154,7 @@
                 </span>
                 <span class="flex flex-1 flex-col px-6 pb-6 pt-5">
                     <span class="font-serif text-[18px] font-bold leading-[1.3] text-[#0d2b5c]">{{ card.title }}</span>
-                    <span class="mt-3 text-[13px] leading-[1.65] text-[#666]">{{ card.summary }}</span>
+                    <span class="mt-3 text-[13px] leading-[1.65] text-[#666]">{{ card.summary|richtext_excerpt:24 }}</span>
                     <span class="mt-auto flex flex-col gap-4 pt-5 sm:flex-row sm:items-end sm:justify-between">
                         <span class="flex flex-wrap gap-2">
                             <span class="rounded-[4px] bg-[rgba(13,43,92,0.07)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#0d2b5c]">{{ card.badge_one }}</span>

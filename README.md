@@ -12,6 +12,13 @@ A modern, fast, and gorgeous Django + Tailwind CSS starter project.
 - **WhiteNoise** with compressed and manifest-hashed static files serving
 - **Pytest** for clean testing
 - **Ruff** + **djLint** + **pre-commit** for code quality
+- **TinyMCE** (via `django-tinymce`) for rich-text CMS fields in Django admin
+
+## CMS Rich Text Editing
+
+Long-form CMS fields (blog summaries, service descriptions, FAQ answers, section copy) use **TinyMCE** in Django admin. Existing plain-text content continues to work without re-saving. HTML is sanitized on the frontend via the `richtext` template filters before rendering.
+
+After installing dependencies, run `python manage.py collectstatic` so TinyMCE assets are available in production.
 
 ## Local Development Setup
 

@@ -1,8 +1,11 @@
-import pytest
 import datetime
+import re
+
+import pytest
 from django.urls import reverse
 
-from website.models import Insight
+from website.models import HomeServiceCard, Insight
+from website.views import _seed_home_services_content
 
 pytestmark = pytest.mark.django_db
 
@@ -129,6 +132,39 @@ def test_ccts_page_only_shows_ccts_blogs_in_context(client):
 def test_service_detail_page_status_code(client):
     response = client.get(reverse("website:service_detail", kwargs={"slug": "tax-planning"}))
     assert response.status_code == 200
+
+
+def test_services_page_renders_each_card_once(client):
+    """Services listing should not duplicate cards in the grid."""
+    response = client.get(reverse("website:services"))
+    cards = response.context["home_service_cards"]
+    section_html = re.search(r'id="all-services".*?</section>', response.content.decode(), re.DOTALL)
+    assert section_html is not None
+    service_links = re.findall(r'href="/services/[^/]+/"', section_html.group(0))
+    assert len(service_links) == len(cards)
+
+
+def test_home_services_seed_respects_admin_delete():
+    """Deleted service cards must not be recreated on page load."""
+    _seed_home_services_content()
+    card = HomeServiceCard.objects.first()
+    assert card is not None
+    initial_count = HomeServiceCard.objects.count()
+    card.delete()
+    _seed_home_services_content()
+    assert HomeServiceCard.objects.count() == initial_count - 1
+
+
+def test_home_services_seed_respects_admin_edit():
+    """Editing a service title must not create a duplicate card."""
+    _seed_home_services_content()
+    card = HomeServiceCard.objects.get(slug="tax-planning")
+    card.title = "Updated Tax Planning"
+    card.save()
+    initial_count = HomeServiceCard.objects.count()
+    _seed_home_services_content()
+    assert HomeServiceCard.objects.count() == initial_count
+    assert HomeServiceCard.objects.filter(title="Updated Tax Planning").exists()
 
 
 def test_global_context_processor(client):

@@ -11,7 +11,9 @@
 - [x] Wrote Django unit and integration tests under `tests/`
 - [x] Tested and confirmed successful `collectstatic` post-processing and passing `pytest` test runs
 
-## Active Tasks
+## Discovered During Work
+- [x] Fix services section duplicate cards on edit/delete (2026-07-03): removed duplicate template loop and stopped `_seed_home_services_content()` from re-seeding on every request.
+- [x] Integrate TinyMCE rich text editor for CMS fields in Django admin (2026-07-03).
 - [ ] Implement additional page views (About, Services, Contact)
 - [ ] Connect custom contact form and database model (if needed)
 - [ ] Configure production server environment and systemd/Nginx configurations

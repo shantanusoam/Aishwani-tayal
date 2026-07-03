@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from .admin_mixins import RichTextAdminMixin
 from .models import (
     ConsultationRequest,
     Insight,
@@ -32,7 +34,8 @@ class ConsultationRequestAdmin(admin.ModelAdmin):
 
 
 @admin.register(Insight)
-class InsightAdmin(admin.ModelAdmin):
+class InsightAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("summary",)
     list_display = ("title", "category", "published_date", "image_filename")
     list_filter = ("category", "published_date")
     search_fields = ("title", "summary")
@@ -46,7 +49,8 @@ class AALabelCardAdmin(admin.ModelAdmin):
     search_fields = ("title",)
 
 
-class HomeServiceCardInline(admin.StackedInline):
+class HomeServiceCardInline(RichTextAdminMixin, admin.StackedInline):
+    rich_text_fields = ("summary", "detail_intro", "detail_body")
     model = HomeServiceCard
     extra = 0
     fields = (
@@ -77,14 +81,16 @@ class ServiceDetailHeroSlideInline(admin.TabularInline):
 
 
 @admin.register(HomeServiceSection)
-class HomeServiceSectionAdmin(admin.ModelAdmin):
+class HomeServiceSectionAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("description",)
     list_display = ("title", "label", "cta_text", "cta_url")
     search_fields = ("title", "label", "description")
     inlines = [HomeServiceCardInline]
 
 
 @admin.register(HomeServiceCard)
-class HomeServiceCardAdmin(admin.ModelAdmin):
+class HomeServiceCardAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("summary", "detail_intro", "detail_body")
     list_display = ("title", "section", "order", "link_url")
     list_filter = ("section",)
     search_fields = ("title", "summary", "badge_one", "badge_two")
@@ -101,7 +107,8 @@ class AboutHeroPanelInline(admin.TabularInline):
 
 
 @admin.register(AboutHeroSection)
-class AboutHeroSectionAdmin(admin.ModelAdmin):
+class AboutHeroSectionAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("description",)
     list_display = ("pretitle", "title_line_one", "title_line_two", "title_highlight")
     search_fields = ("pretitle", "title_line_one", "title_line_two", "title_highlight", "description")
     inlines = [AboutHeroPanelInline]
@@ -115,7 +122,8 @@ class AboutIntroFeatureInline(admin.TabularInline):
 
 
 @admin.register(AboutIntroSection)
-class AboutIntroSectionAdmin(admin.ModelAdmin):
+class AboutIntroSectionAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("description",)
     list_display = ("pretitle", "title", "section_id", "cta_url")
     search_fields = ("pretitle", "title", "description", "section_id")
     inlines = [AboutIntroFeatureInline]
@@ -172,7 +180,8 @@ class MomentMilestoneAdmin(admin.ModelAdmin):
 
 
 @admin.register(FAQ)
-class FAQAdmin(admin.ModelAdmin):
+class FAQAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("answer",)
     list_display = ("question", "page", "order", "is_active")
     list_editable = ("order", "is_active")
     list_filter = ("page", "is_active")
@@ -180,7 +189,8 @@ class FAQAdmin(admin.ModelAdmin):
     ordering = ("page", "order", "id")
 
 
-class CCTSServiceCardInline(admin.TabularInline):
+class CCTSServiceCardInline(RichTextAdminMixin, admin.TabularInline):
+    rich_text_fields = ("summary",)
     model = CCTSServiceCard
     extra = 0
     fields = (
@@ -199,7 +209,8 @@ class CCTSServiceCardInline(admin.TabularInline):
 
 
 @admin.register(CCTSServiceSection)
-class CCTSServiceSectionAdmin(admin.ModelAdmin):
+class CCTSServiceSectionAdmin(RichTextAdminMixin, admin.ModelAdmin):
+    rich_text_fields = ("description",)
     list_display = ("title", "label")
     search_fields = ("title", "label", "description")
     inlines = [CCTSServiceCardInline]

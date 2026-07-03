@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "tinymce",
     # Our website app
     "website",
 ]
@@ -146,3 +147,19 @@ STORAGES = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+TINYMCE_DEFAULT_CONFIG = {
+    "height": 320,
+    "menubar": False,
+    "plugins": "lists link autolink",
+    "toolbar": (
+        "undo redo | bold italic underline | h2 h3 | "
+        "bullist numlist blockquote | link unlink | removeformat"
+    ),
+    "block_formats": "Paragraph=p; Heading 2=h2; Heading 3=h3",
+    "valid_elements": (
+        "p,br,strong/b,em/i,u,ul,ol,li,a[href|title|target|rel],"
+        "h2,h3,h4,blockquote"
+    ),
+    "content_style": "body { font-family: Inter, sans-serif; font-size: 14px; }",
+}
