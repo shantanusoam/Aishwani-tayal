@@ -6,9 +6,11 @@
             <p class="text-base text-slate-600 font-light">A legacy of recognition from India's most respected corporate associations & advisory forums.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="flex flex-nowrap gap-5 justify-center overflow-x-auto pb-2">
             {% for award in award_cards %}
-                {% include "website/components/award_card.html" with award=award %}
+                <div class="w-[322px] shrink-0">
+                    {% include "website/components/award_card.html" with award=award %}
+                </div>
             {% endfor %}
         </div>
     </div>

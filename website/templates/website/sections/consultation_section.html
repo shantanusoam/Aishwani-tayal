@@ -68,11 +68,11 @@
                     <div class="mt-6 space-y-5 text-[14px] leading-[1.6]">
                         <div class="flex items-start gap-3.5">
                             <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="map-pin" class="size-4"></i></span>
-                            <span>302, Prestige Tower, MG Road, New Delhi — 110001</span>
+                            <span>{{ contact_address }}</span>
                         </div>
                         <div class="flex items-center gap-3.5">
                             <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="phone" class="size-4"></i></span>
-                            <span>+91 11 4567 8900</span>
+                            <a href="tel:+{{ contact_phone_digits }}" class="hover:text-[#d4af37]">{{ contact_phone }}</a>
                         </div>
                         <div class="flex items-center gap-3.5">
                             <span class="flex size-9 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(212,175,55,0.2)] text-[#d4af37]"><i data-lucide="mail" class="size-4"></i></span>
@@ -94,9 +94,9 @@
 
                 <div class="flex gap-3">
                     {% for social_link in social_links %}
-                    <a href="{{ social_link.url }}" target="_blank" rel="noopener" class="flex size-11 items-center justify-center rounded-full bg-[#0d2b5c] text-white transition hover:bg-[#d4af37]" aria-label="{{ social_link.label }}"><i data-lucide="{{ social_link.icon_name|default:'link' }}" class="size-[18px]"></i></a>
-                    {% empty %}
-                    <a href="https://linktr.ee/ca_ashwanitayal" target="_blank" rel="noopener" class="flex size-11 items-center justify-center rounded-full bg-[#0d2b5c] text-white transition hover:bg-[#d4af37]" aria-label="Linktree"><i data-lucide="link" class="size-[18px]"></i></a>
+                    <a href="{{ social_link.url }}" target="_blank" rel="noopener" class="flex size-11 items-center justify-center rounded-full bg-[#0d2b5c] text-white transition hover:bg-[#d4af37]" aria-label="{{ social_link.label }}">
+                        {% include "website/components/social_icon.html" with social_link=social_link size="18" lucide_class="size-[18px]" %}
+                    </a>
                     {% endfor %}
                 </div>
             </div>

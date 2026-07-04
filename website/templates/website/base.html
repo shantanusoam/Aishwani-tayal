@@ -121,8 +121,8 @@
                         <a href="{% url 'website:home' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Home</a>
                         <a href="{% url 'website:about' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">About</a>
                         <a href="{% url 'website:services' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Services</a>
-                        <a href="{% url 'website:home' %}#gallery" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
                         <a href="{% url 'website:ccts' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">CCTS</a>
+                        <a href="{% url 'website:home' %}#gallery" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Workshops</a>
                         <a href="{% url 'website:blogs' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-gold)] transition">Blogs</a>
                         <a href="{% url 'website:contact' %}" class="ml-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 border border-[var(--brand-navy)]">
                             Connect
@@ -157,10 +157,10 @@
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">About</a>
                           <a href="{% url 'website:services' %}" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Services</a>
-                          <a href="{% url 'website:home' %}#gallery" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Workshops</a>
                           <a href="{% url 'website:ccts' %}" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">CCTS</a>
+                          <a href="{% url 'website:home' %}#gallery" @click="mobileMenuOpen = false"
+                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Workshops</a>
                           <a href="{% url 'website:blogs' %}" @click="mobileMenuOpen = false"
                               class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-[var(--brand-gold)] transition">Blogs</a>
                     <a href="{% url 'website:contact' %}" @click="mobileMenuOpen = false"
@@ -205,11 +205,7 @@
                             <div class="mt-6 flex items-center gap-[10px]">
                                 {% for social_link in social_links %}
                                 <a href="{{ social_link.url }}" target="_blank" rel="noopener" class="flex h-[38px] w-[38px] items-center justify-center rounded-[19px] text-black transition hover:text-[#b88e50]" aria-label="{{ social_link.label }}">
-                                    <i data-lucide="{{ social_link.icon_name|default:'link' }}" class="h-4 w-4"></i>
-                                </a>
-                                {% empty %}
-                                <a href="https://linktr.ee/ca_ashwanitayal" target="_blank" rel="noopener" class="flex h-[38px] w-[38px] items-center justify-center rounded-[19px] text-black transition hover:text-[#b88e50]" aria-label="Linktree">
-                                    <i data-lucide="link" class="h-4 w-4"></i>
+                                    {% include "website/components/social_icon.html" with social_link=social_link size="16" lucide_class="h-4 w-4" %}
                                 </a>
                                 {% endfor %}
                             </div>
@@ -222,8 +218,8 @@
                                 <li><a href="{% url 'website:home' %}" class="transition hover:text-[#b88e50]">Home</a></li>
                                 <li><a href="{% url 'website:about' %}" class="transition hover:text-[#b88e50]">About</a></li>
                                 <li><a href="{% url 'website:services' %}" class="transition hover:text-[#b88e50]">Services</a></li>
-                                <li><a href="{% url 'website:home' %}#gallery" class="transition hover:text-[#b88e50]">Workshops</a></li>
                                 <li><a href="{% url 'website:ccts' %}" class="transition hover:text-[#b88e50]">CCTS</a></li>
+                                <li><a href="{% url 'website:home' %}#gallery" class="transition hover:text-[#b88e50]">Workshops</a></li>
                                 <li><a href="{% url 'website:blogs' %}" class="transition hover:text-[#b88e50]">Blogs</a></li>
                                 <li><a href="{% url 'website:contact' %}" class="transition hover:text-[#b88e50]">Connect</a></li>
                             </ul>
@@ -248,11 +244,11 @@
                             <ul class="mt-5 space-y-4 text-[14px] font-normal leading-[22.4px] text-black">
                                 <li class="flex items-start gap-3">
                                     <i data-lucide="map-pin" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>
-                                    <span class="max-w-[245px]">302, Prestige Tower, MG Road, New Delhi — 110001</span>
+                                    <span class="max-w-[245px]">{{ contact_address }}</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <i data-lucide="phone" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>
-                                    <span>+91 11 4567 8900</span>
+                                    <a href="tel:+{{ contact_phone_digits }}" class="transition hover:text-[#b88e50]">{{ contact_phone }}</a>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <i data-lucide="mail" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>

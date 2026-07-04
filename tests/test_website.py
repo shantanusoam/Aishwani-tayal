@@ -4,7 +4,7 @@ import re
 import pytest
 from django.urls import reverse
 
-from website.models import HomeServiceCard, Insight
+from website.models import HomeServiceCard, Insight, SocialLink
 from website.views import _seed_home_services_content
 
 pytestmark = pytest.mark.django_db
@@ -169,7 +169,7 @@ def test_home_services_seed_respects_admin_edit():
 
 def test_global_context_processor(client):
     """
-    Test that the global context processor injects the correct site name and email.
+    Test that the global context processor injects site name, contact details, and social links.
     """
     url = reverse("website:home")
     response = client.get(url)
@@ -177,6 +177,88 @@ def test_global_context_processor(client):
     assert response.context["site_name"] == "Aishwani Tayal"
     assert "contact_email" in response.context
     assert response.context["contact_email"] == "contact@aishwanitayal.com"
+    assert response.context["contact_phone"] == "+91 98995 00036"
+    assert response.context["contact_phone_digits"] == "919899500036"
+    assert response.context["contact_whatsapp_url"] == "https://wa.me/919899500036"
+    assert "Pushpanjali Enclave" in response.context["contact_address"]
+    assert "Pitampura" in response.context["contact_address"]
+
+    labels = {link.label for link in response.context["social_links"]}
+    assert {"WhatsApp", "Facebook", "Linktree"}.issubset(labels)
+    assert SocialLink.objects.filter(label="WhatsApp", icon_name="whatsapp").exists()
+    assert SocialLink.objects.filter(label="Facebook", icon_name="facebook").exists()
+
+
+def test_global_context_seeds_missing_social_links(client):
+    """
+    Edge case: when only Linktree exists, WhatsApp and Facebook are still added.
+    """
+    SocialLink.objects.all().delete()
+    SocialLink.objects.create(
+        label="Linktree",
+        url="https://linktr.ee/ca_ashwanitayal",
+        icon_name="link",
+        order=1,
+        is_active=True,
+    )
+    response = client.get(reverse("website:home"))
+    labels = {link.label for link in response.context["social_links"]}
+    assert labels == {"WhatsApp", "Facebook", "Linktree"}
+
+
+def test_home_hero_cta_points_to_contact_form(client):
+    """
+    Hero CTA should redirect to the contact page consultation form.
+    """
+    response = client.get(reverse("website:home"))
+    content = response.content.decode()
+    assert "/contact/#appointments" in content
+    assert "BOOK YOUR CONSULTATION" in content
+
+
+def test_inactive_social_links_are_excluded(client):
+    """
+    Failure case: inactive social links must not appear in context.
+    """
+    SocialLink.objects.all().delete()
+    SocialLink.objects.create(
+        label="WhatsApp",
+        url="https://wa.me/919899500036",
+        icon_name="whatsapp",
+        order=1,
+        is_active=False,
+    )
+    response = client.get(reverse("website:home"))
+    # Seeding re-activates the default WhatsApp row by label update.
+    active_labels = {link.label for link in response.context["social_links"]}
+    assert "WhatsApp" in active_labels
+    assert SocialLink.objects.get(label="WhatsApp").is_active is True
+
+
+def test_home_page_shows_updated_contact_details(client):
+    """
+    Footer and floating WhatsApp use the updated phone and address.
+    """
+    response = client.get(reverse("website:home"))
+    content = response.content.decode()
+    assert "+91 98995 00036" in content
+    assert "https://wa.me/919899500036" in content
+    assert "Pushpanjali Enclave" in content
+    assert "Prestige Tower" not in content
+    assert "911145678900" not in content
+
+
+def test_nav_order_ccts_before_workshops(client):
+    """
+    CCTS should appear before Workshops in the header navigation.
+    """
+    response = client.get(reverse("website:home"))
+    content = response.content.decode()
+    ccts_pos = content.find(">CCTS</a>")
+    workshops_pos = content.find(">Workshops</a>")
+    assert ccts_pos != -1
+    assert workshops_pos != -1
+    assert ccts_pos < workshops_pos
 
 
 def test_book_consultation_success(client):

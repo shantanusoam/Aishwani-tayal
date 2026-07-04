@@ -80,13 +80,13 @@
                             <div class="bg-[rgba(212,175,55,0.2)] rounded-[6px] p-2 flex-shrink-0">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-[var(--brand-gold)]"></i>
                             </div>
-                            <p>302, Prestige Tower, MG Road, New Delhi — 110001</p>
+                            <p>{{ contact_address }}</p>
                         </div>
                         <div class="flex items-start gap-3">
                             <div class="bg-[rgba(212,175,55,0.2)] rounded-[6px] p-2 flex-shrink-0">
                                 <i data-lucide="phone" class="w-4 h-4 text-[var(--brand-gold)]"></i>
                             </div>
-                            <p>+91 11 4567 8900</p>
+                            <p><a href="tel:+{{ contact_phone_digits }}" class="hover:text-[var(--brand-gold)]">{{ contact_phone }}</a></p>
                         </div>
                         <div class="flex items-start gap-3">
                             <div class="bg-[rgba(212,175,55,0.2)] rounded-[6px] p-2 flex-shrink-0">
@@ -115,11 +115,7 @@
                 <div class="flex flex-wrap gap-3">
                     {% for social_link in social_links %}
                     <a href="{{ social_link.url }}" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-[#0d2b5c] flex items-center justify-center text-white hover:bg-[var(--brand-gold)] transition" aria-label="{{ social_link.label }}">
-                        <i data-lucide="{{ social_link.icon_name|default:'link' }}" class="w-5 h-5"></i>
-                    </a>
-                    {% empty %}
-                    <a href="https://linktr.ee/ca_ashwanitayal" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-[#0d2b5c] flex items-center justify-center text-white hover:bg-[var(--brand-gold)] transition" aria-label="Linktree">
-                        <i data-lucide="link" class="w-5 h-5"></i>
+                        {% include "website/components/social_icon.html" with social_link=social_link size="20" lucide_class="w-5 h-5" %}
                     </a>
                     {% endfor %}
                 </div>
@@ -138,7 +134,7 @@
         <div class="text-center max-w-xl mx-auto mb-20 space-y-4">
             <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Get In Touch</span>
             <h2 class="text-3xl sm:text-5xl font-extrabold text-white font-serif leading-tight">Book Your Consultation</h2>
-            <p class="text-slate-300 font-light text-base">Schedule a private session with CA Ashwani Tayal's core team online or at our head offices in Prestige Tower.</p>
+            <p class="text-slate-300 font-light text-base">Schedule a private session with CA Ashwani Tayal's core team online or at our head office in Pitampura, Delhi.</p>
             <div class="h-0.5 w-16 bg-gradient-to-r from-transparent via-indigo-500 to-transparent mx-auto rounded"></div>
         </div>
 
@@ -262,7 +258,7 @@
                             </div>
                             <div>
                                 <div class="font-bold text-white text-xs uppercase tracking-wider">Office Details</div>
-                                <p class="text-slate-300 mt-1 font-light leading-relaxed">302, Prestige Tower, MG Road, New Delhi — 110001</p>
+                                <p class="text-slate-300 mt-1 font-light leading-relaxed">{{ contact_address }}</p>
                             </div>
                         </div>
 
@@ -272,7 +268,7 @@
                             </div>
                             <div>
                                 <div class="font-bold text-white text-xs uppercase tracking-wider">Call Inquiries</div>
-                                <p class="text-slate-300 mt-1 font-semibold">+91 11 4567 8900</p>
+                                <p class="text-slate-300 mt-1 font-semibold"><a href="tel:+{{ contact_phone_digits }}" class="hover:text-white transition">{{ contact_phone }}</a></p>
                             </div>
                         </div>
 
@@ -309,7 +305,7 @@
                             <i data-lucide="map-pin" class="w-5 h-5 fill-indigo-400"></i>
                         </div>
                         <div>
-                            <span class="text-xs uppercase font-extrabold tracking-widest text-indigo-400">Prestige Tower Delhi</span>
+                            <span class="text-xs uppercase font-extrabold tracking-widest text-indigo-400">Pushpanjali Enclave, Pitampura</span>
                             <div class="text-sm text-slate-300 mt-1">Google Maps Interactive Preview</div>
                         </div>
                         <a href="https://maps.google.com" target="_blank" class="px-5 py-2 bg-slate-800 text-xs font-bold uppercase tracking-wider rounded-lg border border-slate-700 hover:bg-indigo-600 hover:text-white transition duration-300">

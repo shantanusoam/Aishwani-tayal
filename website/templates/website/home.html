@@ -25,7 +25,7 @@
                 Notice, Survey, Investigation, Raid- Nobody can control, but we can control preparedness.
             </p>
 
-            <a href="#appointments"
+            <a href="{% url 'website:contact' %}#appointments"
                class="hero-reveal mt-7 inline-flex h-[48px] w-full max-w-[319px] items-center justify-center gap-2 rounded-[4px] bg-[#b88e50] px-4 text-[15px] font-normal uppercase tracking-[0.02em] text-white hover:bg-[#a67e45] transition shadow-md sm:mt-8 sm:h-[52px] sm:text-[18px]">
                 BOOK YOUR CONSULTATION
                 <i data-lucide="arrow-right" class="h-[18px] w-[18px]"></i>
@@ -40,7 +40,7 @@
        class="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-gold)] text-white shadow-[0_4px_14px_rgba(0,0,0,0.25)] hover:scale-110 hover:bg-[#a67e45] transition-all duration-300">
         <i data-lucide="mail" class="h-5 w-5"></i>
     </a>
-    <a href="https://wa.me/911145678900" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+    <a href="{{ contact_whatsapp_url }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
        class="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(0,0,0,0.25)] hover:scale-110 hover:bg-[#20bd5a] transition-all duration-300">
         <!-- SVG icon for WhatsApp instead of text -->
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -201,8 +201,8 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center scroll-anim-stats items-center">
             
             <!-- Stat 1 -->
-            <div class="px-4 py-6 flex flex-col items-center justify-center border-r border-white/8 lg:border-r" x-data="{ count: 0 }" x-init="setTimeout(() => { let interval = setInterval(() => { if (count < 25) { count++ } else { clearInterval(interval) } }, 40) }, 500)">
-                <div class="text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" x-text="count + '+'">25+</div>
+            <div class="px-4 py-6 flex flex-col items-center justify-center border-r border-white/8 lg:border-r">
+                <div class="stat-count text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" data-target="25">0+</div>
                 <div class="my-4 h-[2px] w-[40px] bg-[rgba(212,175,55,0.4)]"></div>
                 <div class="text-xs font-semibold tracking-[0.05em] uppercase text-white/75">
                     Years of Experience
@@ -210,8 +210,8 @@
             </div>
             
             <!-- Stat 2 -->
-            <div class="px-4 py-6 flex flex-col items-center justify-center border-none lg:border-r lg:border-white/8" x-data="{ count: 0 }" x-init="setTimeout(() => { let interval = setInterval(() => { if (count < 1000) { count += 25 } else { count = 1000; clearInterval(interval) } }, 20) }, 500)">
-                <div class="text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" x-text="count + '+'">1000+</div>
+            <div class="px-4 py-6 flex flex-col items-center justify-center border-none lg:border-r lg:border-white/8">
+                <div class="stat-count text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" data-target="1000">0+</div>
                 <div class="my-4 h-[2px] w-[40px] bg-[rgba(212,175,55,0.4)]"></div>
                 <div class="text-xs font-semibold tracking-[0.05em] uppercase text-white/75">
                     Happy Clients
@@ -219,8 +219,8 @@
             </div>
 
             <!-- Stat 3 -->
-            <div class="px-4 py-6 flex flex-col items-center justify-center border-r border-white/8 lg:border-r lg:border-white/8" x-data="{ count: 0 }" x-init="setTimeout(() => { let interval = setInterval(() => { if (count < 50) { count += 2 } else { count = 50; clearInterval(interval) } }, 30) }, 500)">
-                <div class="text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" x-text="count + '+'">50+</div>
+            <div class="px-4 py-6 flex flex-col items-center justify-center border-r border-white/8 lg:border-r lg:border-white/8">
+                <div class="stat-count text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" data-target="50">0+</div>
                 <div class="my-4 h-[2px] w-[40px] bg-[rgba(212,175,55,0.4)]"></div>
                 <div class="text-xs font-semibold tracking-[0.05em] uppercase text-white/75">
                     Professionals
@@ -228,8 +228,8 @@
             </div>
 
             <!-- Stat 4 -->
-            <div class="px-4 py-6 flex flex-col items-center justify-center border-none" x-data="{ count: 0 }" x-init="setTimeout(() => { let interval = setInterval(() => { if (count < 100) { count += 4 } else { count = 100; clearInterval(interval) } }, 25) }, 500)">
-                <div class="text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" x-text="count + '+'">100+</div>
+            <div class="px-4 py-6 flex flex-col items-center justify-center border-none">
+                <div class="stat-count text-[54px] sm:text-[63px] font-bold text-[#d4af37] leading-[1]" style="font-family: 'Playfair Display', serif;" data-target="100">0+</div>
                 <div class="my-4 h-[2px] w-[40px] bg-[rgba(212,175,55,0.4)]"></div>
                 <div class="text-xs font-semibold tracking-[0.05em] uppercase text-white/75">
                     Services Offered
@@ -457,7 +457,7 @@
             ease: 'back.out(1.2)'
         });
 
-        // 5. Stats section counts
+        // 5. Stats section reveal + count-up on scroll
         gsap.from('.scroll-anim-stats', {
             scrollTrigger: {
                 trigger: '.scroll-anim-stats',
@@ -467,6 +467,26 @@
             scale: 0.95,
             duration: 1.2,
             ease: 'power3.out'
+        });
+
+        document.querySelectorAll('.stat-count').forEach((el) => {
+            const target = parseInt(el.dataset.target, 10) || 0;
+            const counter = { value: 0 };
+            ScrollTrigger.create({
+                trigger: '.scroll-anim-stats',
+                start: 'top 85%',
+                once: true,
+                onEnter: () => {
+                    gsap.to(counter, {
+                        value: target,
+                        duration: target >= 1000 ? 2 : 1.4,
+                        ease: 'power1.out',
+                        onUpdate: () => {
+                            el.textContent = Math.round(counter.value) + '+';
+                        },
+                    });
+                },
+            });
         });
 
         // 6. Testimonial Story Cards reveal
