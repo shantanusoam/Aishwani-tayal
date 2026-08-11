@@ -5,7 +5,7 @@ import pytest
 from django.urls import reverse
 
 from website.models import HomeServiceCard, Insight, SocialLink
-from website.views import _seed_home_services_content
+from website.views import _seed_awards_content, _seed_home_services_content
 
 pytestmark = pytest.mark.django_db
 
@@ -297,3 +297,41 @@ def test_book_consultation_failure(client):
     assert res_data["success"] is False
     assert "full_name" in res_data["errors"]
     assert "email" in res_data["errors"]
+
+
+def test_home_awards_section_auto_scrolls(client):
+    """
+    Expected use: home awards track uses the infinite marquee animation.
+    """
+    response = client.get(reverse("website:home"))
+    content = response.content.decode()
+    assert "home-awards-track" in content
+    assert "home-awards-scroll-left" in content
+    assert "overflow-x-auto" not in content.split("Awards & Recognitions", 1)[-1].split("</section>", 1)[0]
+
+
+def test_home_awards_section_duplicates_cards_for_loop(client):
+    """
+    Edge case: cards are duplicated so the -50% translate loops seamlessly.
+    """
+    awards = _seed_awards_content()
+    response = client.get(reverse("website:home"))
+    content = response.content.decode()
+    first_title = awards[0].title
+    assert content.count(first_title) >= 2
+    assert 'aria-hidden="true"' in content
+
+
+def test_inactive_awards_are_excluded_from_home(client):
+    """
+    Failure case: inactive awards must not appear in the auto-scroll track.
+    """
+    awards = _seed_awards_content()
+    hidden = awards[0]
+    hidden.is_active = False
+    hidden.save(update_fields=["is_active"])
+
+    response = client.get(reverse("website:home"))
+    titles = [award.title for award in response.context["award_cards"]]
+    assert hidden.title not in titles
+    assert response.content.decode().count(hidden.title) == 0
