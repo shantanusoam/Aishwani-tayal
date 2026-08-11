@@ -126,6 +126,9 @@ echo "Unpacking project"
 $SUDO tar --no-same-owner -xzf "$REMOTE_ARCHIVE" -C "$APP_DIR"
 $SUDO mkdir -p "$APP_DIR/media" "$APP_DIR/staticfiles"
 
+echo "Ensuring nginx can traverse media directories"
+$SUDO find "$APP_DIR/media" -type d -exec chmod o+rx {} \;
+
 if [[ ! -f "$APP_DIR/.env" ]]; then
     echo "Creating production .env"
     SECRET="$($SUDO python3 -c 'import secrets; print(secrets.token_urlsafe(64))')"
