@@ -6,11 +6,15 @@
 {% block content %}
 <!-- Hero (Figma node 1:859) -->
 <section class="relative min-h-[639px] overflow-hidden bg-[#f9f8f6] pt-[83px]">
-    <img src="{% static 'images/ccts_hero_bg.png' %}" alt="Carbon Credits: Real Money" class="absolute inset-0 h-full w-full object-cover">
-    <div class="absolute inset-y-0 left-0 w-full bg-[linear-gradient(90deg,rgba(247,244,237,0.88)_0%,rgba(247,244,237,0.78)_33%,rgba(247,244,237,0.18)_56%,rgba(247,244,237,0)_78%)]"></div>
+    {# Mobile hero #}
+    <img src="{% static 'images/ccts_hero_bg_mobile.png' %}" alt="Carbon Credits: Real Money" width="485" height="1024" class="absolute inset-0 h-full w-full object-cover object-[center_20%] lg:hidden">
+    {# Desktop hero #}
+    <img src="{% static 'images/ccts_hero_bg.png' %}" alt="Carbon Credits: Real Money" width="1024" height="512" class="absolute inset-0 hidden h-full w-full object-cover lg:block">
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,244,237,0.92)_0%,rgba(247,244,237,0.72)_38%,rgba(247,244,237,0.18)_62%,rgba(247,244,237,0)_82%)] lg:hidden"></div>
+    <div class="absolute inset-y-0 left-0 hidden w-full bg-[linear-gradient(90deg,rgba(247,244,237,0.88)_0%,rgba(247,244,237,0.78)_33%,rgba(247,244,237,0.18)_56%,rgba(247,244,237,0)_78%)] lg:block"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-[74px]">
-        <div class="max-w-[614px] pt-28 sm:pt-32">
+        <div class="max-w-[614px] pt-16 sm:pt-24 lg:pt-32">
             <p class="text-[18px] leading-[1.5] text-[#011f42] sm:text-[20px]">Let’s Talk About India’s</p>
             <h1 class="mt-2 font-serif text-[46px] font-semibold leading-[1.12] text-[#011f42] sm:text-[64px]">
                 Carbon Credits:<br>Real Money

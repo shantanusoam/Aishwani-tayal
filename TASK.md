@@ -12,6 +12,9 @@
 - [x] Tested and confirmed successful `collectstatic` post-processing and passing `pytest` test runs
 
 ## Discovered During Work
+- [x] Add CCTS hero mobile composite image (2026-08-12)
+- [x] Replace About Us hero images (desktop + mobile) with new composites (2026-08-12)
+- [x] Replace CCTS hero background with new Ashwani composite image (2026-08-12)
 - [x] Home awards section auto-scroll like About Us certifications (2026-08-11)
 - [x] Fix services section duplicate cards on edit/delete (2026-07-03): removed duplicate template loop and stopped `_seed_home_services_content()` from re-seeding on every request.
 - [x] Integrate TinyMCE rich text editor for CMS fields in Django admin (2026-07-03).
