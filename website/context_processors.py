@@ -4,9 +4,10 @@ CONTACT_PHONE = "+91 98995 00036"
 CONTACT_PHONE_DIGITS = "919899500036"
 CONTACT_WHATSAPP_URL = f"https://wa.me/{CONTACT_PHONE_DIGITS}"
 CONTACT_ADDRESS = (
-    "Third Floor, Pushpanjali Enclave, Bus Stand, B-20, Outer Ring Rd, "
-    "nearby Pushpajali Enclave, Pushpanjali Enclave, Pitampura, Delhi, 110034"
+    "3rd Floor (4th Floor By Lift), Pushpanjali Enclave, Behind Bus Stand, "
+    "B-20, Outer Ring Rd, Pitampura, Delhi, 110034"
 )
+CONTACT_TIMING = "Mon-Fri: 8:30 AM - 5:30 PM"
 LINKTREE_URL = "https://linktr.ee/ca_ashwanitayal"
 
 # Reason: ensure brand icons exist even when only Linktree was seeded earlier.
@@ -53,5 +54,6 @@ def global_context(request):
         "contact_phone_digits": CONTACT_PHONE_DIGITS,
         "contact_whatsapp_url": CONTACT_WHATSAPP_URL,
         "contact_address": CONTACT_ADDRESS,
+        "contact_timing": CONTACT_TIMING,
         "social_links": links,
     }
