@@ -44,7 +44,9 @@
                 --brand-gold: #b88e50;
                 --brand-ivory: #f7f4ed;
                 --brand-cream: #f9f8f6;
+                --brand-ink: #05070a;
                 --line-soft: rgba(1, 31, 66, 0.12);
+                --ease-out-premium: cubic-bezier(0.22, 1, 0.36, 1);
             }
             body {
                 font-family: 'Open Sans', sans-serif;
@@ -91,6 +93,90 @@
                 --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
             }
 
+            /* Header nav — the "ink line": a gold underline that draws in on hover
+               and stays drawn under the active page, so hover reads as a preview
+               and the permanent line reads as "you are here". */
+            .nav-link {
+                position: relative;
+                color: var(--brand-navy);
+                transition: color 220ms var(--ease-out-premium), letter-spacing 220ms var(--ease-out-premium);
+            }
+            .nav-link::after {
+                content: "";
+                position: absolute;
+                left: 12px;
+                right: 12px;
+                bottom: 4px;
+                height: 1.5px;
+                background: var(--brand-gold);
+                transform: scaleX(0);
+                transform-origin: center;
+                transition: transform 420ms var(--ease-out-premium);
+            }
+            .nav-link:hover,
+            .nav-link:focus-visible {
+                color: var(--brand-ink);
+                letter-spacing: 0.1em;
+            }
+            .nav-link:hover::after,
+            .nav-link:focus-visible::after {
+                transform: scaleX(1);
+            }
+            .nav-link.is-active {
+                color: var(--brand-ink);
+                letter-spacing: 0.1em;
+            }
+            .nav-link.is-active::after {
+                transform: scaleX(1);
+            }
+            .nav-link:focus-visible {
+                outline: 2px solid var(--brand-gold);
+                outline-offset: 4px;
+                border-radius: 2px;
+            }
+
+            /* Mobile nav mirrors the ink line as a left-edge accent, since touch has no hover. */
+            .nav-link-mobile {
+                position: relative;
+                border-left: 2px solid transparent;
+                transition: border-color 220ms var(--ease-out-premium), color 220ms var(--ease-out-premium),
+                    background-color 220ms var(--ease-out-premium), padding-left 220ms var(--ease-out-premium);
+            }
+            .nav-link-mobile:hover,
+            .nav-link-mobile:focus-visible {
+                border-left-color: var(--brand-gold);
+                color: var(--brand-ink);
+                padding-left: 1.25rem;
+            }
+            .nav-link-mobile.is-active {
+                border-left-color: var(--brand-gold);
+                color: var(--brand-ink);
+                background-color: rgba(184, 142, 80, 0.08);
+                font-weight: 700;
+            }
+            .nav-link-mobile:focus-visible {
+                outline: 2px solid var(--brand-gold);
+                outline-offset: -2px;
+            }
+
+            /* Connect CTA: arrow nudges forward on hover to reinforce momentum. */
+            .nav-cta-arrow {
+                transition: transform 320ms var(--ease-out-premium);
+            }
+            .nav-cta:hover .nav-cta-arrow,
+            .nav-cta:focus-visible .nav-cta-arrow {
+                transform: translateX(3px);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .nav-link,
+                .nav-link::after,
+                .nav-link-mobile,
+                .nav-cta-arrow {
+                    transition: none !important;
+                }
+            }
+
         </style>
         {% block extra_head %}{% endblock %}
     </head>
@@ -118,15 +204,15 @@
 
                     <!-- Desktop Nav -->
                     <nav class="hidden md:flex items-center gap-1 px-4 py-1.5 justify-end w-full lg:w-auto">
-                        <a href="{% url 'website:home' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold transition hover:text-black hover:underline {% if request.resolver_match.url_name == 'home' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">Home</a>
-                        <a href="{% url 'website:about' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold transition hover:text-black hover:underline {% if request.resolver_match.url_name == 'about' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">About</a>
-                        <a href="{% url 'website:services' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold transition hover:text-black hover:underline {% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'service_detail' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">Services</a>
-                        <a href="{% url 'website:ccts' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold transition hover:text-black hover:underline {% if request.resolver_match.url_name == 'ccts' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">CCTS</a>
-                        <a href="{% url 'website:home' %}#gallery" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold text-[var(--brand-navy)] hover:text-black hover:underline transition">Workshops</a>
-                        <a href="{% url 'website:blogs' %}" class="px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold transition hover:text-black hover:underline {% if request.resolver_match.url_name == 'blogs' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">Blogs</a>
-                        <a href="{% url 'website:contact' %}" class="ml-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 border border-[var(--brand-navy)]">
+                        <a href="{% url 'website:home' %}" class="nav-link px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold {% if request.resolver_match.url_name == 'home' %}is-active{% endif %}">Home</a>
+                        <a href="{% url 'website:about' %}" class="nav-link px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold {% if request.resolver_match.url_name == 'about' %}is-active{% endif %}">About</a>
+                        <a href="{% url 'website:services' %}" class="nav-link px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold {% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'service_detail' %}is-active{% endif %}">Services</a>
+                        <a href="{% url 'website:ccts' %}" class="nav-link px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold {% if request.resolver_match.url_name == 'ccts' %}is-active{% endif %}">CCTS</a>
+                        <a href="{% url 'website:home' %}#gallery" class="nav-link px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold">Workshops</a>
+                        <a href="{% url 'website:blogs' %}" class="nav-link px-3 py-2 text-[12px] uppercase tracking-[0.08em] font-semibold {% if request.resolver_match.url_name == 'blogs' %}is-active{% endif %}">Blogs</a>
+                        <a href="{% url 'website:contact' %}" class="nav-cta ml-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition-all duration-300 border border-[var(--brand-navy)]">
                             Connect
-                            <i data-lucide="arrow-right" class="ml-1.5 w-3.5 h-3.5"></i>
+                            <i data-lucide="arrow-right" class="nav-cta-arrow ml-1.5 w-3.5 h-3.5"></i>
                         </a>
                     </nav>
                     <!-- Mobile Menu Button -->
@@ -152,17 +238,17 @@
                  style="display: none">
                      <div class="px-4 pt-3 pb-6 space-y-2 bg-[var(--brand-ivory)] border-t border-[color:var(--line-soft)] shadow-xl rounded-b-2xl">
                           <a href="{% url 'website:home' %}" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold transition hover:bg-white hover:text-black hover:underline {% if request.resolver_match.url_name == 'home' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">Home</a>
+                              class="nav-link-mobile block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] {% if request.resolver_match.url_name == 'home' %}is-active{% endif %}">Home</a>
                           <a href="{% url 'website:about' %}" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold transition hover:bg-white hover:text-black hover:underline {% if request.resolver_match.url_name == 'about' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">About</a>
+                              class="nav-link-mobile block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] {% if request.resolver_match.url_name == 'about' %}is-active{% endif %}">About</a>
                           <a href="{% url 'website:services' %}" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold transition hover:bg-white hover:text-black hover:underline {% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'service_detail' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">Services</a>
+                              class="nav-link-mobile block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] {% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'service_detail' %}is-active{% endif %}">Services</a>
                           <a href="{% url 'website:ccts' %}" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold transition hover:bg-white hover:text-black hover:underline {% if request.resolver_match.url_name == 'ccts' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">CCTS</a>
+                              class="nav-link-mobile block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] {% if request.resolver_match.url_name == 'ccts' %}is-active{% endif %}">CCTS</a>
                           <a href="{% url 'website:home' %}#gallery" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] hover:bg-white hover:text-black hover:underline transition">Workshops</a>
+                              class="nav-link-mobile block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)]">Workshops</a>
                           <a href="{% url 'website:blogs' %}" @click="mobileMenuOpen = false"
-                              class="block px-4 py-2.5 rounded-lg text-base font-semibold transition hover:bg-white hover:text-black hover:underline {% if request.resolver_match.url_name == 'blogs' %}text-black underline{% else %}text-[var(--brand-navy)]{% endif %}">Blogs</a>
+                              class="nav-link-mobile block px-4 py-2.5 rounded-lg text-base font-semibold text-[var(--brand-navy)] {% if request.resolver_match.url_name == 'blogs' %}is-active{% endif %}">Blogs</a>
                     <a href="{% url 'website:contact' %}" @click="mobileMenuOpen = false"
                               class="block text-center px-4 py-3 rounded-lg text-base font-bold text-white bg-[var(--brand-navy)] hover:bg-[var(--brand-navy-soft)] transition mt-4">Connect</a>
                 </div>
