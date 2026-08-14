@@ -85,12 +85,17 @@
                     </div>
                 </div>
 
-                <div class="flex h-[200px] items-center justify-center rounded-[16px] bg-[#e8edf5] text-center text-[#666] shadow-[0_4px_24px_rgba(13,43,92,0.06)]">
-                    <div>
-                        <i data-lucide="map-pin" class="mx-auto size-8 text-[#0d2b5c]"></i>
-                        <p class="mt-2 text-[13px] leading-[19.5px]">Google Maps Preview</p>
-                    </div>
+                <div class="overflow-hidden rounded-[16px] shadow-[0_4px_24px_rgba(13,43,92,0.06)] h-[200px]">
+                    <iframe
+                        src="https://www.google.com/maps?cid=1657783186676260690&output=embed"
+                        width="100%" height="100%" style="border:0; display:block;"
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="CA Ashwani Tayal office location on Google Maps"></iframe>
                 </div>
+                <a href="https://maps.app.goo.gl/fxzDuZ32huzvAfey8" target="_blank" rel="noopener"
+                   class="block text-center text-[13px] font-semibold text-[#0d2b5c] hover:text-[#d4af37] transition">
+                    Get Directions &rarr;
+                </a>
 
                 <div class="flex gap-3">
                     {% for social_link in social_links %}
