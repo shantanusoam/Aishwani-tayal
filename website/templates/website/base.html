@@ -262,9 +262,9 @@
         </main>
         <!-- Footer -->
         <div class="relative z-10 bg-white">
-            <div class="relative mx-auto h-[210px] max-w-[1185px] overflow-hidden rounded-[24px] bg-[#011f42] bg-cover bg-center px-6 text-center text-white sm:h-[260px] lg:h-[295px]" style="background-image: linear-gradient(180deg, rgba(1,31,66,0.08), rgba(1,31,66,0.18)), url('{% static 'images/raid_ready_banner_bg.png' %}');">
+            <div class="relative mx-auto min-h-[210px] max-w-[1185px] overflow-hidden rounded-[24px] bg-[#011f42] bg-cover bg-center px-6 text-center text-white sm:h-[260px] lg:h-[295px]" style="background-image: linear-gradient(180deg, rgba(1,31,66,0.08), rgba(1,31,66,0.18)), url('{% static 'images/raid_ready_banner_bg.png' %}');">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(76,128,213,0.28),transparent_33%),linear-gradient(110deg,rgba(1,31,66,0),rgba(0,12,34,0.32)_68%)]"></div>
-                <div class="relative z-10 mx-auto flex h-full max-w-[870px] flex-col items-center justify-start pt-9 sm:pt-11 lg:pt-[34px]">
+                <div class="relative z-10 mx-auto flex h-full max-w-[870px] flex-col items-center justify-start pt-9 pb-9 sm:pt-11 sm:pb-0 lg:pt-[34px]">
                     <h2 class="font-serif text-[24px] font-semibold leading-[1.122] text-white sm:text-[29px] lg:text-[32px]">
                         Ready To Build A Raid-Ready Business ?
                     </h2>
@@ -278,7 +278,9 @@
                 </div>
             </div>
 
-            <footer class="relative overflow-hidden bg-white pt-[52px] pb-8 text-black sm:pt-[70px]">
+            <footer class="relative overflow-hidden bg-white pt-[52px] pb-8 text-black sm:pt-[70px]"
+                    x-data="{ open: { links: false, services: false, contact: false } }"
+                    x-init="let deskOpen = window.matchMedia('(min-width: 640px)').matches; open.links = deskOpen; open.services = deskOpen; open.contact = deskOpen;">
                 <div class="pointer-events-none absolute -left-[138px] -top-[71px] h-[856px] w-[839px] bg-[#4c80d5] opacity-10" style="-webkit-mask-image: url('{% static 'images/logo.png' %}'); mask-image: url('{% static 'images/logo.png' %}'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 1350px 1198px; mask-size: 1350px 1198px; -webkit-mask-position: -320px -239px; mask-position: -320px -239px;"></div>
 
                 <div class="relative z-10 mx-auto max-w-[1186px] px-6 sm:px-8 lg:px-0">
@@ -300,9 +302,23 @@
                         </div>
 
                         <div>
-                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">Quick Links</h4>
+                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">
+                                <button type="button" class="flex w-full items-center justify-between gap-2 text-left sm:pointer-events-none sm:cursor-default" @click="open.links = !open.links" :aria-expanded="open.links.toString()" aria-controls="footer-panel-links">
+                                    <span>Quick Links</span>
+                                    <span class="shrink-0 transition-transform duration-300 sm:hidden" :class="open.links ? 'rotate-180' : ''">
+                                        <i data-lucide="chevron-down" class="h-4 w-4 text-[#d4af37]"></i>
+                                    </span>
+                                </button>
+                            </h4>
                             <div class="mt-5 h-[2px] w-8 bg-[rgba(212,175,55,0.4)]"></div>
-                            <ul class="mt-5 space-y-3 text-[14px] font-medium leading-[21px] text-black">
+                            <ul id="footer-panel-links" x-show="open.links"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 -translate-y-2"
+                                x-transition:enter-end="opacity-100 translate-y-0"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 -translate-y-2"
+                                class="mt-5 space-y-3 text-[14px] font-medium leading-[21px] text-black">
                                 <li><a href="{% url 'website:home' %}" class="transition hover:text-[#b88e50]">Home</a></li>
                                 <li><a href="{% url 'website:about' %}" class="transition hover:text-[#b88e50]">About</a></li>
                                 <li><a href="{% url 'website:services' %}" class="transition hover:text-[#b88e50]">Services</a></li>
@@ -314,9 +330,23 @@
                         </div>
 
                         <div>
-                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">Services</h4>
+                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">
+                                <button type="button" class="flex w-full items-center justify-between gap-2 text-left sm:pointer-events-none sm:cursor-default" @click="open.services = !open.services" :aria-expanded="open.services.toString()" aria-controls="footer-panel-services">
+                                    <span>Services</span>
+                                    <span class="shrink-0 transition-transform duration-300 sm:hidden" :class="open.services ? 'rotate-180' : ''">
+                                        <i data-lucide="chevron-down" class="h-4 w-4 text-[#d4af37]"></i>
+                                    </span>
+                                </button>
+                            </h4>
                             <div class="mt-5 h-[2px] w-8 bg-[rgba(212,175,55,0.4)]"></div>
-                            <ul class="mt-5 space-y-3 text-[14px] font-normal leading-[21px] text-black">
+                            <ul id="footer-panel-services" x-show="open.services"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 -translate-y-2"
+                                x-transition:enter-end="opacity-100 translate-y-0"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 -translate-y-2"
+                                class="mt-5 space-y-3 text-[14px] font-normal leading-[21px] text-black">
                                 <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Tax Planning</a></li>
                                 <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Audit &amp; Assurance</a></li>
                                 <li><a href="{% url 'website:services' %}#all-services" class="transition hover:text-[#b88e50]">Business Advisory</a></li>
@@ -327,9 +357,23 @@
                         </div>
 
                         <div>
-                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">Contact Details</h4>
+                            <h4 class="text-[13px] font-bold uppercase leading-[19.5px] tracking-[1.56px] text-[#d4af37]">
+                                <button type="button" class="flex w-full items-center justify-between gap-2 text-left sm:pointer-events-none sm:cursor-default" @click="open.contact = !open.contact" :aria-expanded="open.contact.toString()" aria-controls="footer-panel-contact">
+                                    <span>Contact Details</span>
+                                    <span class="shrink-0 transition-transform duration-300 sm:hidden" :class="open.contact ? 'rotate-180' : ''">
+                                        <i data-lucide="chevron-down" class="h-4 w-4 text-[#d4af37]"></i>
+                                    </span>
+                                </button>
+                            </h4>
                             <div class="mt-5 h-[2px] w-8 bg-[rgba(212,175,55,0.4)]"></div>
-                            <ul class="mt-5 space-y-4 text-[14px] font-normal leading-[22.4px] text-black">
+                            <ul id="footer-panel-contact" x-show="open.contact"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 -translate-y-2"
+                                x-transition:enter-end="opacity-100 translate-y-0"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 -translate-y-2"
+                                class="mt-5 space-y-4 text-[14px] font-normal leading-[22.4px] text-black">
                                 <li class="flex items-start gap-3">
                                     <i data-lucide="map-pin" class="mt-0.5 h-[15px] w-[15px] flex-shrink-0 text-[#d4af37]"></i>
                                     <span class="max-w-[245px]">{{ contact_address }}</span>
@@ -355,7 +399,7 @@
         </div>
         <!-- Lucide Icons initialization -->
         <script type="module">
-        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, ArrowLeft, ArrowUpRight, Zap, CheckCircle2, ChevronRight, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube, BookOpen, Mic, GraduationCap, Briefcase, Users } from 'lucide'
+        import { createIcons, Sparkles, Menu, X, Mail, Phone, MapPin, ArrowRight, ArrowLeft, ArrowUpRight, Zap, CheckCircle2, ChevronRight, ChevronDown, Play, ExternalLink, Calendar, Star, Building2, UserCheck, Clock, Award, Video, ShieldCheck, Heart, Linkedin, Twitter, Instagram, Youtube, BookOpen, Mic, GraduationCap, Briefcase, Users } from 'lucide'
         createIcons({
             icons: {
                 Sparkles,
@@ -370,6 +414,7 @@
                 Zap,
                 CheckCircle2,
                 ChevronRight,
+                ChevronDown,
                 Play,
                 ExternalLink,
                 Calendar,
