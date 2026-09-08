@@ -129,6 +129,76 @@ def test_ccts_page_only_shows_ccts_blogs_in_context(client):
     assert all(insight.category == "CCTS" for insight in insights)
 
 
+def test_blog_detail_page_status_code_and_template(client):
+    post = Insight.objects.create(
+        title="Understanding Advance Tax",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 1),
+        summary="A guide to advance tax.",
+        body="<p>Full article body.</p>",
+        image_filename="blog_tax.png",
+    )
+    response = client.get(reverse("website:blog_detail", kwargs={"slug": post.slug}))
+    assert response.status_code == 200
+    assert "website/blog_detail.html" in [t.name for t in response.templates]
+    assert response.context["post"] == post
+
+
+def test_blog_detail_page_404_for_unpublished_post(client):
+    post = Insight.objects.create(
+        title="Draft Post",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 1),
+        summary="Not ready yet.",
+        image_filename="blog_tax.png",
+        is_published=False,
+    )
+    response = client.get(reverse("website:blog_detail", kwargs={"slug": post.slug}))
+    assert response.status_code == 404
+
+
+def test_blogs_page_excludes_unpublished_posts(client):
+    Insight.objects.create(
+        title="Published Post",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 5),
+        summary="Live post.",
+        image_filename="blog_tax.png",
+        is_published=True,
+    )
+    Insight.objects.create(
+        title="Hidden Draft",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 6),
+        summary="Draft post.",
+        image_filename="blog_tax.png",
+        is_published=False,
+    )
+    response = client.get(reverse("website:blogs"))
+    titles = [insight.title for insight in response.context["insights"]]
+    assert "Published Post" in titles
+    assert "Hidden Draft" not in titles
+
+
+def test_insight_slug_uniqueness_appends_suffix():
+    first = Insight.objects.create(
+        title="Same Title",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 1),
+        summary="First.",
+        image_filename="blog_tax.png",
+    )
+    second = Insight.objects.create(
+        title="Same Title",
+        category="TAX",
+        published_date=datetime.date(2026, 6, 2),
+        summary="Second.",
+        image_filename="blog_tax.png",
+    )
+    assert first.slug == "same-title"
+    assert second.slug == "same-title-2"
+
+
 def test_service_detail_page_status_code(client):
     response = client.get(reverse("website:service_detail", kwargs={"slug": "tax-planning"}))
     assert response.status_code == 200

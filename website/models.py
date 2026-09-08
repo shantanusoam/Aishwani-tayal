@@ -1,4 +1,7 @@
 from django.db import models
+from django.urls import reverse
+from django.templatetags.static import static
+from django.utils.html import strip_tags
 from django.utils.text import slugify
 
 
@@ -34,20 +37,76 @@ class Insight(models.Model):
     ]
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=220, unique=True, blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="TAX")
+    author_name = models.CharField(max_length=120, default="CA Ashwani Tayal")
     published_date = models.DateField()
-    summary = models.TextField()
-    read_more_link = models.CharField(max_length=250, default="#")
-    image_filename = models.CharField(max_length=100)  # e.g., blog_tax.png
+    is_published = models.BooleanField(
+        default=True,
+        help_text="Uncheck to save this post as a draft without publishing it live.",
+    )
+    summary = models.TextField(help_text="Short excerpt shown on blog listing cards.")
+    body = models.TextField(
+        blank=True,
+        help_text="Full article content shown on the post's own page. Falls back to the summary if left empty.",
+    )
+    featured_image = models.ImageField(
+        upload_to="blog_images/",
+        blank=True,
+        help_text="Cover image for the post. If left empty, a default image is used.",
+    )
+    image_filename = models.CharField(
+        max_length=100,
+        blank=True,
+        default="",
+        help_text="Legacy: filename under static/images/, used only if no featured image is uploaded above.",
+    )
+    meta_description = models.CharField(
+        max_length=300,
+        blank=True,
+        help_text="SEO description for search engines. Defaults to the summary if left blank.",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-published_date", "-id"]
+        verbose_name = "Blog Post"
+        verbose_name_plural = "Blog Posts"
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            base_slug = slugify(self.title) or "post"
+            candidate = base_slug
+            suffix = 2
+            while Insight.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
+                candidate = f"{base_slug}-{suffix}"
+                suffix += 1
+            self.slug = candidate
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("website:blog_detail", kwargs={"slug": self.slug})
+
+    @property
+    def image_url(self):
+        if self.featured_image:
+            return self.featured_image.url
+        if self.image_filename:
+            return static(f"images/{self.image_filename}")
+        return static("images/blog_tax.png")
+
+    @property
+    def meta_description_text(self):
+        return self.meta_description or strip_tags(self.summary)[:160]
+
+    @property
+    def reading_time_minutes(self):
+        word_count = len(strip_tags(self.body or self.summary).split())
+        return max(1, round(word_count / 200))
 
 
 class AALabelCard(models.Model):

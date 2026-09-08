@@ -10,6 +10,7 @@ urlpatterns = [
     path("ccts/", views.ccts, name="ccts"),
     path("about/", views.about, name="about"),
     path("blogs/", views.blogs, name="blogs"),
+    path("blogs/<slug:slug>/", views.blog_detail, name="blog_detail"),
     path("contact/", views.contact, name="contact"),
     path("book-consultation/", views.book_consultation, name="book_consultation"),
 ]

@@ -41,6 +41,24 @@ def _ensure_default_insights():
             "published_date": datetime.date(2026, 6, 20),
             "summary": "A practical quarterly checklist for carbon accounting, disclosures, and governance under India's CCTS.",
             "image_filename": "blog_growth.png",
+            "body": (
+                "<p>India's Carbon Credit Trading Scheme (CCTS) is moving from policy to enforcement, and finance "
+                "teams are now expected to treat carbon obligations with the same rigour as tax and statutory "
+                "compliance. Here is what CFOs should have on their desk this quarter.</p>"
+                "<h2>1. Baseline your emissions data</h2>"
+                "<p>Before any target or credit can be reported, you need auditable emissions data across scope 1 "
+                "and scope 2 activities. Spreadsheet-based tracking rarely survives scrutiny — build a data trail "
+                "that a third-party verifier can independently reconcile.</p>"
+                "<h2>2. Assign board-level ownership</h2>"
+                "<p>Regulators increasingly expect a named accountable officer for carbon disclosures, not just a "
+                "sustainability team. Document this ownership in board minutes.</p>"
+                "<h2>3. Reconcile obligations with your tax position</h2>"
+                "<p>Credits purchased, banked, or surrendered under CCTS have accounting and tax consequences. "
+                "Align your carbon ledger with your statutory books before quarter close, not after.</p>"
+                "<blockquote>Treat CCTS reporting as a compliance calendar item, not an annual scramble.</blockquote>"
+                "<p>Businesses that build this discipline early avoid the penalty exposure and last-minute audit "
+                "findings that catch unprepared companies off guard.</p>"
+            ),
         },
         {
             "title": "Carbon Credit Accounting and Tax Treatment in India",
@@ -48,6 +66,27 @@ def _ensure_default_insights():
             "published_date": datetime.date(2026, 6, 15),
             "summary": "How to classify, value, and report carbon credits with a defensible tax and audit trail.",
             "image_filename": "blog_gst.png",
+            "body": (
+                "<p>Carbon credits sit in a grey zone for many finance teams: are they inventory, intangible "
+                "assets, or something else entirely? Getting the classification right determines how they are "
+                "valued, depreciated, and taxed.</p>"
+                "<h2>Classification first</h2>"
+                "<p>Credits held for compliance surrender are generally treated differently from credits held for "
+                "trading. Document your intent at acquisition — it drives the accounting treatment for the life "
+                "of the asset.</p>"
+                "<h2>Valuation and impairment</h2>"
+                "<p>Carbon markets are volatile. A consistent valuation policy, reviewed at each reporting date, "
+                "protects you from restatement risk when prices move.</p>"
+                "<ul>"
+                "<li>Record acquisition cost and any transaction fees separately.</li>"
+                "<li>Reassess carrying value at each reporting period.</li>"
+                "<li>Maintain a reconciliation between the carbon register and your books.</li>"
+                "</ul>"
+                "<h2>Tax treatment</h2>"
+                "<p>Income from the sale of surplus credits, and the tax character of gains, needs a defensible "
+                "position before you file — not after a notice arrives. Build this into your tax planning cycle "
+                "alongside your regular advance-tax reviews.</p>"
+            ),
         },
         {
             "title": "Could Your Company Face CCTS Penalties?",
@@ -55,6 +94,24 @@ def _ensure_default_insights():
             "published_date": datetime.date(2026, 6, 8),
             "summary": "Understand enforcement exposure, documentation obligations, and board-level accountability under CCTS.",
             "image_filename": "blog_tax.png",
+            "body": (
+                "<p>Enforcement under India's Carbon Credit Trading Scheme is still maturing, but the penalty "
+                "framework already gives regulators real teeth. Here is where most companies are exposed.</p>"
+                "<h2>Common exposure points</h2>"
+                "<ul>"
+                "<li>Missed or incomplete emissions disclosures for a covered entity.</li>"
+                "<li>Shortfall against assigned reduction targets without a credible remediation plan.</li>"
+                "<li>Inadequate documentation to support a verifier's sign-off.</li>"
+                "</ul>"
+                "<h2>What good documentation looks like</h2>"
+                "<p>Auditors and verifiers expect a clear chain of custody: raw activity data, the calculation "
+                "methodology applied, and evidence of internal review before submission. Gaps in any one of these "
+                "layers are the most common trigger for adverse findings.</p>"
+                "<h2>Board accountability</h2>"
+                "<p>Directors are increasingly expected to demonstrate oversight of climate-related obligations, "
+                "not just delegate them. A quarterly compliance briefing to the board is a simple, effective "
+                "safeguard.</p>"
+            ),
         },
         {
             "title": "How to Optimise Your Tax Liability in FY 2025–26",
@@ -62,6 +119,25 @@ def _ensure_default_insights():
             "published_date": datetime.date(2026, 6, 12),
             "summary": "A step-by-step breakdown of strategies to legally minimize personal and corporate taxes.",
             "image_filename": "blog_tax.png",
+            "body": (
+                "<p>Effective tax planning is not a March exercise — it is a decision made across the year. Here "
+                "is a practical framework for FY 2025–26.</p>"
+                "<h2>1. Choose the right regime</h2>"
+                "<p>Compare the old and new tax regimes against your actual deduction profile, not a generic "
+                "template. The right answer depends on your investments, home loan interest, and HRA exposure.</p>"
+                "<h2>2. Front-load your investment declarations</h2>"
+                "<p>Submitting proofs early avoids excess TDS being deducted through the year and improves your "
+                "monthly cash flow.</p>"
+                "<h2>3. Review business structuring</h2>"
+                "<p>For business owners, the choice between proprietorship, LLP, and company materially changes "
+                "your effective tax rate and compliance burden. Revisit this annually as turnover grows.</p>"
+                "<h2>4. Plan capital gains proactively</h2>"
+                "<p>Timing the sale of assets, and using available exemptions under Sections 54/54F, can "
+                "meaningfully reduce your tax outgo — but only with advance planning before the transaction, not "
+                "after.</p>"
+                "<p>A short call with your CA before, not after, a major financial decision is usually the "
+                "highest-leverage tax planning step available to you.</p>"
+            ),
         },
         {
             "title": "GST Input Tax Credit: Common Mistakes & How to Avoid Them",
@@ -69,6 +145,23 @@ def _ensure_default_insights():
             "published_date": datetime.date(2026, 5, 28),
             "summary": "A practical process to reconcile purchase records with GSTR-2B and reduce notice risk.",
             "image_filename": "blog_gst.png",
+            "body": (
+                "<p>Input Tax Credit (ITC) mismatches remain one of the top triggers for GST notices. Most of "
+                "them are avoidable with a disciplined monthly process.</p>"
+                "<h2>The core reconciliation habit</h2>"
+                "<p>Reconcile your purchase register against GSTR-2B every month, not at year-end. Catching a "
+                "vendor's non-filing early gives you time to follow up before the credit is permanently lost.</p>"
+                "<h2>Frequent mistakes we see</h2>"
+                "<ul>"
+                "<li>Claiming ITC on invoices from vendors who haven't filed their GSTR-1.</li>"
+                "<li>Ignoring the reversal requirement for exempt or blocked supplies.</li>"
+                "<li>Missing the time limit to claim credit for a financial year.</li>"
+                "<li>Not maintaining supporting documentation for credit claimed on capital goods.</li>"
+                "</ul>"
+                "<h2>Build a vendor compliance rating</h2>"
+                "<p>Track which vendors file consistently on time. Deprioritising chronically late filers protects "
+                "your own credit position and reduces notice risk significantly.</p>"
+            ),
         },
         {
             "title": "Structuring Your Business for Long-term Growth",
@@ -76,6 +169,24 @@ def _ensure_default_insights():
             "published_date": datetime.date(2026, 5, 10),
             "summary": "Entity, compliance, and planning structures that support better governance and fundraising.",
             "image_filename": "blog_growth.png",
+            "body": (
+                "<p>The entity structure that got you started rarely stays optimal as the business scales. Here "
+                "is what to revisit as you grow.</p>"
+                "<h2>Entity choice</h2>"
+                "<p>A proprietorship or partnership that made sense at ₹50 lakh turnover often becomes a "
+                "liability at ₹5 crore — both for tax efficiency and for investor readiness. Revisit this "
+                "decision at each growth milestone.</p>"
+                "<h2>Governance discipline</h2>"
+                "<p>Board minutes, statutory registers, and clean related-party documentation aren't just "
+                "compliance boxes — they are what a due-diligence team checks first before any fundraise or "
+                "acquisition conversation.</p>"
+                "<h2>Financial reporting maturity</h2>"
+                "<p>Move from cash-basis, informal tracking to accrual-based, audit-ready books well before you "
+                "need them for a bank facility or investor round. Retrofitting clean books under deadline "
+                "pressure is expensive and slow.</p>"
+                "<p>Growth-stage businesses that plan their structure ahead of need, rather than reacting to it, "
+                "consistently raise capital faster and at better terms.</p>"
+            ),
         },
     ]
     created = [Insight.objects.create(**data) for data in seed_data]
@@ -741,7 +852,8 @@ def home(request):
     """
     Renders the homepage with insights and consultation forms.
     """
-    insights = _ensure_default_insights()
+    _ensure_default_insights()
+    insights = list(Insight.objects.filter(is_published=True).order_by("-published_date")[:6])
 
     form = ConsultationForm()
     home_service_section = _seed_home_services_content()
@@ -790,7 +902,9 @@ def ccts(request):
     Renders the Carbon Credit Trading Scheme (CCTS) page.
     """
     _ensure_default_insights()
-    insights = list(Insight.objects.filter(category="CCTS").order_by("-published_date")[:3])
+    insights = list(
+        Insight.objects.filter(category="CCTS", is_published=True).order_by("-published_date")[:3]
+    )
     form = ConsultationForm()
     ccts_service_section, ccts_service_cards = _seed_ccts_services_content()
     ccts_faqs = _seed_faqs()
@@ -859,10 +973,43 @@ def blogs(request):
     """
     Renders the comprehensive blogs & insights page.
     """
-    insights = _ensure_default_insights()
+    _ensure_default_insights()
+    insights = list(Insight.objects.filter(is_published=True).order_by("-published_date"))
 
     form = ConsultationForm()
     return render(request, "website/blogs.html", {"insights": insights, "form": form})
+
+
+def blog_detail(request, slug):
+    """
+    Renders a single published blog post with related reading and a booking CTA.
+    """
+    _ensure_default_insights()
+    post = get_object_or_404(Insight, slug=slug, is_published=True)
+
+    related_posts = list(
+        Insight.objects.filter(category=post.category, is_published=True)
+        .exclude(pk=post.pk)
+        .order_by("-published_date")[:3]
+    )
+    if len(related_posts) < 3:
+        excluded_ids = [related.pk for related in related_posts] + [post.pk]
+        related_posts += list(
+            Insight.objects.filter(is_published=True)
+            .exclude(pk__in=excluded_ids)
+            .order_by("-published_date")[: 3 - len(related_posts)]
+        )
+
+    form = ConsultationForm()
+    return render(
+        request,
+        "website/blog_detail.html",
+        {
+            "post": post,
+            "related_posts": related_posts,
+            "form": form,
+        },
+    )
 
 
 def contact(request):

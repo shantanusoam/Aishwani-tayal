@@ -35,11 +35,32 @@ class ConsultationRequestAdmin(admin.ModelAdmin):
 
 @admin.register(Insight)
 class InsightAdmin(RichTextAdminMixin, admin.ModelAdmin):
-    rich_text_fields = ("summary",)
-    list_display = ("title", "category", "published_date", "image_filename")
-    list_filter = ("category", "published_date")
-    search_fields = ("title", "summary")
+    rich_text_fields = ("summary", "body")
+    list_display = ("title", "category", "author_name", "published_date", "is_published")
+    list_editable = ("is_published",)
+    list_filter = ("is_published", "category", "published_date")
+    search_fields = ("title", "summary", "body")
     prepopulated_fields = {"slug": ("title",)}
+    date_hierarchy = "published_date"
+    readonly_fields = ("created_at", "updated_at")
+    fieldsets = (
+        (None, {
+            "fields": ("title", "slug", "category", "author_name", "published_date", "is_published"),
+        }),
+        ("Content", {
+            "fields": ("summary", "body"),
+        }),
+        ("Media", {
+            "fields": ("featured_image", "image_filename"),
+        }),
+        ("SEO", {
+            "fields": ("meta_description",),
+        }),
+        ("Timestamps", {
+            "fields": ("created_at", "updated_at"),
+            "classes": ("collapse",),
+        }),
+    )
 
 
 @admin.register(AALabelCard)

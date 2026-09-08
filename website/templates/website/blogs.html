@@ -69,21 +69,21 @@
         <!-- Articles Grid -->
         <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for insight in insights %}
-            <article 
+            <article
                 x-show="activeTab === 'ALL' || activeTab === '{{ insight.category }}'"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 scale-95"
                 x-transition:enter-end="opacity-100 scale-100"
                 class="flex flex-col bg-white rounded-[12px] shadow-[0px_4px_16px_rgba(13,43,92,0.06)] border border-slate-100 overflow-hidden group hover:shadow-[0px_10px_30px_rgba(13,43,92,0.12)] transition-all duration-300"
                 style="display: none;">
-                
+
                 <!-- Card Image -->
-                <div class="relative h-[200px] w-full overflow-hidden">
-                    <img src="{% static 'images/' %}{{ insight.image_filename }}" 
-                         alt="{{ insight.title }}" 
+                <a href="{{ insight.get_absolute_url }}" class="relative block h-[200px] w-full overflow-hidden">
+                    <img src="{{ insight.image_url }}"
+                         alt="{{ insight.title }}"
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     <div class="absolute inset-0 bg-[rgba(13,43,92,0.12)]"></div>
-                </div>
+                </a>
 
                 <!-- Card Content -->
                 <div class="flex-grow flex flex-col justify-between p-6 pb-7">
@@ -110,7 +110,7 @@
 
                         <!-- Card Heading -->
                         <h3 class="mt-4 font-['Playfair_Display'] font-bold text-[18px] leading-[1.3] text-[#0d2b5c] transition-colors group-hover:text-[var(--brand-gold)] duration-300">
-                            {{ insight.title }}
+                            <a href="{{ insight.get_absolute_url }}">{{ insight.title }}</a>
                         </h3>
 
                         <!-- Card Paragraph -->
@@ -121,7 +121,7 @@
 
                     <!-- Read More Link -->
                     <div class="mt-5 pt-3 flex items-center gap-[8px]">
-                        <a href="{{ insight.read_more_link }}" class="font-['Inter'] font-semibold text-[13px] text-[var(--brand-gold)] flex items-center gap-1 group/btn hover:underline">
+                        <a href="{{ insight.get_absolute_url }}" class="font-['Inter'] font-semibold text-[13px] text-[var(--brand-gold)] flex items-center gap-1 group/btn hover:underline">
                             Read More
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1"></i>
                         </a>
